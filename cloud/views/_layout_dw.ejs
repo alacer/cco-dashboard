@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<title>Alacer AML Data Wrangler</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="author" content="" />
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
+
+	<link rel="stylesheet" href="/alacer_bootstrap/css/font-awesome.min.css" type="text/css" />		
+	<link rel="stylesheet" href="/alacer_bootstrap/css/bootstrap.min.css" type="text/css" />	
+	<link rel="stylesheet" href="/alacer_bootstrap/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css" />
+
+	<link rel="stylesheet" href="/alacer_bootstrap/js/plugins/icheck/skins/minimal/blue.css" type="text/css" />
+	<link rel="stylesheet" href="/alacer_bootstrap/js/plugins/select2/select2.css" type="text/css" />
+	<link rel="stylesheet" href="/alacer_bootstrap/js/plugins/fullcalendar/fullcalendar.css" type="text/css" />
+
+	<link rel="stylesheet" href="/alacer_bootstrap/css/App.css" type="text/css" />
+
+	<link rel="stylesheet" href="/alacer_bootstrap/css/custom.css" type="text/css" />
+
+	<%- stylesheets %>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<header id="header">
+
+		<h1 id="site-logo">
+			<a href="/page/search_web/">
+				<img src="/alacer_bootstrap/img/logos/logo.png" alt="Alacer" />
+			</a>
+		</h1>	
+
+		<a href="javascript:;" data-toggle="collapse" data-target=".top-bar-collapse" id="top-bar-toggle" class="navbar-toggle collapsed">
+			<i class="fa fa-cog"></i>
+		</a>
+
+		<a href="javascript:;" data-toggle="collapse" data-target=".sidebar-collapse" id="sidebar-toggle" class="navbar-toggle collapsed">
+			<i class="fa fa-reorder"></i>
+		</a>
+		
+		<%- blocks.header %>
+
+	</header> <!-- header -->
+
+
+	<nav id="top-bar" class="collapse top-bar-collapse">
+
+		<ul class="nav navbar-nav pull-left">
+			<li class="">
+				<a href="/page/search_web">
+					<i class="fa fa-home"></i> 
+					Home
+				</a>
+			</li>
+			
+		</ul>
+	</nav> <!-- /#top-bar -->
+
+
+	<div id="sidebar-wrapper" class="collapse sidebar-collapse">
+	
+		<div id="search">
+			<form>
+				<input class="form-control input-sm" type="text" name="search" placeholder="Search..." />
+
+				<button type="submit" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+			</form>		
+		</div> <!-- #search -->
+	
+		<nav id="sidebar">		
+			
+			<ul id="main-nav" class="open-active">			
+
+				<li class="<%= active == 'search_web' ? 'active' : '' %>">				
+					<a href="/page/search_web">
+						<i class="fa fa-search"></i>
+						Wrangle Data
+					</a>				
+				</li>
+				<li class="<%= active == 'upload' ? 'active' : '' %>">
+					<a href="/page/upload">
+						<i class="fa fa-upload"></i>
+						Upload File
+					</a>
+				</li>
+				<li class="<%= active == 'upload_extract' ? 'active' : '' %>">
+					<a href="/page/upload_extract">
+						<i class="fa fa-cloud-upload"></i>
+						Upload &amp; Extract
+					</a>
+				</li>
+				<li class="<%= active == 'manage_users' ? 'active' : '' %>">
+					<a href="/page/manage_users">
+						<i class="fa fa-user"></i>
+						Manage Users
+					</a>				
+				</li>
+			</ul>
+					
+		</nav> <!-- #sidebar -->
+
+	</div> <!-- /#sidebar-wrapper -->
+
+	
+	<div id="content">
+		
+		<div id="content-header">
+			<h1>Alacer AML Data Wrangler</h1>
+		</div> <!-- #content-header -->
+
+		<div id="content-container">
+            <%- body -%>
+		</div> <!-- /#content-container -->
+		
+
+	</div> <!-- #content -->
+	
+</div> <!-- #wrapper -->
+
+<footer id="footer">
+	<ul class="nav pull-right">
+		<li>
+			Copyright &copy; <%= new Date().getFullYear() %>, Alacer Group.
+		</li>
+		<%- blocks.footer %>
+	</ul>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/alacer_bootstrap/js/libs/window.log.js"></script>
+<script src="/alacer_bootstrap/js/libs/jquery-1.9.1.min.js"></script>
+<script src="/alacer_bootstrap/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/alacer_bootstrap/js/libs/bootstrap.min.js"></script>
+<script src="/alacer_bootstrap/js/plugins/parsley/parsley.js"></script>
+
+<script src="/alacer_bootstrap/js/plugins/icheck/jquery.icheck.min.js"></script>
+<script src="/alacer_bootstrap/js/plugins/select2/select2.js"></script>
+<script src="/alacer_bootstrap/js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
+
+<script src="/alacer_bootstrap/js/App.js"></script>
+
+<script src="/alacer_bootstrap/js/plugins/howl/howl.js"></script>
+<%- scripts %>
+
+</body>
+</html>
