@@ -1,13 +1,23 @@
 
 
 $(document).ready(function() {
-    	    Parse.initialize({
-                app_id : "QlR7raDX8sggg5ebpDkgBXVANXhPPmpUKZRmOaMS", // <-- enter your Application Id here
-                rest_key : "urhXUisVSqEOMoHhYp4W624k3Putu4YZAeJ7E26p" // <--enter your REST API Key here   
-            });
-
-    $('#dashboardtable').dataTable( {
-    	"data": metrics
-
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $('#example thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#example').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
     } );
 } );
