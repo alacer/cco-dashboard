@@ -53,8 +53,38 @@ app.post('/gotodataentry', function(req, res) {
 	res.redirect('/dataentry');
 });
 
-app.post('/update', function(req, res) {
-	res.redirect('/update');
+app.post('/addMetric', function(req, res) {
+
+  //TODO on POST, send InQueue = Caution + Danger + OK
+  //TODO add drop-down select metric
+  //TODO add drop-down select date
+  //TODO update bins based on metric seleceted
+
+   
+    console.log("req.body:" + req.body);
+    console.log("req.params:" + req.params);
+    
+    // var Metric = Parse.Object.extend("metrics");
+    // var newMetric = new Metric();
+
+    // console.log("setting newMetric");
+    // newMetric.set("Received", req.bodyParser);
+
+    // console.log(3);
+    // newMetric.save(null, {
+    //   success: function(newMetric) {
+    //     // Execute any logic that should take place after the object is saved.
+    //     console.log('New object created with objectId: ' + newMetric.id);
+    //   },
+    //   error: function(newMetric, error) {
+    //     // Execute any logic that should take place if the save fails.
+    //     // error is a Parse.Error with an error code and message.
+    //     console.log('Failed to create new object, with error code: ' + error.message);
+    //   }
+    // });
+
+  
+	res.redirect('/dashboard');
 });
 
 
