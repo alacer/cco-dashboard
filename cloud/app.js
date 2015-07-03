@@ -46,6 +46,10 @@ app.post('/gotodataentry', function(req, res) {
 	res.redirect('/dataentry');
 });
 
+app.post('/update', function(req, res) {
+	res.redirect('/update');
+});
+
 
 app.listen();
 
