@@ -17,20 +17,18 @@ app.get('/', function(req, res) {
 
 app.get('/dashboard', function(req, res) {
 	var Metric = Parse.Object.extend("metric");
-	var metric = new Metric;
 	var metricQuery = new Parse.Query(Metric);
 
-	var b = metric.get("Date");
-	console.log(b);
-	var a = ["1", "1", "2", "3", "3", "1"];
-	console.log(a);
-	var unique = a.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-
+	
+	var dates = [];
 
 	metricQuery.find().then(function(results){
+		for (var i=0; i < results.length; i++) {
+			dates.push(results[i].get('Date'));
+		}
+		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+		console.log(unique);
 		res.render('dashboard.ejs', {metrics:results, uniquedates:unique});
-		console.log(JSON.stringify(b));
-		console.log(JSON.stringify(a));
 	}
 	)
 });

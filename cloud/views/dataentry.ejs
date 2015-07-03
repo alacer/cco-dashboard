@@ -18,9 +18,31 @@
 
 <script>
 
+  $(".close").click(function(){
+      $("#SuccessAlert").hide();
+  });
+
   function addMetric(){
-    alert("here");
-    console.log("addMetric");
+    
+    var Metric = Parse.Object.extend("metrics");
+    var newMetric = new Metric();
+
+    newMetric.set("Received", #Received)
+
+    newMetric.save(null, {
+      success: function(newMetric) {
+        // Execute any logic that should take place after the object is saved.
+        console.log('New object created with objectId: ' + newMetric.id);
+      },
+      error: function(gameScore, error) {
+        // Execute any logic that should take place if the save fails.
+        // error is a Parse.Error with an error code and message.
+        console.log('Failed to create new object, with error code: ' + error.message);
+      }
+    });
+
+  }
+    
   }
 
 </script>
@@ -32,7 +54,7 @@
               <label class="col-md-2">Received</label>
 
               <div class="col-md-2">
-                <input type="text" class="form-control" placeholder="(Number)">
+                <input id="Received" type="text" class="form-control" placeholder="(Number)">
               </div>
  
               <label class="col-md-2">Less Than 1 Day</label>
@@ -68,8 +90,11 @@
             </div>            
 
             <div>
-                <input type="button" value="Submit" onclick="addMetric" />
-                <div class="alert alert-success" role="alert">...</div>
+                <input type="button" value="Submit" onclick="addMetric()" />
+                <div id="SuccessAlert" class="alert alert-success" role="alert" style="display:none;">Metric added!>
+                  <button type="button" class="close">&times;</button>
+
+                </div>
 
             </div>
 
