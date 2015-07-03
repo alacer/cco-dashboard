@@ -26,7 +26,7 @@ app.get('/dashboard', function(req, res) {
 	var percentwarning = [];
 /*	var datedd = document.getElementById("validateSelect");
 	var dateSelected = datedd.options[datedd.selectedIndex].text;*/
-
+	metricQuery.equalTo("Date", "2015-06-28");
 	metricQuery.find().then(function(results){
 		for (var i=0; i < results.length; i++) {
 			dates.push(results[i].get('Date'));
