@@ -54,11 +54,11 @@
                         <td> <%= metrics[i].attributes.Completed %> </td>
                         <td>
                           <div class="progress">
-                            <div class="progress-bar progress-bar-success" style="width: 75%">
+                            <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
                             </div>
-                            <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%; background-color: #FFF000">
+                            <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%=percentcaution[i]%>%; background-color: #FFF000">
                             </div>
-                            <div class="progress-bar progress-bar-danger" style="width: 5%">
+                            <div class="progress-bar progress-bar-danger" style="width: <%=percentwarning[i]%>%">
                             </div>
                           </div>
                         </td>
