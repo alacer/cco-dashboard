@@ -19,6 +19,7 @@ app.get('/dashboard', function(req, res) {
 	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
 
+
 	metricQuery.find().then(function(results){
 		res.render('dashboard.ejs', {metrics:results});
 	}
