@@ -16,7 +16,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-	res.render('dashboard.ejs');
+	var Metric = Parse.Object.extend("metrics");
+	var metricQuery = new Parse.Query(Metric);
+
+	metricQuery.find().then(function(results){
+		res.render('dashboard.ejs', {metrics:results});
+	}
+	)
 });
 
 app.get('/trends', function(req, res) {
