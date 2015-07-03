@@ -21,14 +21,26 @@ app.get('/dashboard', function(req, res) {
 
 	
 	var dates = [];
+	var percentcaution = [];
+	var percentok = [];
+	var percentwarning = [];
+/*	var datedd = document.getElementById("validateSelect");
+	var dateSelected = datedd.options[datedd.selectedIndex].text;*/
 
 	metricQuery.find().then(function(results){
 		for (var i=0; i < results.length; i++) {
 			dates.push(results[i].get('Date'));
+			percentok.push(100*results[i].get('OK')/results[i].get('InQueue'));
+			percentcaution.push(100*results[i].get('Caution')/results[i].get('InQueue'));
+			percentwarning.push(100*results[i].get('Danger')/results[i].get('InQueue'));
 		}
 		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-		console.log(unique);
-		res.render('dashboard.ejs', {metrics:results, uniquedates:unique});
+		res.render('dashboard.ejs', {metrics:results, 
+			uniquedates:unique, 
+			percentok:percentok, 
+			percentcaution:percentcaution,
+			percentwarning:percentwarning
+		});
 	}
 	)
 });
