@@ -42,8 +42,7 @@ app.get('/dashboard', function(req, res) {
 			percentcaution:percentcaution,
 			percentwarning:percentwarning
 		});
-	}
-	)
+	});
 });
 
 app.get('/trends', function(req, res) {
@@ -51,30 +50,49 @@ app.get('/trends', function(req, res) {
 });
 
 app.get('/dataentry', function(req, res) {
-	var Metric = Parse.Object.extend("metric");
-	var MetricBin = Parse.Object.extend("metric_bin");
-	var metricQuery = new Parse.Query(Metric);
-	var metricBinQuery = new Parse.Query(MetricBin);
 
-	var names = [];
+	var MetricBin = Parse.Object.extend("metric_bin");
+	var metricBinQuery = new Parse.Query(MetricBin);
+	
+	var Metric = Parse.Object.extend("metric");
+	var metricQuery = new Parse.Query(Metric);
+
+	var metric_bins = [];
 	var dates = [];
 	
-	metricBinQuery.find().then(function(results){
-		for (var i=0; i < results.length; i++) {
-			names.push(results[i].get('Metric'));
-	}
-
-	metricQuery.find().then(function(results){
-		for (var i=0; i < results.length; i++) {
-			dates.push(results[i].get('Date'));
-	}
-
-	// var uniquemetrics = names.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-	var uniquedates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-
-	res.render('dataentry.ejs', {metrics:names, dates:uniquedates});
+	metricBinQuery.find().then(function(metric_bins){	
+		// for (var i=0; i < objects.length; i++) {
+		// 	metric_bins.push(objects[i]);
+		// }
+		metricQuery.find().then(function(metrics){
+			for (var i=0; i < metrics.length; i++) {
+				dates.push(metrics[i].get('Date'));
+			}
+			
+			var uniquedates = dates.filter(function(item, x, ar){ return ar.indexOf(item) === x; });
 		
-	})
+			res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
+
+		}
+
+	});
+	
+	// metricQuery.find().then(function(results){
+	// 	for (var j=0; j < results.length; j++) {
+	// 		dates.push(results[j].get('Date'));
+	// 	}
+	// 	console.log(JSON.stringify(dates));
+	// 	uniquedates = dates.filter(function(item, k, ar){ return ar.indexOf(item) === k; });
+	// 	res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
+	// });
+	
+	// Metric names are already unique in the Metric Bin table
+	// var uniquemetrics = names.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+	// uniquedates = dates.filter(function(item, k, ar){ return ar.indexOf(item) === k; });
+	//console.log(JSON.stringify(dates));
+	// res.render('dataentry.ejs', {metrics:metric_bins, dates:uniquedates});
+	//res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
+
 });
 
 app.post('/gotodashboard', function(req, res) {
@@ -89,7 +107,7 @@ app.post('/gotodataentry', function(req, res) {
 	res.redirect('/dataentry');
 });
 
-app.get('/addMetric', function(req, res) {
+app.post('/addMetric', function(req, res) {
 
   //TODO on POST, send InQueue = Caution + Danger + OK
   //TODO add drop-down select metric

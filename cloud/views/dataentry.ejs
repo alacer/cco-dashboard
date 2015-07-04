@@ -1,14 +1,6 @@
 <% include header.ejs %>
 
 
-<script>
-
-  $(".close").click(function(){
-     $("#SuccessAlert").hide();
-  });
-
-</script>
-
         <!-- Content Header -->
         <div id="content-header">
           <h1>Enter Data</h1>
@@ -18,16 +10,14 @@
 
         <select id="metricSelect" name="metricSelect" class="form-control parsley-validated" data-required="true">
 
-
                     <%  
-                    for(var i = 0; i < metrics.length; i++){ %>
-                        <option> <%= metrics[i]%> </option>
+                    for(var i = 0; i < metric_bins.length; i++){ %>
+                        <option> <%= metric_bins[i].get("Metric")%> </option>
                    <% } %>
           
         </select>
 
         <select id="dateSelect" name="dateSelect" class="form-control parsley-validated" data-required="true">
-
 
                     <%  
                     for(var j = 0; j < dates.length; j++){ %>
@@ -46,7 +36,9 @@
         </div>  
 
 
-<form id="metricForm" method="get">
+<form id="metricForm" method="post" action="/addMetric">
+
+
   <div class="form-group">
           <div class="row">
 
@@ -56,7 +48,7 @@
                 <input id="Received" type="text" class="form-control" placeholder="(Number)">
               </div>
  
-              <label class="col-md-2">Less Than 1 Day</label>
+              <label class="col-md-2"> Less Than 1 Day <%/* metric_bins[i].attributes.Bin1 */%> </label>
 
               <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="(Number)">
@@ -70,7 +62,7 @@
                 <input type="text" class="form-control" placeholder="(Number)">
               </div>
  
-              <label class="col-md-2">1 Day to 5 Days</label>
+              <label class="col-md-2">1 Day to 5 Days<%/* metric_bins[i].attributes.Bin2 */ %></label>  
 
               <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="(Number)">
@@ -81,7 +73,8 @@
               <div class="col-md-4">
               </div>
  
-              <label class="col-md-2">More Than 5 Days</label>
+              <label class="col-md-2">More Than 5 Days <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
+   
 
               <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="(Number)">
@@ -89,9 +82,8 @@
             </div>            
 
             <div>
-                <input type="submit" text="Add Metric" action="/addMetric" onclick="addMetric()" />
-                <div id="SuccessAlert" class="alert alert-success" role="alert" style="display:none;">Metric added!>
-                  <button type="button" class="close">&times;</button>
+                <button type="submit" >Add Metric</button>
+
 
                 </div>
 

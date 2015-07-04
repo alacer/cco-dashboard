@@ -17,38 +17,38 @@ $(function() {
 /* Volume Per Week Chart (Default)    */
 /* ---------------------------------- */
 //Load all of the Volume chart data
-  $.each(volumeWeekSeriesNames, function(i, volumeWeekSeriesName) {
-    $.getJSON('../../Common/Data/JSON/Performance.Dashboard.CCO.Data.json', function(data) {
-      var friendlyName, volumeData, yAxis;
-      switch (volumeWeekSeriesName) {
-        case ('Received'):
-          friendlyName = 'Received';
-          volumeData = data.volumeWeekDataReceived;
-          yAxis = 0;
-          break;
-        case ('InQueue'):
-          friendlyName = 'In Queue';
-          volumeData = data.volumeWeekDataInQueue;
-          yAxis = 0;
-          break;
-        case ('Completed'):
-          friendlyName = 'Completed';
-          volumeData = data.volumeWeekDataCompleted;
-          yAxis = 0;
-          break;
+  // $.each(volumeWeekSeriesNames, function(i, volumeWeekSeriesName) {
+  //   $.getJSON('../../Common/Data/JSON/Performance.Dashboard.CCO.Data.json', function(data) {
+  //     var friendlyName, volumeData, yAxis;
+  //     switch (volumeWeekSeriesName) {
+  //       case ('Received'):
+  //         friendlyName = 'Received';
+  //         volumeData = data.volumeWeekDataReceived;
+  //         yAxis = 0;
+  //         break;
+  //       case ('InQueue'):
+  //         friendlyName = 'In Queue';
+  //         volumeData = data.volumeWeekDataInQueue;
+  //         yAxis = 0;
+  //         break;
+  //       case ('Completed'):
+  //         friendlyName = 'Completed';
+  //         volumeData = data.volumeWeekDataCompleted;
+  //         yAxis = 0;
+  //         break;
 
-      }
-      volumeWeekSeriesOptions[i] = {
-        name: friendlyName,
-        data: volumeData,
-        yAxis: yAxis
-      };
-      volumeWeekSeriesCounter++;
-      if (volumeWeekSeriesCounter == volumeWeekSeriesNames.length) {
-        createVolumeChart();
-      }
-    });
-  });
+  //     }
+  //     volumeWeekSeriesOptions[i] = {
+  //       name: friendlyName,
+  //       data: volumeData,
+  //       yAxis: yAxis
+  //     };
+  //     volumeWeekSeriesCounter++;
+  //     if (volumeWeekSeriesCounter == volumeWeekSeriesNames.length) {
+  //       createVolumeChart();
+  //     }
+  //   });
+  // });
 //Create the Volume chart when all data are loaded
   function createVolumeChart() {
     $('#AlertsPerformance_WeekViews_VolumeChart').highcharts('StockChart', {
