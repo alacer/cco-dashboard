@@ -1,11 +1,40 @@
 <% include header.ejs %>
 
+
+<script>
+
+  $(".close").click(function(){
+     $("#SuccessAlert").hide();
+  });
+
+</script>
+
         <!-- Content Header -->
         <div id="content-header">
           <h1>Enter Data</h1>
         </div>
         <!-- Primary Content Container -->
         <div id="content-container">
+
+        <select id="metricSelect" name="metricSelect" class="form-control parsley-validated" data-required="true">
+
+
+                    <%  
+                    for(var i = 0; i < metrics.length; i++){ %>
+                        <option> <%= metrics[i]%> </option>
+                   <% } %>
+          
+        </select>
+
+        <select id="dateSelect" name="dateSelect" class="form-control parsley-validated" data-required="true">
+
+
+                    <%  
+                    for(var j = 0; j < dates.length; j++){ %>
+                        <option> <%= dates[j]%> </option>
+                   <% } %>
+          
+        </select>
 
         <div class="row">
           <div class="col-md-4">
@@ -16,17 +45,6 @@
           </div>
         </div>  
 
-<script>
-
-  $(".close").click(function(){
-     $("#SuccessAlert").hide();
-  });
-
-  
-
-    
-
-</script>
 
 <form id="metricForm" method="get">
   <div class="form-group">
@@ -71,7 +89,7 @@
             </div>            
 
             <div>
-                <input type="submit" action="/addMetric" onclick="addMetric()" />
+                <input type="submit" text="Add Metric" action="/addMetric" onclick="addMetric()" />
                 <div id="SuccessAlert" class="alert alert-success" role="alert" style="display:none;">Metric added!>
                   <button type="button" class="close">&times;</button>
 

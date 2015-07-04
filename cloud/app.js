@@ -24,8 +24,9 @@ app.get('/dashboard', function(req, res) {
 	var percentcaution = [];
 	var percentok = [];
 	var percentwarning = [];
-/*	var datedd = document.getElementById("validateSelect");
-	var dateSelected = datedd.options[datedd.selectedIndex].text;*/
+
+	// var datedd = document.getElementById("validateSelect");
+	// var dateSelected = datedd.options[datedd.selectedIndex].text;
 	metricQuery.equalTo("Date", "2015-06-28");
 	metricQuery.find().then(function(results){
 		for (var i=0; i < results.length; i++) {
@@ -50,7 +51,30 @@ app.get('/trends', function(req, res) {
 });
 
 app.get('/dataentry', function(req, res) {
-	res.render('dataentry.ejs');
+	var Metric = Parse.Object.extend("metric");
+	var MetricBin = Parse.Object.extend("metric_bin");
+	var metricQuery = new Parse.Query(Metric);
+	var metricBinQuery = new Parse.Query(MetricBin);
+
+	var names = [];
+	var dates = [];
+	
+	metricBinQuery.find().then(function(results){
+		for (var i=0; i < results.length; i++) {
+			names.push(results[i].get('Metric'));
+	}
+
+	metricQuery.find().then(function(results){
+		for (var i=0; i < results.length; i++) {
+			dates.push(results[i].get('Date'));
+	}
+
+	// var uniquemetrics = names.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+	var uniquedates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+
+	res.render('dataentry.ejs', {metrics:names, dates:uniquedates});
+		
+	})
 });
 
 app.post('/gotodashboard', function(req, res) {
@@ -65,7 +89,7 @@ app.post('/gotodataentry', function(req, res) {
 	res.redirect('/dataentry');
 });
 
-app.post('/addMetric', function(req, res) {
+app.get('/addMetric', function(req, res) {
 
   //TODO on POST, send InQueue = Caution + Danger + OK
   //TODO add drop-down select metric
