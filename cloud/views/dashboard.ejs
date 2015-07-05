@@ -17,28 +17,39 @@
                   <label for="validateSelect">Date</label>
                   <select id="validateSelect" name="validateSelect" class="form-control parsley-validated" data-required="true">
 
-
-
-
-
-
                     <%  
                     for(var j = 0; j < uniquedates.length; j++){ %>
                         <option> <%= uniquedates[j]%> </option>
-                   <% } %>
-
-
-
-                     
+                   <% } %>  
 
                   </select>
               </div>
 
 
+<!--
+<script> 
+  var datedd = document.getElementById("validateSelect");
+  var dateSelected = datedd.options[datedd.selectedIndex].text;
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', dateSelected ).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
+    } );
+</script>
+
+-->
+
               <div class="table-responsive">
                 <table id=#metricsdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="20" data-info="false" data-search="false" data-length-change="false" data-paginate="false">
                   <thead>
                     <tr>
+                      <th data-filterable="true" data-sortable="false">Date</th>
                       <th data-filterable="true" data-sortable="true" data-direction="asc">Metric</th>
                       <th data-filterable="false" data-sortable="false">Received</th>
                       <th data-filterable="false" data-sortable="false">Completed</th>
@@ -49,6 +60,7 @@
 
                   <% for(var i = 0; i < metrics.length; i++) { %>
                     <tr data-objectid="<%= metrics[i].id %>">
+                        <td> <%= metrics[i].attributes.Date %> </td>
                         <td> <%= metrics[i].attributes.Metric %> </td>
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>

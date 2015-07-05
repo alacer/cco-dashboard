@@ -17,59 +17,66 @@ $(function() {
 /* Volume Per Week Chart (Default)    */
 /* ---------------------------------- */
 //Load all of the Volume chart data
-  // $.each(volumeWeekSeriesNames, function(i, volumeWeekSeriesName) {
-  //   $.getJSON('../../Common/Data/JSON/Performance.Dashboard.CCO.Data.json', function(data) {
-  //     var friendlyName, volumeData, yAxis;
-  //     switch (volumeWeekSeriesName) {
-  //       case ('Received'):
-  //         friendlyName = 'Received';
-  //         volumeData = data.volumeWeekDataReceived;
-  //         yAxis = 0;
-  //         break;
-  //       case ('InQueue'):
-  //         friendlyName = 'In Queue';
-  //         volumeData = data.volumeWeekDataInQueue;
-  //         yAxis = 0;
-  //         break;
-  //       case ('Completed'):
-  //         friendlyName = 'Completed';
-  //         volumeData = data.volumeWeekDataCompleted;
-  //         yAxis = 0;
-  //         break;
+  $.each(volumeWeekSeriesNames, function(i, volumeWeekSeriesName) {
+    $.getJSON('../../Common/Data/JSON/Performance.Dashboard.CCO.Data.json', function(data) {
+      var friendlyName, volumeData, yAxis;
+      switch (volumeWeekSeriesName) {
+        case ('Received'):
+          friendlyName = 'Received';
+          volumeData = data.volumeWeekDataReceived;
+          yAxis = 0;
+          break;
+        case ('InQueue'):
+          friendlyName = 'In Queue';
+          volumeData = data.volumeWeekDataInQueue;
+          yAxis = 0;
+          break;
+        case ('Completed'):
+          friendlyName = 'Completed';
+          volumeData = data.volumeWeekDataCompleted;
+          yAxis = 0;
+          break;
 
-  //     }
-  //     volumeWeekSeriesOptions[i] = {
-  //       name: friendlyName,
-  //       data: volumeData,
-  //       yAxis: yAxis
-  //     };
-  //     volumeWeekSeriesCounter++;
-  //     if (volumeWeekSeriesCounter == volumeWeekSeriesNames.length) {
-  //       createVolumeChart();
-  //     }
-  //   });
-  // });
+      }
+      volumeWeekSeriesOptions[i] = {
+        name: friendlyName,
+        data: volumeData,
+        yAxis: yAxis
+      };
+      volumeWeekSeriesCounter++;
+      if (volumeWeekSeriesCounter == volumeWeekSeriesNames.length) {
+        createVolumeChart();
+      }
+    });
+  });
 //Create the Volume chart when all data are loaded
   function createVolumeChart() {
     $('#AlertsPerformance_WeekViews_VolumeChart').highcharts('StockChart', {
       chart: {
+        height: 250,
         marginLeft: 35,
         marginRight: 45
       },
-      colors: ['#e69900', '#9c3', '#69c', '#669', '#d9534f'],
-      navigation: {
-        buttonOptions: {
-          enabled: false
-        }
+      title:{
+        text: 'testing'
+      },
+      credits: {
+        enabled: false
       },
       navigator: {
-        enabled: false
+        enabled: true
       },
       scrollbar: {
         enabled: false
       },
       rangeSelector: {
         enabled: false
+      },
+      colors: ['#e69900', '#9c3', '#69c', '#669', '#d9534f'],
+      navigation: {
+        buttonOptions: {
+          enabled: true
+        }
       },
       plotOptions: {
         series: {
@@ -117,22 +124,22 @@ $(function() {
 /* ---------------------------------- */
 //Load all of the Volume chart data
   $.each(queueWeekSeriesNames, function(i, queueWeekSeriesName) {
-    $.getJSON('../../Common/Data/JSON/Performance.Dashboard.CCO.Data.json', function(data) {
+   // $.getJSON('../../Common/Data/JSON/Performance.Dashboard.CCO.Data.json', function(data) {
       var friendlyName, queueData, yAxis;
       switch (queueWeekSeriesName) {
         case ('OK'):
           friendlyName = 'Less Than 1 Day';
-          queueData = data.queueWeekDataOK;
+          queueData = ok;
           yAxis = 0;
           break;
         case ('Caution'):
           friendlyName = '1 Day to 5 Days';
-          queueData = data.queueWeekDataCaution;
+          queueData = caution;
           yAxis = 0;
           break;
         case ('Warning'):
           friendlyName = 'More Than 5 Days';
-          queueData = data.queueWeekDataWarning;
+          queueData = warning;
           yAxis = 0;
           break;
 
@@ -146,23 +153,31 @@ $(function() {
       if (queueWeekSeriesCounter == queueWeekSeriesNames.length) {
         createqueueChart();
       }
-    });
+  //  });
   });
 //Create the queue chart when all data are loaded
   function createqueueChart() {
     $('#AlertsPerformance_WeekViews_QueueChart').highcharts('StockChart', {
+      title: {
+        text: 'test test'
+      },
       chart: {
+        height: 250,
+        type: 'area',
         marginLeft: 35,
         marginRight: 45
       },
       colors: ['#5cb85c', '#FFF000', '#d9534f'],
       navigation: {
         buttonOptions: {
-          enabled: false
+          enabled: true
         }
       },
-      navigator: {
+      credits: {
         enabled: false
+      },
+      navigator: {
+        enabled: true
       },
       scrollbar: {
         enabled: false
@@ -171,8 +186,11 @@ $(function() {
         enabled: false
       },
       plotOptions: {
+        area: {
+          stacking: 'percent'
+        },
         series: {
-          shadow: true
+          shadow: false
         }
       },
       xAxis: {
@@ -182,8 +200,6 @@ $(function() {
         },
       },
       yAxis: [{
-        min: 0,
-        max: 15,
         labels: {
           formatter: function() {
             return (this.value);
@@ -195,7 +211,7 @@ $(function() {
         gridLineColor: '#efefef',
         lineWidth: 1,
         lineColor: '#efefef',
-        tickPositions: [0, 5, 10, 15],
+        tickPositions: [0, 20, 40, 60, 80, 100],
         minPadding: 0,
         maxPadding: 0.15,
         showFirstLabel: false,

@@ -27,8 +27,18 @@ app.get('/dashboard', function(req, res) {
 
 	// var datedd = document.getElementById("validateSelect");
 	// var dateSelected = datedd.options[datedd.selectedIndex].text;
-	metricQuery.equalTo("Date", "2015-06-28");
+	// metricQuery.equalTo("Date", "2015-06-28");
 	metricQuery.find().then(function(results){
+
+/*		for (var i = 0; i < results.length; i++) { 
+		  var object = results[i];
+		  (function($) {
+		      $('#validateSelect').append($("<option></option>")
+		     .attr("value",object.get('Date'))
+		     .text(object.get('Date'))); 
+		      })(jQuery);
+		 }*/
+
 		for (var i=0; i < results.length; i++) {
 			dates.push(results[i].get('Date'));
 			percentok.push(100*results[i].get('OK')/results[i].get('InQueue'));
@@ -46,7 +56,39 @@ app.get('/dashboard', function(req, res) {
 });
 
 app.get('/trends', function(req, res) {
-	res.render('trends.ejs');
+	var Metric = Parse.Object.extend("metric");
+	var metricQuery = new Parse.Query(Metric);
+
+	
+	var dates = [];
+	var caution = [];
+	var ok = [];
+	var warning = [];
+	var received = [];
+	var completed = [];	
+	var inqueue = [];		
+
+
+	metricQuery.find().then(function(results){
+
+		for (var i=0; i < results.length; i++) {
+			dates.push(results[i].get('Date'));
+			ok.push(results[i].get('OK'));
+			warning.push(results[i].get('Danger'));			
+			caution.push(results[i].get('Caution'));
+			received.push(results[i].get('Received'));
+			completed.push(results[i].get('Completed'));		
+			inqueue.push(results[i].get('InQueue'));					
+		}
+		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+		res.render('dashboard.ejs', { 
+			dates: dates,
+			ok: ok,
+			warning: warning,
+			caution: caution
+		});
+	});
+
 });
 
 app.get('/dataentry', function(req, res) {
@@ -60,7 +102,7 @@ app.get('/dataentry', function(req, res) {
 	var metric_bins = [];
 	var dates = [];
 	
-	metricBinQuery.find().then(function(metric_bins){	
+/*	metricBinQuery.find().then(function(metric_bins){	
 		// for (var i=0; i < objects.length; i++) {
 		// 	metric_bins.push(objects[i]);
 		// }
@@ -75,7 +117,7 @@ app.get('/dataentry', function(req, res) {
 
 		}
 
-	});
+	});*/
 	
 	// metricQuery.find().then(function(results){
 	// 	for (var j=0; j < results.length; j++) {
