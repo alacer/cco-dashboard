@@ -26,30 +26,16 @@
               </div>
 
 
-<!--
-<script> 
-  var datedd = document.getElementById("validateSelect");
-  var dateSelected = datedd.options[datedd.selectedIndex].text;
 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
- 
-        $( 'input', dateSelected ).on( 'keyup change', function () {
-            that
-                .search( this.value )
-                .draw();
-        } );
-    } );
-</script>
 
--->
+
+
 
               <div class="table-responsive">
                 <table id=#metricsdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="20" data-info="false" data-search="false" data-length-change="false" data-paginate="false">
                   <thead>
                     <tr>
-                      <th data-filterable="true" data-sortable="false">Date</th>
+                      <th id = "Date" data-filterable="true" data-sortable="false">Date</th>
                       <th data-filterable="true" data-sortable="true" data-direction="asc">Metric</th>
                       <th data-filterable="false" data-sortable="false">Received</th>
                       <th data-filterable="false" data-sortable="false">Completed</th>
@@ -85,6 +71,20 @@
                 </table>
               </div>
 
+<script> 
+//  var datedd = document.getElementById("validateSelect");
+//  var dateSelected = datedd.options[datedd.selectedIndex].text;
+//  var dateFilter = document.querySelector(".form-control input-sm show");
+//  dateFilter = dateSelected;
+//  console.log(dateFilter)
+//  console.log(dateSelected)
+    var dateSelected = $('input.form-control').val
+          console.log(dateSelected);
+   //     $("#validateSelect").change(function(){
+   //       $("#metricsdt thead tr:nth-child(2) th.nth-child(1) input.form").val("#validateSelect");
+
+  //      });
+</script>
           
           <!-- /#AlertsTabsContent -->
           <!-- Investigator Status -->
