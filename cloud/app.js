@@ -81,7 +81,8 @@ app.get('/trends', function(req, res) {
 			inqueue.push(results[i].get('InQueue'));					
 		}
 		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-		res.render('dashboard.ejs', { 
+		
+		res.render('trends.ejs', {metrics: results,
 			dates: dates,
 			ok: ok,
 			warning: warning,
@@ -102,7 +103,7 @@ app.get('/dataentry', function(req, res) {
 	var metric_bins = [];
 	var dates = [];
 	
-/*	metricBinQuery.find().then(function(metric_bins){	
+	//metricBinQuery.find().then(function(metric_bins){	
 		// for (var i=0; i < objects.length; i++) {
 		// 	metric_bins.push(objects[i]);
 		// }
@@ -115,9 +116,9 @@ app.get('/dataentry', function(req, res) {
 		
 			res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
 
-		}
+	//	}
 
-	});*/
+	});
 	
 	// metricQuery.find().then(function(results){
 	// 	for (var j=0; j < results.length; j++) {
