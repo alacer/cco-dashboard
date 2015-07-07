@@ -3,11 +3,26 @@
 
         <!-- Content Header -->
         <div id="content-header">
-          <h1>Enter Data</h1>
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>Enter Data</h1>
+          </div>
+          <div class="col-sm-5" style="margin-top: 15px;">
+            <label for="validateSelect">Metric</label>
+            <select id="metricSelect" name="metricSelect" class="form-control parsley-validated" data-required="true">
+
+                    <%  
+                    for(var i = 0; i < metric_bins.length; i++){ %>
+                        <option> <%= metric_bins[i].get("Metric")%> </option>
+                   <% } %>
+          
+            </select>
+          </div>
         </div>
+      </div>
         <!-- Primary Content Container -->
         <div id="content-container">
-
+<!--
         <select id="metricSelect" name="metricSelect" class="form-control parsley-validated" data-required="true">
 
                     <%  
@@ -26,78 +41,161 @@
           
         </select>
 
-        <div class="row">
-          <div class="col-md-4">
-              <h5>Overall</h5>
-          </div>        
-          <div class="col-md-4">
-              <h5>In Queue</h5>
-          </div>
-        </div>  
+-->
+    <div class="row">
+      <div class="col-sm-12">  
+      <div class="portlet">
+
+        <div class="portlet-header">
+          <h3>
+            Instructions
+          </h3>
+
+        </div> <!-- /.portlet-header -->
+
+        <div class="portlet-content">
+              <p>
+                Select a metric above.  Enter data for the most recent week, or upload a .csv file in the approved format.  To correct historical data or enter data from previous weeks, contact the administrator for assistance.
+              </p>
+
+          <!--Closes Portlet Content -->
+        </div>
+
+        <!-- closes portlet -->
+      </div>
+
+      </div>
+        <!-- closes row -->
+      </div>
 
 
-<form id="metricForm" method="post" action="/addMetric">
 
+    <div class="row">
+      <div class="col-sm-5">
+      <div class="portlet">
 
-  <div class="form-group">
-          <div class="row">
+        <div class="portlet-header">
 
-              <label class="col-md-2">Received</label>
+              <h3>
+                Enter Data
+              </h3>
 
-              <div class="col-md-2">
-                <input id="Received" type="text" class="form-control" placeholder="(Number)">
-              </div>
- 
- <!-- 
-            <label class="col-md-2" id="Bin1Label"> <%= metric_bins[1].attributes.Bin1 %> </label>
-   -->             
-            <label class="col-md-2" id="Bin1Label"> Testing </label>
+        </div> <!-- /.portlet-header -->
 
-              <div class="col-md-2">
-                <input type="text" class="form-control" placeholder="(Number)">
-              </div>
-            </div>
-          <div class="row">
+        <div class="portlet-content">
 
-              <label class="col-md-2">Completed</label>
+          <form id="metricForm" class="form-horizontal" method="post" action="/addMetric">
 
-              <div class="col-md-2">
-                <input type="text" class="form-control" placeholder="(Number)">
-              </div>
- 
-              <label class="col-md-2" id="Bin2Label">1 Day to 5 Days<%/* metric_bins[i].attributes.Bin2 */ %></label>  
+              <h4>Overall</h4>
 
-              <div class="col-md-2">
-                <input type="text" class="form-control" placeholder="(Number)">
-              </div>
-            </div>
-          <div class="row">
-
-              <div class="col-md-4">
-              </div>
- 
-              <label class="col-md-2" id="Bin3Label">More Than 5 Days <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
-   
-
-              <div class="col-md-2">
-                <input type="text" class="form-control" placeholder="(Number)">
-              </div>
-            </div>            
-
-            <div>
-                <button type="submit" >Add Metric</button>
-
-
+              <div class="form-group">
+                <label class="col-md-4">Received</label>
+                <div class="col-md-8">
+                  <input id="Received" type="text" class="form-control" placeholder="(Number)">
                 </div>
+              </div>
 
+              <div class="form-group"> 
+                <label class="col-md-4">Completed</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" placeholder="(Number)">
+                </div>
+              </div>
+
+              <h4>In Queue</h4>
+
+              <div class="form-group">              
+                <label class="col-md-4" id="Bin1Label"> Testing </label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" placeholder="(Number)">
+                </div>
+              </div>
+              <div class="form-group"> 
+                <label class="col-md-4" id="Bin2Label">1 Day to 5 Days<%/* metric_bins[i].attributes.Bin2 */ %></label>  
+                <div class="col-md-8">
+                  <input type="text" class="form-control" placeholder="(Number)">
+                </div>
+               </div>
+
+              <div class="form-group">   
+                <label class="col-md-4" id="Bin3Label">More Than 5 Days <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
+                <div class="col-md-8">
+                  <input type="text" class="form-control" placeholder="(Number)">
+                </div>
+              </div>  
+
+              <div style="text-align: center">
+                <button type="submit" id="submitData" class="btn btn-primary">Submit</button>
+              </div>
+
+          </form>
+
+          <!--Closes Portlet Content -->
+        </div>
+
+        <!-- closes portlet -->
+      </div>
+
+        <!-- closes col -->
+      </div>
+
+      <div class="col-sm-2">
+        <h4 style="text-align: center"> - OR  - </h4>
+      </div>
+
+      <div class="col-sm-5">
+      <div class="portlet">
+
+        <div class="portlet-header">
+
+              <h3>
+                Upload File
+              </h3>
+
+        </div> <!-- /.portlet-header -->
+
+        <div class="portlet-content">
+
+          <div class="fileupload fileupload-new" data-provides="fileupload">
+            <div class="input-group">
+              <div class="form-control">
+                <i class="fa fa-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+              </div>
+              <div class="input-group-btn">
+                <a href="#" class="btn btn-default fileupload-exists btn btn-danger" data-dismiss="fileupload" style="border-color: #004a89">Remove</a>
+                <span class="btn btn-default btn-file btn btn-primary">
+                <span class="fileupload-new">Select file</span>
+                <span class="fileupload-exists">Change</span>
+                  <input type="file">
+                </span>
+              </div>
             </div>
+          </div>
+
+          <div style="text-align: center">
+              <button type="submit" id="submitData" class="btn btn-primary">Submit</button>
+          </div>
 
 
-         <!-- </div> -->
+          <!--Closes Portlet Content -->
+        </div>
+
+        <!-- closes portlet -->
+      </div>
+
+        <!-- closes col -->
+      </div>
+
+
+
+        <!-- closes row -->
+      </div>
+
+<!-- Closes content container -->
 
   </div>
-</form>
 
+<!--
 <script>
 $(document).ready(function(){
             var metricSelected;
@@ -112,6 +210,6 @@ $(document).ready(function(){
       //console.log(test)
 })
 </script>
-
+-->
 
 <% include footer.ejs %>

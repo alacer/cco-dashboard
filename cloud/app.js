@@ -59,6 +59,9 @@ app.get('/trends', function(req, res) {
 	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
 
+	var MetricBin = Parse.Object.extend("metric_bin");
+	var metricBinQuery = new Parse.Query(MetricBin);
+
 	
 	var dates = [];
 	var caution = [];
@@ -67,7 +70,13 @@ app.get('/trends', function(req, res) {
 	var received = [];
 	var completed = [];	
 	var inqueue = [];		
+	var metric_bins = [];
 
+	metricBinQuery.find().then(function(results){	
+		 for (var i=0; i < results.length; i++) {
+		 	metric_bins.push(results[i]);
+		 }
+	});	
 
 	metricQuery.find().then(function(results){
 
@@ -81,12 +90,12 @@ app.get('/trends', function(req, res) {
 			inqueue.push(results[i].get('InQueue'));					
 		}
 		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-		
 		res.render('trends.ejs', {metrics: results,
 			dates: dates,
 			ok: ok,
 			warning: warning,
-			caution: caution
+			caution: caution,
+			metric_bins: metric_bins
 		});
 	});
 
