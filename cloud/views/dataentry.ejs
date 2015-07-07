@@ -48,7 +48,10 @@
                 <input id="Received" type="text" class="form-control" placeholder="(Number)">
               </div>
  
-              <label class="col-md-2"> Less Than 1 Day <%/* metric_bins[i].attributes.Bin1 */%> </label>
+ <!-- 
+            <label class="col-md-2" id="Bin1Label"> <%= metric_bins[1].attributes.Bin1 %> </label>
+   -->             
+            <label class="col-md-2" id="Bin1Label"> Testing </label>
 
               <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="(Number)">
@@ -62,7 +65,7 @@
                 <input type="text" class="form-control" placeholder="(Number)">
               </div>
  
-              <label class="col-md-2">1 Day to 5 Days<%/* metric_bins[i].attributes.Bin2 */ %></label>  
+              <label class="col-md-2" id="Bin2Label">1 Day to 5 Days<%/* metric_bins[i].attributes.Bin2 */ %></label>  
 
               <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="(Number)">
@@ -73,7 +76,7 @@
               <div class="col-md-4">
               </div>
  
-              <label class="col-md-2">More Than 5 Days <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
+              <label class="col-md-2" id="Bin3Label">More Than 5 Days <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
    
 
               <div class="col-md-2">
@@ -94,5 +97,20 @@
 
   </div>
 </form>
+
+<script>
+$(document).ready(function(){
+      $("#metricSelect").change(function(){
+            var metricSelected = $(this)[0].selectedIndex;
+            console.log(metricSelected);
+          $("#Bin1Label").text("<%= metric_bins[1].attributes.Bin1 %>");
+      });
+  //    var metricSelected = $("#metricSelect").val();
+  //              console.log(metricSelected);
+   //   var test = $("#metricselect").index();
+      //console.log(test)
+})
+</script>
+
 
 <% include footer.ejs %>

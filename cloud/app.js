@@ -103,13 +103,14 @@ app.get('/dataentry', function(req, res) {
 	var metric_bins = [];
 	var dates = [];
 	
-	//metricBinQuery.find().then(function(metric_bins){	
-		// for (var i=0; i < objects.length; i++) {
-		// 	metric_bins.push(objects[i]);
-		// }
-		metricQuery.find().then(function(metrics){
-			for (var i=0; i < metrics.length; i++) {
-				dates.push(metrics[i].get('Date'));
+	metricBinQuery.find().then(function(results){	
+		 for (var i=0; i < results.length; i++) {
+		 	metric_bins.push(results[i]);
+		 }
+	});
+		metricQuery.find().then(function(results){
+			for (var i=0; i < results.length; i++) {
+				dates.push(results[i].get('Date'));
 			}
 			
 			var uniquedates = dates.filter(function(item, x, ar){ return ar.indexOf(item) === x; });
