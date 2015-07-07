@@ -25,12 +25,12 @@ $(function() {
       function(x) {
         for(var i = 0; i < x.results.length; i++) {
            jsonArray.push(x.results[i]);
-           console.log(x.results[i])
+       //    console.log(x.results[i])
         }
       } 
       );
 
-  console.log(jsonArray);
+  //console.log(jsonArray);
 
 /* ---------------------------------- */
 /* Volume Per Week Chart (Default)    */
@@ -38,7 +38,7 @@ $(function() {
 //Load all of the Volume chart data
   $.each(volumeWeekSeriesNames, function(i, volumeWeekSeriesName) {
 
-//    $.getJSON(Metrics, function(data) {
+    $.getJSON(jsonArray, function(data) {
       var friendlyName, volumeData, yAxis;
       switch (volumeWeekSeriesName) {
         case ('Received'):
@@ -67,7 +67,7 @@ $(function() {
       if (volumeWeekSeriesCounter == volumeWeekSeriesNames.length) {
         createVolumeChart();
       }
-    //});
+    });
   });
 //Create the Volume chart when all data are loaded
   function createVolumeChart() {

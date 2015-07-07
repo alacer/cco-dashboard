@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-	var Metric = Parse.Object.extend("metric");
+	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
 
 	
@@ -56,7 +56,7 @@ app.get('/dashboard', function(req, res) {
 });
 
 app.get('/trends', function(req, res) {
-	var Metric = Parse.Object.extend("metric");
+	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
 
 	
@@ -97,7 +97,7 @@ app.get('/dataentry', function(req, res) {
 	var MetricBin = Parse.Object.extend("metric_bin");
 	var metricBinQuery = new Parse.Query(MetricBin);
 	
-	var Metric = Parse.Object.extend("metric");
+	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
 
 	var metric_bins = [];
