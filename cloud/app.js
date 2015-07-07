@@ -160,7 +160,7 @@ app.post('/gotodataentry', function(req, res) {
 	res.redirect('/dataentry');
 });
 
-app.post('/addMetric', function(req, res) {
+//app.post('/addMetric', function(req, res) {
 
   //TODO on POST, send InQueue = Caution + Danger + OK
   //TODO add drop-down select metric
@@ -168,8 +168,8 @@ app.post('/addMetric', function(req, res) {
   //TODO update bins based on metric seleceted
 
    
-    console.log("req.body:" + req.body);
-    console.log("req.params:" + req.params);
+//    console.log("req.body:" + req.body);
+//    console.log("req.params:" + req.params);
     
     // var Metric = Parse.Object.extend("metrics");
     // var newMetric = new Metric();
@@ -191,8 +191,8 @@ app.post('/addMetric', function(req, res) {
     // });
 
   
-	res.redirect('/dashboard');
-});
+	//res.redirect('/dashboard');
+//});
 
 
 app.listen();

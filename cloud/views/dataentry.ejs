@@ -84,7 +84,7 @@
 
         <div class="portlet-content">
 
-          <form id="metricForm" class="form-horizontal" method="post" action="/addMetric">
+          <form id="metricForm" class="form-horizontal" method="post"  action="/addMetric" */>
 
               <h4>Overall</h4>
 
@@ -124,10 +124,10 @@
                 </div>
               </div>  
 
-              <div style="text-align: center">
-                <button type="submit" id="submitData" class="btn btn-primary">Submit</button>
-              </div>
-
+          <div style="text-align: center">
+              <button type="submit" id="submitData" class="btn btn-primary">Submit</button>
+          </div>
+            <br>
           </form>
 
           <!--Closes Portlet Content -->
@@ -172,8 +172,9 @@
             </div>
           </div>
 
+
           <div style="text-align: center">
-              <button type="submit" id="submitData" class="btn btn-primary">Submit</button>
+              <button type="submit" id="submitDataUpload" class="btn btn-primary">Submit</button>
           </div>
 
 
@@ -194,6 +195,30 @@
 <!-- Closes content container -->
 
   </div>
+
+<script>
+$("#submitData").click(function() {
+    $(this).after(
+        '<br><br><div class="alert alert-success alert-dismissable">'+
+            '<button type="button" class="close" ' + 
+                    'data-dismiss="alert" aria-hidden="true">' + 
+                '&times;' + 
+            '</button>' + 
+            'Data Entered And Submitted!' + 
+         '</div>');
+});
+
+$("#submitDataUpload").click(function() {
+    $(this).after(
+        '<br><br><div class="alert alert-success alert-dismissable">'+
+            '<button type="button" class="close" ' + 
+                    'data-dismiss="alert" aria-hidden="true">' + 
+                '&times;' + 
+            '</button>' + 
+            'Data Uploaded Successfully!' + 
+         '</div>');
+}); 
+</script>
 
 <!--
 <script>

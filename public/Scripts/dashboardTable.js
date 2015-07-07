@@ -1,8 +1,8 @@
 
-
+$.fn.dataTable.TableTools.defaults.aButtons = [ "copy", "csv", "xls" ];
+ 
 $(document).ready(function() {
- 
-    // DataTable
-    var table = $('#metricsdt').DataTable();
- 
+    $('#metricsdt').DataTable( {
+        dom: 'T<"clear">lfrtip'
+    } );
 } );
