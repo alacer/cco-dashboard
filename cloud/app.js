@@ -9,9 +9,9 @@ app.set('view engine', 'ejs');
 app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
 app.use(express.bodyParser());
 
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(multer()); // for parsing multipart/form-data
+// app.use(bodyParser.json()); // for parsing application/json
+// app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+// app.use(multer()); // for parsing multipart/form-data
 
 app.use(express.cookieParser('Alacer'));
 app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
@@ -23,12 +23,14 @@ app.get('/', function(req, res) {
 app.get('/dashboard', function(req, res) {
 	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
-
-	
 	var dates = [];
 	var percentcaution = [];
 	var percentok = [];
 	var percentwarning = [];
+
+	if (req.query.date) {
+		metricQuery.equalTo("Date", req.query.date);
+	};
 
 	// var datedd = document.getElementById("validateSelect");
 	// var dateSelected = datedd.options[datedd.selectedIndex].text;
