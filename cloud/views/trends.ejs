@@ -2,12 +2,11 @@
 
 
 <!-- exclude script for graphs for now -->
-<!--
+
    <script>
 $(function() {
 
-    $.parse.init({app_id:"QlR7raDX8sggg5ebpDkgBXVANXhPPmpUKZRmOaMS",
-                   rest_key: "urhXUisVSqEOMoHhYp4W624k3Putu4YZAeJ7E26p"});
+
 
 /* ---------------------------------- */
 /* Charts Variables                   */
@@ -22,18 +21,18 @@ $(function() {
     colors = App.chartColors,
     teamChartColors = ['#d9534f','#e69900','#9c3','#69c','#96c','#e4784e','#d96600','#3366b2'];
 
-    var jsonArray = new Array();
+   // var jsonArray = <%=metrics[1].attributes.Date%>
 
-    $.parse.get('metric',
-      function(x) {
-        for(var i = 0; i < x.results.length; i++) {
-           jsonArray.push(x.results[i]);
+  //  $.parse.get('metric',
+   //   function(x) {
+   //     for(var i = 0; i < x.results.length; i++) {
+   //        jsonArray.push(x.results[i]);
   //         console.log(x.results[i]))
-        }
-      } 
-    );
+   //     }
+  //    } 
+  //  );
 
-  console.log(jsonArray);
+   // console.log(jsonArray);
 
 /* ---------------------------------- */
 /* Volume Per Week Chart (Default)    */
@@ -46,17 +45,17 @@ $(function() {
       switch (volumeWeekSeriesName) {
         case ('Received'):
           friendlyName = 'Received';
-          volumeData = Received;
+          volumeData = <%=received%>;
           yAxis = 0;
           break;
         case ('InQueue'):
           friendlyName = 'In Queue';
-          volumeData = data.volumeWeekDataInQueue;
+          volumeData = <%=inqueue%>;
           yAxis = 0;
           break;
         case ('Completed'):
           friendlyName = 'Completed';
-          volumeData = data.volumeWeekDataCompleted;
+          volumeData = <%=completed%>;
           yAxis = 0;
           break;
 
@@ -114,7 +113,7 @@ $(function() {
       },
       yAxis: [{
         min: 0,
-        max: 30,
+      //  max: 30,
         labels: {
           formatter: function() {
             return (this.value);
@@ -126,7 +125,7 @@ $(function() {
         gridLineColor: '#efefef',
         lineWidth: 1,
         lineColor: '#efefef',
-        tickPositions: [0, 5, 10, 15, 20, 25, 30],
+      //  tickPositions: [0, 5, 10, 15, 20, 25, 30],
         minPadding: 0,
         maxPadding: 0.15,
         showFirstLabel: false,
@@ -144,7 +143,6 @@ $(function() {
 });
 </script>
 
--->
 
         <!-- Content Header -->
         <div id="content-header">
@@ -153,7 +151,7 @@ $(function() {
             <h1>Trends</h1>
           </div>
           <div class="col-sm-5" style="margin-top: 15px;">
-            <label for="validateSelect">Metric</label>
+            <label for="metricSelect">Metric</label>
             <select id="metricSelect" name="metricSelect" class="form-control parsley-validated" data-required="true">
 
                     <%  
@@ -189,7 +187,7 @@ $(function() {
                       <!--
                       <th id = "Date" data-filterable="true" data-sortable="false" width = "0%">Date</th>
                       -->
-                      <th data-filterable="false" data-sortable="true" data-direction="asc" width = "25%">Date</th>
+                      <th data-filterable="false" data-sortable="true" data-direction="desc" width = "25%">Date</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Received</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Completed</th>
                       <th data-filterable="false" data-sortable="false" width = "30%">In Queue</th>

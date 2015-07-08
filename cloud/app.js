@@ -69,6 +69,9 @@ app.get('/trends', function(req, res) {
 	var MetricBin = Parse.Object.extend("metric_bin");
 	var metricBinQuery = new Parse.Query(MetricBin);
 
+	if (req.query.metric) {
+		metricQuery.equalTo("Metric", req.query.metric);
+	};
 	
 	var dates = [];
 	var caution = [];
@@ -105,6 +108,9 @@ app.get('/trends', function(req, res) {
 		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 		res.render('trends.ejs', {metrics: results,
 			dates: dates,
+			received: received,
+			completed: completed,
+			inqueue: inqueue,
 			ok: ok,
 			warning: warning,
 			caution: caution,
@@ -194,7 +200,7 @@ app.post('/addmetric', function(req, res) {
 
 	newMetric.set("Metric", req.body.metric);
 	newMetric.set("Date", req.body.date);
-	newMetric.set("Comments", '');
+	newMetric.set("Comments", req.body.comments);
     newMetric.set("Received", parseInt(req.body.received));
     newMetric.set("Completed", parseInt(req.body.completed));
     newMetric.set("OK", parseInt(req.body.ok));
@@ -211,7 +217,7 @@ app.post('/addmetric', function(req, res) {
     	}
     });
 
-	res.redirect('/dashboard');
+	//res.redirect('/dashboard');
 });
 
 
