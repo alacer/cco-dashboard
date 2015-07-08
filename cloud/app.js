@@ -71,6 +71,9 @@ app.get('/trends', function(req, res) {
 	var completed = [];	
 	var inqueue = [];		
 	var metric_bins = [];
+	var percentcaution = [];
+	var percentok = [];
+	var percentwarning = [];
 
 	metricBinQuery.find().then(function(results){	
 		 for (var i=0; i < results.length; i++) {
@@ -83,6 +86,9 @@ app.get('/trends', function(req, res) {
 		for (var i=0; i < results.length; i++) {
 			dates.push(results[i].get('Date'));
 			ok.push(results[i].get('OK'));
+			percentok.push(100*results[i].get('OK')/results[i].get('InQueue'));
+			percentcaution.push(100*results[i].get('Caution')/results[i].get('InQueue'));
+			percentwarning.push(100*results[i].get('Danger')/results[i].get('InQueue'));
 			warning.push(results[i].get('Danger'));			
 			caution.push(results[i].get('Caution'));
 			received.push(results[i].get('Received'));
@@ -95,7 +101,10 @@ app.get('/trends', function(req, res) {
 			ok: ok,
 			warning: warning,
 			caution: caution,
-			metric_bins: metric_bins
+			metric_bins: metric_bins,
+			percentok:percentok, 
+			percentcaution:percentcaution,
+			percentwarning:percentwarning
 		});
 	});
 
