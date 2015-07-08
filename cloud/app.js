@@ -184,29 +184,33 @@ app.post('/addmetric', function(req, res) {
   //TODO update bins based on metric seleceted
 
    //TODO extract metricForm data from body
-   console.log("req.body:" + JSON.stringify(req.body));
+	console.log("req.body:" + JSON.stringify(req.body));
    // console.log("req.bodyParser:" + req.bodyParser);
     
-    // var Metric = Parse.Object.extend("metrics");
-    // var newMetric = new Metric();
+	var Metric = Parse.Object.extend("metrics");
+	var newMetric = new Metric();
 
-    // console.log("setting newMetric");
-    // newMetric.set("Received", req.bodyParser);
+	console.log("adding new metric...");
 
-    // console.log(3);
-    // newMetric.save(null, {
-    //   success: function(newMetric) {
-    //     // Execute any logic that should take place after the object is saved.
-    //     console.log('New object created with objectId: ' + newMetric.id);
-    //   },
-    //   error: function(newMetric, error) {
-    //     // Execute any logic that should take place if the save fails.
-    //     // error is a Parse.Error with an error code and message.
-    //     console.log('Failed to create new object, with error code: ' + error.message);
-    //   }
-    // });
+	newMetric.set("Metric", req.body.metric);
+	newMetric.set("Date", req.body.date);
+	newMetric.set("Comments", '');
+    newMetric.set("Received", parseInt(req.body.received));
+    newMetric.set("Completed", parseInt(req.body.completed));
+    newMetric.set("OK", parseInt(req.body.ok));
+    newMetric.set("Caution", parseInt(req.body.caution));
+    newMetric.set("Danger", parseInt(req.body.danger));
+    newMetric.set("InQueue", parseInt(req.body.ok) + parseInt(req.body.caution) + parseInt(req.body.danger));
 
-  
+    newMetric.save(null, {
+    	success: function(newMetric) {
+    		alert(newMetric);
+    	},
+    	error: function(newMetric, error) {
+    		alert(error);
+    	}
+    });
+
 	res.redirect('/dashboard');
 });
 

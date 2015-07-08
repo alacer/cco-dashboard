@@ -87,18 +87,26 @@
           <form id="metricForm" class="form-horizontal" method="post"  action="/addmetric" >
 
               <h4>Overall</h4>
+              <input id="metric" type="hidden" name="metric" value="<%= metric_bins[0].get("Metric")%>" />
+
+              <div class="form-group">
+                <label class="col-md-4">Date</label>
+                <div class="col-md-8">
+                  <input id="Date" type="date" name="date" class="form-control">
+                </div>
+              </div>
 
               <div class="form-group">
                 <label class="col-md-4">Received</label>
                 <div class="col-md-8">
-                  <input id="Received" type="text" class="form-control" placeholder="(Number)">
+                  <input id="Received" type="text" name="received" class="form-control" placeholder="(Number)">
                 </div>
               </div>
 
               <div class="form-group"> 
                 <label class="col-md-4">Completed</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" placeholder="(Number)">
+                  <input type="text" class="form-control" name="completed" placeholder="(Number)">
                 </div>
               </div>
 
@@ -107,20 +115,20 @@
               <div class="form-group">              
                 <label class="col-md-4" id="Bin1Label"> Testing </label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" placeholder="(Number)">
+                  <input type="text" class="form-control" name="ok" placeholder="(Number)">
                 </div>
               </div>
               <div class="form-group"> 
                 <label class="col-md-4" id="Bin2Label">1 Day to 5 Days<%/* metric_bins[i].attributes.Bin2 */ %></label>  
                 <div class="col-md-8">
-                  <input type="text" class="form-control" placeholder="(Number)">
+                  <input type="text" class="form-control" name="caution" placeholder="(Number)">
                 </div>
                </div>
 
               <div class="form-group">   
                 <label class="col-md-4" id="Bin3Label">More Than 5 Days <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
                 <div class="col-md-8">
-                  <input type="text" class="form-control" placeholder="(Number)">
+                  <input type="text" class="form-control" name="danger" placeholder="(Number)">
                 </div>
               </div>  
 
@@ -218,23 +226,13 @@ $("#submitDataUpload").click(function() {
             'Data Uploaded Successfully!' + 
          '</div>');
 }); 
-</script>
-
-<!--
-<script>
 $(document).ready(function(){
-  //          var metricSelected;
-   //   $("#metricSelect").change(function(){
-    //        metricSelected = $(this)[0].selectedIndex;
-    //        console.log(metricSelected);
-   //       $("#Bin1Label").text("<%= metric_bins[1].attributes.Bin1 %>");
-   //   });
-  //    var metricSelected = $("#metricSelect").val();
-  //              console.log(metricSelected);
-   //   var test = $("#metricselect").index();
-      //console.log(test)
-})
+  var metricSelected;
+  $("#metricSelect").change(function(){
+    metricSelected = $(this)[0].selectedIndex;
+    $("#metric").val($("#metricSelect").val());
+  });
+});
 </script>
--->
 
 <% include footer.ejs %>
