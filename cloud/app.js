@@ -8,6 +8,11 @@ app.set('views', 'cloud/views');
 app.set('view engine', 'ejs');
 app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
 app.use(express.bodyParser());
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(multer()); // for parsing multipart/form-data
+
 app.use(express.cookieParser('Alacer'));
 app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 
@@ -169,16 +174,16 @@ app.post('/gotodataentry', function(req, res) {
 	res.redirect('/dataentry');
 });
 
-//app.post('/addMetric', function(req, res) {
+app.post('/addmetric', function(req, res) {
 
   //TODO on POST, send InQueue = Caution + Danger + OK
   //TODO add drop-down select metric
   //TODO add drop-down select date
   //TODO update bins based on metric seleceted
 
-   
-//    console.log("req.body:" + req.body);
-//    console.log("req.params:" + req.params);
+   //TODO extract metricForm data from body
+   console.log("req.body:" + JSON.stringify(req.body));
+   // console.log("req.bodyParser:" + req.bodyParser);
     
     // var Metric = Parse.Object.extend("metrics");
     // var newMetric = new Metric();
@@ -200,8 +205,8 @@ app.post('/gotodataentry', function(req, res) {
     // });
 
   
-	//res.redirect('/dashboard');
-//});
+	res.redirect('/dashboard');
+});
 
 
 app.listen();
