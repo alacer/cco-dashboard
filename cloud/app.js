@@ -98,17 +98,19 @@ app.get('/trends', function(req, res) {
 		 	metric_bins.push(results[i]);
 		 }
 	});	
+
+
 	metricQuery.ascending("Date");
 	metricQuery.find().then(function(results){
 
 		for (var i=0; i < results.length; i++) {
 			dates.push(results[i].get('Date'));
-			ok.push(results[i].get('OK'));
 			percentok.push(100*results[i].get('OK')/results[i].get('InQueue'));
 			percentcaution.push(100*results[i].get('Caution')/results[i].get('InQueue'));
 			percentwarning.push(100*results[i].get('Danger')/results[i].get('InQueue'));
-			warning.push(results[i].get('Danger'));			
-			caution.push(results[i].get('Caution'));
+			ok.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('OK')+']');
+			warning.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Danger')+']');			
+			caution.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Caution')+']');
 			received.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Received')+']');
 			completed.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Completed')+']');		
 			inqueue.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('InQueue')+']');					
