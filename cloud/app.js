@@ -39,6 +39,9 @@ app.get('/dashboard', function(req, res) {
 	if (req.query.date) {
 		metricQuery.equalTo("Date", req.query.date);
 	};
+	if(!req.query.date){
+		metricQuery.equalTo("Date", "2015-06-21")	
+	};
 
 	// var datedd = document.getElementById("validateSelect");
 	// var dateSelected = datedd.options[datedd.selectedIndex].text;
@@ -80,6 +83,10 @@ app.get('/trends', function(req, res) {
 	if (req.query.metric) {
 		metricQuery.equalTo("Metric", req.query.metric);
 	};
+
+	if(!req.query.metric){
+		metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")	
+	};	
 	
 	var dates = [];
 	var caution = [];

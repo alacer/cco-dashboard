@@ -2,6 +2,22 @@
  
 $(document).ready(function() {
 
+/*    var $datepicker = $( "#date_input" );
+        $datepicker.datepicker();
+        $datepicker.datepicker('setDate', new Date("2015-06-21"));*/
+
+/*    $("window").on("load", function(){
+        $("#date_input").val(new Date("2015-06-21"))      
+    }); */   
+
+    $("#date_input").on("change", function () {
+        window.location.href = "/dashboard?date=" +  this.value;
+    });
+
+    $("#metricTrends").on("change", function () {
+        window.location.href = "/trends?metric=" +  this.value;
+    });
+
   $('[id*="Overview"] table tbody tr td').on('click', function(e) {
     var initiator = e.target;
     var rowId = $(this).parent('tr').data('objectid');
@@ -37,12 +53,7 @@ $(document).ready(function() {
         dom: 'T<"clear">lfrtip'
     });
 
-    $("#date_input").on("change", function () {
-    	window.location.href = "/dashboard?date=" +  this.value;
-    });
 
-    $("#metricTrends").on("change", function () {
-    	window.location.href = "/trends?metric=" +  this.value;
-    });
+
 
 } );
