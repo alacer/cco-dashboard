@@ -24,17 +24,17 @@ $(function() {
       switch (volumeWeekSeriesName) {
         case ('Received'):
           friendlyName = 'Received';
-          volumeData = ['<%=received%>'];
+          volumeData = [<%=received%>];
           yAxis = 0;
           break;
         case ('InQueue'):
           friendlyName = 'In Queue';
-          volumeData = ['<%=inqueue%>'];
+          volumeData = [<%=inqueue%>];
           yAxis = 0;
           break;
         case ('Completed'):
           friendlyName = 'Completed';
-          volumeData = ['<%=completed%>'];
+          volumeData = [<%=completed%>];
           yAxis = 0;
           break;
 
@@ -130,17 +130,17 @@ $(function() {
       switch (queueWeekSeriesName) {
         case ('OK'):
           friendlyName = 'Less Than 1 Day';
-          queueData = ['<%=ok%>'];
+          queueData = [<%=ok%>];
           yAxis = 0;
           break;
         case ('Caution'):
           friendlyName = '1 Day to 5 Days';
-          queueData = ['<%=caution%>'];
+          queueData = [<%=caution%>];
           yAxis = 0;
           break;
         case ('Warning'):
           friendlyName = 'More Than 5 Days';
-          queueData = ['<%=warning%>'];
+          queueData = [<%=warning%>];
           yAxis = 0;
           break;
 

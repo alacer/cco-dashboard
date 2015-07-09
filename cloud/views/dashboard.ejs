@@ -23,9 +23,9 @@
           <!-- Alerts Tables Navigation -->
 
           <!-- Alerts Tables (Open, Submitted, Closed) -->
-          <div id="AlertsTabsContent" class="tab-content">
+          <div id="DashboardTabsContent" class="tab-content">
             <!-- Open Alerts -->
-            <div class="tab-pane fade in active" id="OpenAlerts">
+            <div class="tab-pane fade in active" id="Overview">
            
 <!--
               <div class="form-group">  
@@ -57,7 +57,7 @@
                   </thead>
 
                   <% for(var i = 0; i < metrics.length; i++) { %>
-                    <tr data-objectid="<%= metrics[i].id %>">
+                    <tr data-objectid="<%= metrics[i].attributes.Metric %>">
                         <!--
                         <td> <%= metrics[i].attributes.Date %> </td>
                         -->

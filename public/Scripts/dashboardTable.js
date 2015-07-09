@@ -2,6 +2,22 @@
  
 $(document).ready(function() {
 
+  $('[id*="Overview"] table tbody tr td').on('click', function(e) {
+    var initiator = e.target;
+    var rowId = $(this).parent('tr').data('objectid');
+    if (!$(this).hasClass('non-selectable')) {
+      window.location.href = 'trends?metric=' + rowId;
+    }
+  });
+
+  $('[id*="trendTable"] table tbody tr td').on('click', function(e) {
+    var initiator = e.target;
+    var rowId = $(this).parent('tr').data('objectid');
+    if (!$(this).hasClass('non-selectable')) {
+      window.location.href = 'dashboard?date=' + rowId;
+    }
+  });
+
 	var initial_date = window.location.search;
 	var set_date 	 = initial_date.replace("?date=",'');
 		$("#date_input").val(set_date);

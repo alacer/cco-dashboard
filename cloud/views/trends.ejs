@@ -275,9 +275,9 @@ $(function() {
                   <div id="AlertsPerformance_WeekViews_QueueChart"></div>
                 </div>
 
-                <div class="col-md-6 col-sm-12">   
+                <div class="col-md-6 col-sm-12" id="trendTable">   
                <div class="table-responsive">
-                <table id=#trendsdt class="table table-striped table-bordered table-highlight table-checkable" data-provide="datatable" data-display-rows="10" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
+                <table id=#trendsdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
                   <thead>
                     <tr>
                       <!--
@@ -292,7 +292,7 @@ $(function() {
                   </thead>
 
                   <% for(var i = 0; i < metrics.length; i++) { %>
-                    <tr data-objectid="<%= metrics[i].id %>">
+                    <tr data-objectid="<%= metrics[i].attributes.Date %>">
                         <td> <%= metrics[i].attributes.Date %> </td>
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
