@@ -218,7 +218,8 @@ app.post('/addmetric', function(req, res) {
 
     newMetric.save(null, {
     	success: function(newMetric) {
-    		alert(newMetric);
+    		res.redirect('/dashboard');
+    		//alert(newMetric);
     	},
     	error: function(newMetric, error) {
     		alert(error);
