@@ -17,7 +17,11 @@ app.use(express.cookieParser('Alacer'));
 app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 
 app.get('/', function(req, res) {
-	res.render('dashboard.ejs');
+	res.render('login.ejs');
+});
+
+app.get('/login', function(req, res) {
+	res.render('login.ejs');
 });
 
 app.get('/dashboard', function(req, res) {
@@ -90,7 +94,7 @@ app.get('/trends', function(req, res) {
 		 	metric_bins.push(results[i]);
 		 }
 	});	
-
+	metricQuery.ascending("Date");
 	metricQuery.find().then(function(results){
 
 		for (var i=0; i < results.length; i++) {
@@ -101,9 +105,9 @@ app.get('/trends', function(req, res) {
 			percentwarning.push(100*results[i].get('Danger')/results[i].get('InQueue'));
 			warning.push(results[i].get('Danger'));			
 			caution.push(results[i].get('Caution'));
-			received.push(results[i].get('Received'));
-			completed.push(results[i].get('Completed'));		
-			inqueue.push(results[i].get('InQueue'));					
+			received.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Received')+']');
+			completed.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Completed')+']');		
+			inqueue.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('InQueue')+']');					
 		}
 		var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 		res.render('trends.ejs', {metrics: results,

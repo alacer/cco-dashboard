@@ -1,5 +1,4 @@
 
-$.fn.dataTable.TableTools.defaults.aButtons = [ "copy", "csv", "xls" ];
  
 $(document).ready(function() {
 	var initial_date = window.location.search;
@@ -11,9 +10,11 @@ $(document).ready(function() {
 		$("#metricSelect").val(set_metric);
 
 
-    $('#metricsdt').DataTable( {
-        dom: 'T<"clear">lfrtip'
-    });
+    var table = $('#metricsdt').DataTable();
+    var tt = new $.fn.dataTable.TableTools( table, {
+    } );
+    $( tt.fnContainer() );
+
 
     $('#trendsdt').DataTable( {
         dom: 'T<"clear">lfrtip'
@@ -25,7 +26,6 @@ $(document).ready(function() {
 
     $("#metricSelect").on("change", function () {
     	window.location.href = "/trends?metric=" +  this.value;
-    	console.log(this.value)
     });
 
 } );
