@@ -11,9 +11,9 @@ $(document).ready(function() {
 
 
     var table = $('#metricsdt').DataTable();
-    var tt = new $.fn.dataTable.TableTools( table, {
-    } );
-    $( tt.fnContainer() );
+//    var tt = new $.fn.dataTable.TableTools( table, {
+//    } );
+//    $( tt.fnContainer() );
 
 
     $('#trendsdt').DataTable( {

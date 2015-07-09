@@ -24,6 +24,10 @@ app.get('/login', function(req, res) {
 	res.render('login.ejs');
 });
 
+app.get('/settings', function(req, res) {
+	res.render('settings.ejs');
+});
+
 app.get('/dashboard', function(req, res) {
 	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
