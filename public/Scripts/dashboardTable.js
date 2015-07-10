@@ -52,22 +52,20 @@ $(document).ready(function() {
     if($("#date_input").val()===""){
         $("#date_input").val("2015-06-21")
     };
+
     
 	var initial_metric = window.location.search;
+    if(undefined != initial_metric){
 	var set_metric 	 = initial_metric.replace("?metric=",'');
     var set_metric_clean   = set_metric.replace(/%20/g,' ');
-    console.log(set_metric_clean)
 		$("#metricTrends").val(set_metric_clean);
+    }
 
-
-    var table = $('#metricsdt').DataTable();
-//    var tt = new $.fn.dataTable.TableTools( table, {
-//    } );
-//    $( tt.fnContainer() );
+    $('#metricsdt').DataTable({
+    });
 
 
     $('#trendsdt').DataTable( {
-        dom: 'T<"clear">lfrtip'
     });
 
 
