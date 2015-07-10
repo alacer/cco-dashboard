@@ -149,6 +149,11 @@
             <br>
           </form>
 
+          <div id="datauploadalert" class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Data Entered And Submitted!
+          </div>
+
           <!--Closes Portlet Content -->
         </div>
 
@@ -216,16 +221,7 @@
   </div>
 
 <script>
-$("#submitData").click(function() {
-    $(this).after(
-        '<br><br><div class="alert alert-success alert-dismissable">'+
-            '<button type="button" class="close" ' + 
-                    'data-dismiss="alert" aria-hidden="true">' + 
-                '&times;' + 
-            '</button>' + 
-            'Data Entered And Submitted!' + 
-         '</div>');
-});
+
 
 $("#submitDataUpload").click(function() {
     $(this).after(

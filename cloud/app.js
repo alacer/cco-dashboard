@@ -80,13 +80,7 @@ app.get('/trends', function(req, res) {
 	var MetricBin = Parse.Object.extend("metric_bin");
 	var metricBinQuery = new Parse.Query(MetricBin);
 
-	if (req.query.metric) {
-		metricQuery.equalTo("Metric", req.query.metric);
-	};
 
-	if(!req.query.metric){
-		metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")	
-	};	
 	
 	var dates = [];
 	var caution = [];
@@ -105,6 +99,14 @@ app.get('/trends', function(req, res) {
 		 	metric_bins.push(results[i]);
 		 }
 	});	
+
+	if (req.query.metric) {
+		metricQuery.equalTo("Metric", req.query.metric);
+	};
+
+	if(!req.query.metric){
+		metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")	
+	};	
 
 
 	metricQuery.ascending("Date");
@@ -227,7 +229,7 @@ app.post('/addmetric', function(req, res) {
 
     newMetric.save(null, {
     	success: function(newMetric) {
-    		res.redirect('/dashboard');
+    		res.redirect('/dataentry#datauploadalert');
     		//alert(newMetric);
     	},
     	error: function(newMetric, error) {

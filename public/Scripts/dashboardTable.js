@@ -55,7 +55,9 @@ $(document).ready(function() {
     
 	var initial_metric = window.location.search;
 	var set_metric 	 = initial_metric.replace("?metric=",'');
-		$("#metricTrends").val(set_metric);
+    var set_metric_clean   = set_metric.replace(/%20/g,' ');
+    console.log(set_metric_clean)
+		$("#metricTrends").val(set_metric_clean);
 
 
     var table = $('#metricsdt').DataTable();
