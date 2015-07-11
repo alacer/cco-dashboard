@@ -296,8 +296,7 @@ $(function() {
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
                         <td>
-                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-content="<b>OK: </b><%= metrics[i].attributes.OK %> <br/> <b> Caution: </b> <%= metrics[i].attributes.Caution %> <br/> <b> Warning: </b> <%= metrics[i].attributes.Danger %>" 
-                          data-html=TRUE>
+                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b>OK: </b><%= metrics[i].attributes.OK %> <br/> <b> Caution: </b> <%= metrics[i].attributes.Caution %> <br/> <b> Warning: </b> <%= metrics[i].attributes.Danger %> ">
                           <div class="progress">
                             <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
                             </div>
