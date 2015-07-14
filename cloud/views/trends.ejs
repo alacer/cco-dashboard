@@ -291,10 +291,11 @@ $(function() {
                       <!--
                       <th id = "Date" data-filterable="true" data-sortable="false" width = "0%">Date</th>
                       -->
-                      <th data-filterable="false" data-sortable="true" data-direction="desc" width = "25%">Date</th>
+                      <th data-filterable="false" data-sortable="true" data-direction="desc" width = "15%">Date</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Received</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Completed</th>
-                      <th data-filterable="false" data-sortable="false" width = "30%">In Queue</th>
+                      <th data-filterable="false" data-sortable="false" width = "15%">In Queue</th>
+                      <th data-filterable="false" data-sortable="false" width = "25%">Aging</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Comments</th>
                     </tr>
                   </thead>
@@ -304,17 +305,23 @@ $(function() {
                         <td> <%= metrics[i].attributes.Date %> </td>
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
+                        <td> <%= metrics[i].attributes.InQueue %> </td>                        
                         <td>
-                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b><%= bin1 %>: </b><%= metrics[i].attributes.OK %> <br/> <b> <%= bin2 %> </b> <%= metrics[i].attributes.Caution %> <br/> <b> <%= bin3 %>: </b> <%= metrics[i].attributes.Danger %> ">
                           <div class="progress">
-                            <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
-                            </div>
-                            <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%=percentcaution[i]%>%; background-color: #FFF000">
-                            </div>
-                            <div class="progress-bar progress-bar-danger" style="width: <%=percentwarning[i]%>%">
-                            </div>
+
+                            <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b><%= bin1 %>: </b><%= metrics[i].attributes.OK %>">
+                              <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
+                              </div>
+                            </a>
+                            <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b><%= bin2 %>: </b><%= metrics[i].attributes.Caution %>">                          
+                              <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%=percentcaution[i]%>%; background-color: #FFF000">
+                              </div>
+                            </a>
+                            <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b><%= bin3 %>: </b><%= metrics[i].attributes.Danger %>">
+                              <div class="progress-bar progress-bar-danger" style="width: <%=percentwarning[i]%>%">
+                              </div>
+                            </a>  
                           </div>
-                          </a>
                         </td>
                   <!--     <td> <%= metrics[i].attributes.InQueue %> </td> -->
 
