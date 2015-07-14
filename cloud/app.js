@@ -36,6 +36,33 @@ app.get('/dashboard', function(req, res) {
 	var percentok = [];
 	var percentwarning = [];
 	var metric_bins = [];
+	var metric_names = [];
+	var metric1data = [];
+
+	metricQuery.ascending("Metric");
+	metricBinQuery.ascending("Metric");
+
+
+	metricBinQuery.find().then(function(results){	
+		 for (var i=0; i < results.length; i++) {
+		 	metric_bins.push(results[i]);
+		 	metric_names.push(results[i].attributes.Metric);
+		};
+	});	
+
+
+/*	for (var i=0; i < metric_names.length; i++) {
+		metricQuery.equalTo("Metric", metric_names[i]);
+						console.log(metric_names[i]);
+		metricQuery.find().then(function(results){
+
+
+				for (var j=0; j < results.length; j++) {
+					metric1data.push(results[j].get("Received"));
+				};			 	
+
+		});
+	};*/	
 
 
 	if (req.query.date) {
@@ -43,15 +70,7 @@ app.get('/dashboard', function(req, res) {
 	};
 	if(!req.query.date){
 		metricQuery.equalTo("Date", "2015-06-21")	
-	};
-
-	metricQuery.ascending("Metric");
-	metricBinQuery.ascending("Metric");
-	metricBinQuery.find().then(function(results){	
-		 for (var i=0; i < results.length; i++) {
-		 	metric_bins.push(results[i]);
-		 }
-	});		
+	};	
 
 	// var datedd = document.getElementById("validateSelect");
 	// var dateSelected = datedd.options[datedd.selectedIndex].text;
