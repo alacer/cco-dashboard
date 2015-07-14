@@ -24,6 +24,12 @@
 				        		&nbsp;&nbsp;Configure Metrics
 				        	</a>
 				        </li>
+				        <li>
+				        	<a href="#actionlog" data-toggle="tab">
+				        		<i class="fa fa-file-text-o"></i> 
+				        		&nbsp;&nbsp;View Log
+				        	</a>
+				        </li>				        
 				      </ul>
 
 				</div> <!-- /.col -->
@@ -574,6 +580,70 @@
 				        </div> 
 
 				      </div>
+
+
+				        <div class="tab-pane fade" id="actionlog">
+				        	<h3>View Log</h3>
+			               	<div class="table-responsive">
+				                <table id=#actionlogdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
+				                  <thead>
+				                    <tr>
+				                      <th data-filterable="false" data-sortable="true" data-direction="desc" width = "15%">Date</th>
+				                      <th data-filterable="true" data-sortable="true" width = "15%">User</th>
+				                      <th data-filterable="true" data-sortable="true" width = "15%">Action</th>
+				                      <th data-filterable="true" data-sortable="true" width = "15%">Result</th>
+				                      <th data-filterable="false" data-sortable="false" width = "25%">Details</th>
+				                    </tr>
+				                  </thead>
+
+				                    <tr>
+				                        <td> 01/01/2015 08:00:00 </td>
+				                        <td> Rommel </td>
+				                        <td> AddUser </td>
+				                        <td> Success </td>
+				                        <td> New User Added: Rjill </td>                                                
+				                    </tr>
+				                    <tr>
+				                        <td> 01/01/2015 08:01:00 </td>
+				                        <td> Rommel </td>
+				                        <td> AddUser </td>
+				                        <td> Failure </td>
+				                        <td> User Already Exists: Rjill </td>                                                
+				                    </tr>	
+				                    <tr>
+				                        <td> 01/01/2015 08:02:00 </td>
+				                        <td> Rommel </td>
+				                        <td> UpdateUser </td>
+				                        <td> Success </td>
+				                        <td> User Updated: Rjill </td>                                                
+				                    </tr>
+				                    <tr>
+				                        <td> 01/01/2015 08:03:00 </td>
+				                        <td> Rjill </td>
+				                        <td> AddMetric </td>
+				                        <td> Success </td>
+				                        <td> New Metric Added: SAR Filings </td>                                                
+				                    </tr>
+				                    <tr>
+				                        <td> 01/01/2015 08:04:00 </td>
+				                        <td> Rjill </td>
+				                        <td> UpdateMetric </td>
+				                        <td> Success </td>
+				                        <td> Metric Updated: SAR Filings </td>                                                
+				                    </tr>
+				                    <tr>
+				                        <td> 01/01/2015 08:05:00 </td>
+				                        <td> Rjill </td>
+				                        <td> DeleteMetric </td>
+				                        <td> Success </td>
+				                        <td> Metric Deleted: Law Enforcement Notifications </td>
+				                    </tr>				                    			                   
+				                </table>
+			              	</div>
+
+				      </div>
+
+
 
 				</div> <!-- /.col -->				
 
