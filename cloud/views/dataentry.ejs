@@ -43,20 +43,7 @@
 
 -->
     <div class="row">
-      <div class="col-sm-12">
-          <div id="datauploadalert" class="alert alert-success alert-dismissable collapse" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            Data Entered And Submitted!
-          </div>
-          <div id="datafilealert" class="alert alert-success alert-dismissable collapse" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            Data Uploaded Successfully!
-         </div>
-
+      <div class="col-sm-12">  
       <div class="portlet">
 
         <div class="portlet-header">
@@ -130,26 +117,20 @@
               <h4>In Queue</h4>
 
               <div class="form-group">              
-
-                <label class="col-md-4" id="Bin1Label"> <%= metrics.bin1 %> </label>
-
+                <label class="col-md-4" id="Bin1Label"> OK </label>
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="ok" placeholder="(Number)">
                 </div>
               </div>
               <div class="form-group"> 
-
-                <label class="col-md-4" id="Bin2Label"> <%= metrics.bin2 %> </label>  
-
+                <label class="col-md-4" id="Bin2Label"> Caution<%/* metric_bins[i].attributes.Bin2 */ %></label>  
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="caution" placeholder="(Number)">
                 </div>
                </div>
 
               <div class="form-group">   
-
-                <label class="col-md-4" id="Bin3Label"> <%= metrics.bin3 %> </label> 
-
+                <label class="col-md-4" id="Bin3Label"> Warning <%/* metric_bins[i].attributes.Bin3 */ %> </label> 
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="danger" placeholder="(Number)">
                 </div>
@@ -167,6 +148,11 @@
           </div>
             <br>
           </form>
+
+          <div id="datauploadalert" class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Data Entered And Submitted!
+          </div>
 
           <!--Closes Portlet Content -->
         </div>
@@ -235,31 +221,8 @@
   </div>
 
 <script>
+
 $("#submitDataUpload").click(function() {
-      $('#datafilealert').show();
-      window.location.href = "dataentry#datafilealert";
- });
-
-$(document).ready(function(){
-  if(window.location.href.indexOf("datauploadalert")>-1){
-    $('#datauploadalert').show();
-  }
-})
-
-
-/*console.log(window.location.href)
-*//*$("#submitData").click(function() {
-    $(this).after(
-        '<br><br><div id="datauploadalert" class="alert alert-success alert-dismissable">'+
-            '<button type="button" class="close" ' + 
-                    'data-dismiss="alert" aria-hidden="true">' + 
-                '&times;' + 
-            '</button>' + 
-            'Data Uploaded Successfully!' + 
-         '</div>');
-}); */
-
-/*$("#submitDataUpload").click(function() {
     $(this).after(
         '<br><br><div class="alert alert-success alert-dismissable">'+
             '<button type="button" class="close" ' + 
@@ -268,7 +231,7 @@ $(document).ready(function(){
             '</button>' + 
             'Data Uploaded Successfully!' + 
          '</div>');
-}); */
+}); 
 $(document).ready(function(){
   var metricSelected;
   $("#metricSelect").change(function(){
@@ -277,23 +240,5 @@ $(document).ready(function(){
   });
 });
 </script>
-
-
-<!-- <div id="submitModal" class="modal modal-styled fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title">Data Uploaded!</h3>
-      </div>
-      <div class="modal-body">
-        Your Data Was Successfully Uploaded!
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
 
 <% include footer.ejs %>
