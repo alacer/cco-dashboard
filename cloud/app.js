@@ -24,17 +24,21 @@ app.get('/login', function(req, res) {
 	res.render('login.ejs');
 });
 
-app.get('/settings', function(req, res) {
-	res.render('settings.ejs');
-});
+
 
 app.get('/dashboard', function(req, res) {
 	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
+
+	var MetricBin = Parse.Object.extend("metric_bin");
+	var metricBinQuery = new Parse.Query(MetricBin);
+
 	var dates = [];
 	var percentcaution = [];
 	var percentok = [];
 	var percentwarning = [];
+	var metric_bins = [];
+
 
 	if (req.query.date) {
 		metricQuery.equalTo("Date", req.query.date);
@@ -42,6 +46,14 @@ app.get('/dashboard', function(req, res) {
 	if(!req.query.date){
 		metricQuery.equalTo("Date", "2015-06-21")	
 	};
+
+	metricQuery.ascending("Metric");
+	metricBinQuery.ascending("Metric");
+	metricBinQuery.find().then(function(results){	
+		 for (var i=0; i < results.length; i++) {
+		 	metric_bins.push(results[i]);
+		 }
+	});		
 
 	// var datedd = document.getElementById("validateSelect");
 	// var dateSelected = datedd.options[datedd.selectedIndex].text;
@@ -68,7 +80,8 @@ app.get('/dashboard', function(req, res) {
 			uniquedates:unique, 
 			percentok:percentok, 
 			percentcaution:percentcaution,
-			percentwarning:percentwarning
+			percentwarning:percentwarning,
+			metric_bins: metric_bins
 		});
 	});
 });
@@ -93,6 +106,9 @@ app.get('/trends', function(req, res) {
 	var percentcaution = [];
 	var percentok = [];
 	var percentwarning = [];
+	var bin1 = [];
+	var bin2 = [];
+	var bin3 = [];
 
 	metricBinQuery.find().then(function(results){	
 		 for (var i=0; i < results.length; i++) {
@@ -102,10 +118,23 @@ app.get('/trends', function(req, res) {
 
 	if (req.query.metric) {
 		metricQuery.equalTo("Metric", req.query.metric);
+		metricBinQuery.equalTo("Metric", req.query.metric);
+		metricBinQuery.find().then(function(results){	
+			 for (var i=0; i < results.length; i++) {
+			 	bin1.push(results[i].get('Bin1'));
+			 	bin2.push(results[i].get('Bin2'));
+			 	bin3.push(results[i].get('Bin3'));
+			 }
+		});
 	};
 
 	if(!req.query.metric){
-		metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")	
+		metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")
+		metricBinQuery.find().then(function(results){	
+			 	bin1.push(results[0].get('Bin1'));
+			 	bin2.push(results[0].get('Bin2'));
+			 	bin3.push(results[0].get('Bin3'));
+		});			
 	};	
 
 
@@ -136,7 +165,10 @@ app.get('/trends', function(req, res) {
 			metric_bins: metric_bins,
 			percentok:percentok, 
 			percentcaution:percentcaution,
-			percentwarning:percentwarning
+			percentwarning:percentwarning,
+			bin3: bin3,
+			bin2: bin2,
+			bin1: bin1
 		});
 	});
 
@@ -152,20 +184,39 @@ app.get('/dataentry', function(req, res) {
 
 	var metric_bins = [];
 	var dates = [];
-	
+	var bin1 = [];
+	var bin2 = [];
+	var bin3 = [];
+
 	metricBinQuery.find().then(function(results){	
 		 for (var i=0; i < results.length; i++) {
 		 	metric_bins.push(results[i]);
 		 }
-	});
+	});	
+
+/*		metricBinQuery.equalTo("Metric", req.body.metric);
+		metricBinQuery.find().then(function(results){	
+			 for (var i=0; i < results.length; i++) {
+			 	bin1.push(results[i].get('Bin1'));
+			 	bin2.push(results[i].get('Bin2'));
+			 	bin3.push(results[i].get('Bin3'));
+			 }
+		});*/
+
 		metricQuery.find().then(function(results){
 			for (var i=0; i < results.length; i++) {
 				dates.push(results[i].get('Date'));
 			}
 			
 			var uniquedates = dates.filter(function(item, x, ar){ return ar.indexOf(item) === x; });
-		
-			res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
+	console.log(req.body.metric)
+			res.render('dataentry.ejs', {
+				metric_bins:metric_bins,
+				dates:uniquedates,
+				bin1: bin1,
+				bin2: bin2,
+				bin3: bin3
+			});
 
 	//	}
 
@@ -187,6 +238,20 @@ app.get('/dataentry', function(req, res) {
 	// res.render('dataentry.ejs', {metrics:metric_bins, dates:uniquedates});
 	//res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
 
+});
+
+app.get('/settings', function(req, res) {
+
+	var MetricBin = Parse.Object.extend("metric_bin");
+	var metricBinQuery = new Parse.Query(MetricBin);
+	
+
+		metricBinQuery.find().then(function(results){
+
+			res.render('settings.ejs', {
+				metric_bins:results
+			});
+	});
 });
 
 app.post('/gotodashboard', function(req, res) {
@@ -218,6 +283,7 @@ app.post('/addmetric', function(req, res) {
 	console.log("adding new metric...");
 
 	newMetric.set("Metric", req.body.metric);
+	console.log(req.body.date);
 	newMetric.set("Date", req.body.date);
 	newMetric.set("Comments", req.body.comments);
     newMetric.set("Received", parseInt(req.body.received));
