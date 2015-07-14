@@ -60,7 +60,10 @@ $(function() {
       chart: {
         height: 250,
         marginLeft: 35,
-        marginRight: 45
+        marginRight: 45,
+        style: {
+          fontFamily: '"Helvetica Neue", Helvetica, Arial, san-serif'
+        }
       },
       title:{
         text: metricName+': Overall Trends'
@@ -133,17 +136,17 @@ $(function() {
       var friendlyName, queueData, yAxis;
       switch (queueWeekSeriesName) {
         case ('OK'):
-          friendlyName = 'Less Than 1 Day';
+          friendlyName = '<%=bin1%>';
           queueData = [<%=ok%>];
           yAxis = 0;
           break;
         case ('Caution'):
-          friendlyName = '1 Day to 5 Days';
+          friendlyName = '<%=bin2%>';
           queueData = [<%=caution%>];
           yAxis = 0;
           break;
         case ('Warning'):
-          friendlyName = 'More Than 5 Days';
+          friendlyName = '<%=bin3%>';
           queueData = [<%=warning%>];
           yAxis = 0;
           break;
@@ -165,13 +168,19 @@ $(function() {
   function createqueueChart() {
     $('#AlertsPerformance_WeekViews_QueueChart').highcharts('StockChart', {
       title: {
-        text: metricName+': Aging Trends'
+        text: metricName+': Aging Trends',
+        style: {
+          fontFamily: '"Helvetica Neue", Helvetica, Arial, san-serif'
+        }
       },
       chart: {
         height: 250,
         type: 'area',
         marginLeft: 35,
-        marginRight: 45
+        marginRight: 45,
+        style: {
+          fontFamily: 'Helvetica Neue, Helvetica, Arial, san-serif'
+        }
       },
       colors: ['#5cb85c', '#FFF000', '#d9534f'],
       navigation: {
@@ -296,8 +305,7 @@ $(function() {
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
                         <td>
-                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-content="<b>OK: </b><%= metrics[i].attributes.OK %> <br/> <b> Caution: </b> <%= metrics[i].attributes.Caution %> <br/> <b> Warning: </b> <%= metrics[i].attributes.Danger %>" 
-                          data-html=TRUE>
+                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b><%= bin1 %>: </b><%= metrics[i].attributes.OK %> <br/> <b> <%= bin2 %> </b> <%= metrics[i].attributes.Caution %> <br/> <b> <%= bin3 %>: </b> <%= metrics[i].attributes.Danger %> ">
                           <div class="progress">
                             <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
                             </div>

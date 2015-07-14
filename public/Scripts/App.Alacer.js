@@ -242,6 +242,10 @@ var App = function () {
 				tableConfig.bPaginate = false;
 				tableConfig.bLengthChange = false;	
 				tableConfig.bInfo = false;
+				tableConfig.dom = 'T<"clear">lfrtip';
+				tableConfig.tableTools= {
+            				"sSwfPath": "Scripts/Plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
+        				};
 
 				if (helperOptions.paginate) { tableConfig.bPaginate = true; }
 				if (helperOptions.lengthChange) { tableConfig.bLengthChange = true; }

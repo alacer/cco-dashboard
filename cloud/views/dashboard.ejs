@@ -21,7 +21,7 @@
         <!-- Primary Content Container -->
         <div id="content-container">
           <!-- Alerts Tables Navigation -->
-
+                <div class="clear"></div>
           <!-- Alerts Tables (Open, Submitted, Closed) -->
           <div id="DashboardTabsContent" class="tab-content">
             <!-- Open Alerts -->
@@ -42,6 +42,7 @@
 --> 
 
               <div class="table-responsive">
+
                 <table id=#metricsdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
                   <thead>
                     <tr>
@@ -65,8 +66,7 @@
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
                         <td>
-                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-content="<b>OK: </b><%= metrics[i].attributes.OK %> <br/> <b> Caution: </b> <%= metrics[i].attributes.Caution %> <br/> <b> Warning: </b> <%= metrics[i].attributes.Danger %>" 
-                          data-html=TRUE>
+                          <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b> <%= metric_bins[i].attributes.Bin1 %>: </b><%= metrics[i].attributes.OK %> <br/> <b> <%= metric_bins[i].attributes.Bin2 %>: </b> <%= metrics[i].attributes.Caution %> <br/> <b> <%= metric_bins[i].attributes.Bin3 %>: </b> <%= metrics[i].attributes.Danger %>">
                           <div class="progress">
                             <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
                             </div>
@@ -91,27 +91,7 @@
               </div>
 
 
-<script> 
 
-//  var datedd = document.getElementById("validateSelect");
-//  var dateSelected = datedd.options[datedd.selectedIndex].text;
-
-//this returns a null value
-//  var dateFilter = document.querySelector(".form-control input-sm show");
-//  console.log(dateFilter);
-
-//  console.log(dateSelected);
-  //  var dateSelected = $('input.form-control').val
-  //        console.log(dateSelected);
-   //     $("#validateSelect").change(function(){
-   //       $("#metricsdt thead tr:nth-child(2) th.nth-child(1) input.form").val("#validateSelect");
-  //      });
- // I can't grab object in a table; the following lines return a function
-//   var test = $('#metricsdt').val;
-// console.log(test)
-
-
-</script>
           
           <!-- /#AlertsTabsContent -->
           <!-- Investigator Status -->
