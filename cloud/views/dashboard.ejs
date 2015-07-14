@@ -51,6 +51,7 @@
                       -->
                       <th data-filterable="true" data-sortable="true" data-direction="asc" width = "40%">Metric</th>
                       <th data-filterable="false" data-sortable="false" width = "10%">Received</th>
+                      <th data-filterable="false" data-sortable="false" class="hidden-xs hidden-sm">Received Trend</th>
                       <th data-filterable="false" data-sortable="false" width = "10%">Completed</th>
                       <th data-filterable="false" data-sortable="false" width = "10%">In Queue</th>                      
                       <th data-filterable="false" data-sortable="false" width = "20%">Aging</th>
@@ -65,6 +66,9 @@
                         -->
                         <td> <%= metrics[i].attributes.Metric %> </td>
                         <td> <%= metrics[i].attributes.Received %> </td>
+                        <td class="hidden-xs hidden-sm">
+                          <span id="Investigator1_TrendLine" class="trend-line" durationValues="48,10,26,45,30,40,25,38,43,48,20,43" dateValues="1381501200,1381509900,1381565100,1384254900,1384270200,1384938480,1385481660,1385539980,1385546520,1385558520,1385573100,1385733660" alertValues="12345,23456,34567,45678,56789,67890,78901,89012,90123,12890,23904,36757"></span>
+                        </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
                         <td> <%= metrics[i].attributes.InQueue %> </td>                        
                         <td>
