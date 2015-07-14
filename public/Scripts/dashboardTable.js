@@ -76,8 +76,8 @@ $(document).ready(function() {
         var initial_metric  = window.location.search;
         var set_metric      = initial_metric.replace("?metric=", "");
         var final_metric    = set_metric.replace(/%20/g," ");
-        console.log($('#metricSelect').val());
-        console.log(final_metric);
+        // console.log($('#metricSelect').val());
+        // console.log(final_metric);
         if ($('#metricSelect').val() != final_metric ) {
             $('#metricSelect').val(final_metric);
         };

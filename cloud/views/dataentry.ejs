@@ -137,7 +137,7 @@
                   <input type="text" class="form-control" name="ok" placeholder="(Number)">
                 </div>
               </div>
-              <div class="form-group"> 
+              <div id="cautioninput" class="form-group"> 
 
                 <label class="col-md-4" id="Bin2Label"> <%= metrics.bin2 %> </label>  
 
@@ -269,13 +269,26 @@ $(document).ready(function(){
             'Data Uploaded Successfully!' + 
          '</div>');
 }); */
+
+//console.log($("#Bin2Label").text());
+//console.log($("#cautioninput"));
+
 $(document).ready(function(){
   var metricSelected;
   $("#metricSelect").change(function(){
     metricSelected = $(this)[0].selectedIndex;
     $("#metric").val($("#metricSelect").val());
   });
+
+var cautionlabel = $("#Bin2Label").text() 
+if(cautionlabel === ' Caution '){
+   $("#cautioninput").hide();
+};
+
 });
+
+
+
 </script>
 
 
