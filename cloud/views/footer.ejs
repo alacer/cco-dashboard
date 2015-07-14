@@ -8,6 +8,16 @@
         </li>
       </ul>
     </footer>
+
+    <script>
+         var loc = window.location.pathname;
+        $(function(){
+        $('#main-nav li a[href="' + loc + '"]').parent().addClass('active');
+/*           $('#main-nav li').find('a').each(function() {
+             $(this).toggleClass('active', $(this).attr('href') == loc);
+          });*/
+        });
+    </script>
  
     <!-- Script Libraries -->
     <script src="Scripts/Libraries/bootstrap.min.js"></script>
