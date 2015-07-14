@@ -145,31 +145,52 @@ app.get('/trends', function(req, res) {
 app.get('/dataentry', function(req, res) {
 
 	var MetricBin = Parse.Object.extend("metric_bin");
+	var MetricBin2 = Parse.Object.extend("metric_bin");
 	var metricBinQuery = new Parse.Query(MetricBin);
+	var metricBinQuery2 = new Parse.Query(MetricBin2);
 	
 	var Metric = Parse.Object.extend("metrics");
 	var metricQuery = new Parse.Query(Metric);
 
+	var metrics 	= { bin1:'OK', bin2:'Caution', bin3:'Warning' };
 	var metric_bins = [];
-	var dates = [];
+	var dates 		= [];
+
+	if (req.query.metric) {
+		var metric_string 	= req.query.metric;
+		var new_metric 		= metric_string.replace("%20"," ");
+		metricBinQuery2.equalTo("Metric", new_metric);
+		metricBinQuery2.find().then(function (results) {
+			console.log(new_metric);
+			console.log(results);
+			metrics.bin1 = results[0].get("Bin1") || 'OK';
+			metrics.bin2 = results[0].get("Bin2") || 'Caution';
+			metrics.bin3 = results[0].get("Bin3") || 'Warning';
+		});
+		get_metric_bins();
+	} else {
+		get_metric_bins();
+	};
 	
-	metricBinQuery.find().then(function(results){	
-		 for (var i=0; i < results.length; i++) {
-		 	metric_bins.push(results[i]);
-		 }
-	});
-		metricQuery.find().then(function(results){
-			for (var i=0; i < results.length; i++) {
-				dates.push(results[i].get('Date'));
-			}
+	function get_metric_bins () {
+		metricBinQuery.find().then(function(results){	
+			 for (var i=0; i < results.length; i++) {
+			 	metric_bins.push(results[i]);
+			 }
+		});
+			metricQuery.find().then(function(results){
+				for (var i=0; i < results.length; i++) {
+					dates.push(results[i].get('Date'));
+				}
+				
+				var uniquedates = dates.filter(function(item, x, ar){ return ar.indexOf(item) === x; });
 			
-			var uniquedates = dates.filter(function(item, x, ar){ return ar.indexOf(item) === x; });
-		
-			res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates});
+				res.render('dataentry.ejs', {metric_bins:metric_bins, dates:uniquedates, metrics:metrics});
 
-	//	}
+		//	}
 
-	});
+		});
+	}
 	
 	// metricQuery.find().then(function(results){
 	// 	for (var j=0; j < results.length; j++) {

@@ -53,7 +53,6 @@ $(document).ready(function() {
         $("#date_input").val("2015-06-21")
     };
 
-    
 	var initial_metric = window.location.search;
     if(undefined != initial_metric){
 	var set_metric 	 = initial_metric.replace("?metric=",'');
@@ -69,6 +68,8 @@ $(document).ready(function() {
     });
 
 
-
+    $("#metricSelect").on('change', function () {
+        window.location.href = "/dataentry?metric="+this.value;
+    });
 
 } );
