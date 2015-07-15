@@ -76,11 +76,17 @@ $(document).ready(function() {
         var initial_metric  = window.location.search;
         var set_metric      = initial_metric.replace("?metric=", "");
         var final_metric    = set_metric.replace(/%20/g," ");
-        // console.log($('#metricSelect').val());
-        // console.log(final_metric);
         if ($('#metricSelect').val() != final_metric ) {
             $('#metricSelect').val(final_metric);
         };
+    };
+
+    if ($("#Bin1Label").text() == "OK") {
+        $("#okinput").hide();
+    } else if ($("#Bin2Label").text() == "Caution") {
+        $("#cautioninput").hide();
+    } else if ($("#Bin3Label").text() == "Warning") {
+        $("#warninginput").hide();
     };
 
 } );

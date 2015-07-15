@@ -210,8 +210,6 @@ app.get('/dataentry', function(req, res) {
 		var new_metric 		= metric_string.replace("%20"," ");
 		metricBinQuery2.equalTo("Metric", new_metric);
 		metricBinQuery2.find().then(function (results) {
-		//	console.log(new_metric);
-		//	console.log(results);
 			metrics.bin1 = results[0].get("Bin1") || 'OK';
 			metrics.bin2 = results[0].get("Bin2") || 'Caution';
 			metrics.bin3 = results[0].get("Bin3") || 'Warning';
@@ -220,8 +218,6 @@ app.get('/dataentry', function(req, res) {
 	} else {
 		metricBinQuery2.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases");
 		metricBinQuery2.find().then(function (results) {
-		//	console.log(new_metric);
-		//	console.log(results);
 			metrics.bin1 = results[0].get("Bin1") || 'OK';
 			metrics.bin2 = results[0].get("Bin2") || 'Caution';
 			metrics.bin3 = results[0].get("Bin3") || 'Warning';

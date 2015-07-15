@@ -222,6 +222,21 @@ var App = function () {
 
 	function initDataTableHelper () {
 		if ($.fn.dataTable) {
+			$.fn.dataTable.TableTools.buttons.print_view = $.extend(
+				true,
+				{},
+				$.fn.dataTable.TableTools.buttonBase,
+				{
+					"sButtonText": "Print",
+					"target": 	"",
+					"fnClick": function( button, conf ) {
+						this._fnPrintStart(conf);
+						// window.print();
+						// this._fnPrintEnd(conf);
+					}
+				}
+			);
+
 			$('[data-provide="datatable"]').each (function () {	
 				$(this).addClass ('dataTable-helper');		
 				var defaultOptions = {
@@ -240,11 +255,21 @@ var App = function () {
 				tableConfig.bFilter = true;
 				tableConfig.bSort = true;
 				tableConfig.bPaginate = false;
-				tableConfig.bLengthChange = false;	
+				tableConfig.bLengthChange = false;
 				tableConfig.bInfo = false;
 				tableConfig.dom = 'T<"clear">lfrtip';
 				tableConfig.tableTools= {
-            				"sSwfPath": "Scripts/Plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
+            				"sSwfPath": "Scripts/Plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+            				"aButtons": [
+            						"copy",
+            						"csv",
+            						"pdf",
+	            					{	
+	            						"sButtonText": "Print",
+						                "sExtends":    "print_view",
+						                "target":      "#print"
+						            }
+					           ]
         				};
 
 				if (helperOptions.paginate) { tableConfig.bPaginate = true; }
@@ -262,8 +287,8 @@ var App = function () {
 					if ($(this).data ('direction')) {
 						tableConfig.aaSorting.push ([index, $(this).data ('direction')]);
 					}
-				});		
-				
+				});
+
 				// Create the datatable
 				$thisTable = $(this).dataTable (tableConfig);
 
