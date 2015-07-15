@@ -46,24 +46,34 @@ app.get('/dashboard', function(req, res) {
 	metricBinQuery.find().then(function(results){	
 		 for (var i=0; i < results.length; i++) {
 		 	metric_bins.push(results[i]);
-		 	metric_names.push(results[i].attributes.Metric);
+		 	metric_names.push(results[i].get("Metric"));
+/*		};
+		for(j=0; j < metric_names.length; j++){ */
+/*				var test = metricQuery.equalTo("Metric", results[i].get("Metric"));	
+				metricQuery.find().then(function(results2){
+					metric1data.push(results2[j].get("Received"));
+				console.log(metric1data);
+				});*/	
 		};
-	});	
 
 
-/*	for (var i=0; i < metric_names.length; i++) {
-		metricQuery.equalTo("Metric", metric_names[i]);
-						console.log(metric_names[i]);
-		metricQuery.find().then(function(results){
+	});
+	
 
-
-				for (var j=0; j < results.length; j++) {
+/*	console.log(metric_names);
+		metricQuery.equalTo("Metric", metric_names[1]);
+						//console.log(results);
+*/	
+/*	metricQuery.find().then(function(results){
+		//console.log(metric_names);
+				for (var j=0; j < results.query("Metric", metric_names[1]).length; j++) {
 					metric1data.push(results[j].get("Received"));
 				};			 	
-
-		});
-	};*/	
-
+	//};
+		console.log(metric1data);
+	});
+		*/
+	//console.log(metric1data);
 
 	if (req.query.date) {
 		metricQuery.equalTo("Date", req.query.date);

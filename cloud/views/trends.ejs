@@ -301,6 +301,7 @@ $(function() {
                     </tr>
                   </thead>
 
+                  <tbody style="cursor: pointer; cursor: hand">
                   <% for(var i = 0; i < metrics.length; i++) { %>
                     <tr data-objectid="<%= metrics[i].attributes.Date %>">
                         <td> <%= metrics[i].attributes.Date %> </td>
@@ -332,7 +333,7 @@ $(function() {
                        <!-- <td> <%= metrics[i].attributes.Comments %> </td>  -->                         
                       </tr>
                     <% } %> 
-                    
+                    </tbody>
 
                 </table>
               </div>

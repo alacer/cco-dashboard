@@ -25,21 +25,8 @@
           <!-- Alerts Tables (Open, Submitted, Closed) -->
           <div id="DashboardTabsContent" class="tab-content">
             <!-- Open Alerts -->
-            <div class="tab-pane fade in active" id="Overview">
-           
-<!--
-              <div class="form-group">  
-                  <label for="validateSelect">Date</label>
-                  <select id="validateSelect" name="validateSelect" class="form-control parsley-validated" data-required="true">
-
-                    <%  
-                    for(var j = 0; j < uniquedates.length; j++){ %>
-                        <option> <%= uniquedates[j]%> </option>
-                   <% } %>  
-
-                  </select>
-              </div>
---> 
+            <div class="col-md-12" id="Overview">
+          
 
               <div class="table-responsive">
 
@@ -51,7 +38,7 @@
                       -->
                       <th data-filterable="true" data-sortable="true" data-direction="asc" width = "40%">Metric</th>
                       <th data-filterable="false" data-sortable="false" width = "10%">Received</th>
-                     <!--  <th data-filterable="false" data-sortable="false" class="hidden-xs hidden-sm">Received Trend</th> -->
+<!--                       <th data-filterable="false" data-sortable="false" class="hidden-xs hidden-sm">Received Trend</th> -->
                       <th data-filterable="false" data-sortable="false" width = "10%">Completed</th>
                       <th data-filterable="false" data-sortable="false" width = "10%">In Queue</th>                      
                       <th data-filterable="false" data-sortable="false" width = "20%">Aging</th>
@@ -59,6 +46,7 @@
                     </tr>
                   </thead>
 
+                  <tbody style="cursor: pointer; cursor: hand">
                   <% for(var i = 0; i < metrics.length; i++) { %>
                     <tr data-objectid="<%= metrics[i].attributes.Metric %>">
                         <!--
@@ -98,7 +86,7 @@
                       </tr>
                     <% } %> 
                     
-
+                    </tbody>
                 </table>
               </div>
 
