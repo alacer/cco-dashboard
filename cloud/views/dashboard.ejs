@@ -40,9 +40,13 @@
                       <th data-filterable="false" data-sortable="false" width = "10%">Received</th>
 <!--                       <th data-filterable="false" data-sortable="false" class="hidden-xs hidden-sm">Received Trend</th> -->
                       <th data-filterable="false" data-sortable="false" width = "10%">Completed</th>
-                      <th data-filterable="false" data-sortable="false" width = "10%">In Queue</th>                      
+                      <th data-filterable="false" data-sortable="false" width = "10%">In Queue</th> 
+                      <th data-filterable="false" data-sortable="false">OK</th>
+                      <th data-filterable="false" data-sortable="false">Caution</th>
+                      <th data-filterable="false" data-sortable="false">Warning</th>  
                       <th data-filterable="false" data-sortable="false" width = "20%">Aging</th>
                       <th data-filterable="false" data-sortable="false" width = "10%">Comments</th>
+                      <th data-filterable="false" data-sortable="false">Comments</th> 
                     </tr>
                   </thead>
 
@@ -58,7 +62,10 @@
                           <span id="Investigator1_TrendLine" class="trend-line" durationValues="48,10,26,45,30,40,25,38,43,48,20,43" dateValues="1381501200,1381509900,1381565100,1384254900,1384270200,1384938480,1385481660,1385539980,1385546520,1385558520,1385573100,1385733660" alertValues="12345,23456,34567,45678,56789,67890,78901,89012,90123,12890,23904,36757"></span>
                         </td> -->
                         <td> <%= metrics[i].attributes.Completed %> </td>
-                        <td> <%= metrics[i].attributes.InQueue %> </td>                        
+                        <td> <%= metrics[i].attributes.InQueue %> </td> 
+                        <td> <%= metrics[i].attributes.OK %> </td> 
+                        <td> <%= metrics[i].attributes.Caution %> </td>     
+                        <td> <%= metrics[i].attributes.Danger %> </td>                                                
                         <td>
 <!--                           <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b> <%= metric_bins[i].attributes.Bin1 %>: </b><%= metrics[i].attributes.OK %> <br/> <b> <%= metric_bins[i].attributes.Bin2 %>: </b> <%= metrics[i].attributes.Caution %> <br/> <b> <%= metric_bins[i].attributes.Bin3 %>: </b> <%= metrics[i].attributes.Danger %>"> -->
                           <div class="progress">
@@ -82,7 +89,7 @@
                         <td><a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Comments" data-content=<%= metrics[i].attributes.Comments ? metrics[i].attributes.Comments : 'None' %> >
                           <i class="fa fa-comments-o text-xl"></i>
                         </a></td>
-                       <!-- <td> <%= metrics[i].attributes.Comments %> </td>  -->                         
+                       <td> <%= metrics[i].attributes.Comments %> </td>                       
                       </tr>
                     <% } %> 
                     

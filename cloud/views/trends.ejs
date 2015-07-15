@@ -296,8 +296,12 @@ $(function() {
                       <th data-filterable="false" data-sortable="false" width = "15%">Received</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Completed</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">In Queue</th>
+                      <th data-filterable="false" data-sortable="false"><%= bin1 %></th>
+                      <th data-filterable="false" data-sortable="false"><%= bin2 %></th>
+                      <th data-filterable="false" data-sortable="false"><%= bin3 %></th>
                       <th data-filterable="false" data-sortable="false" width = "25%">Aging</th>
                       <th data-filterable="false" data-sortable="false" width = "15%">Comments</th>
+                      <th data-filterable="false" data-sortable="false">Comments</th>                      
                     </tr>
                   </thead>
 
@@ -307,7 +311,10 @@ $(function() {
                         <td> <%= metrics[i].attributes.Date %> </td>
                         <td> <%= metrics[i].attributes.Received %> </td>
                         <td> <%= metrics[i].attributes.Completed %> </td>
-                        <td> <%= metrics[i].attributes.InQueue %> </td>                        
+                        <td> <%= metrics[i].attributes.InQueue %> </td>  
+                        <td> <%= metrics[i].attributes.OK %> </td> 
+                        <td> <%= metrics[i].attributes.Caution %> </td>     
+                        <td> <%= metrics[i].attributes.Danger %> </td>                         
                         <td>
                           <div class="progress">
 
@@ -330,7 +337,7 @@ $(function() {
                         <td><a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Comments" data-content=<%= metrics[i].attributes.Comments ? metrics[i].attributes.Comments : 'None' %> >
                           <i class="fa fa-comments-o text-xl"></i>
                         </a></td>
-                       <!-- <td> <%= metrics[i].attributes.Comments %> </td>  -->                         
+                       <td> <%= metrics[i].attributes.Comments %> </td>                       
                       </tr>
                     <% } %> 
                     </tbody>
