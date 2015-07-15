@@ -275,7 +275,7 @@ var App = function () {
             							"sExtends": "pdf",
             							"sButtonText": "PDF",
             							"sPdfOrientation": "landscape",
-            							"mColumns": [5,6,9]
+            							"mColumns": [0,1,2,3,4,5,6,9]
             						},
 	            					{	
 	            						"sButtonText": "Print",
