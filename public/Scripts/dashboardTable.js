@@ -60,11 +60,11 @@ $(document).ready(function() {
 		$("#metricTrends").val(set_metric_clean);
     }
 
-    $('#metricsdt').DataTable({
+    $('metricsdt').DataTable({
     });
 
 
-    $('#trendsdt').DataTable( {
+    $('trendsdt').DataTable( {
     });
 
 

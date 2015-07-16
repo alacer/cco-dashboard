@@ -289,22 +289,21 @@ $(function() {
                 <div class="col-md-12" id="trendTable">
                 <!-- <div class="col-md-6 col-sm-12" id="trendTable">    -->
                <div class="table-responsive">
-                <table id=#trendsdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
+                <table id='trendsdt' class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
                   <thead>
                     <tr>
                       <!--
                       <th id = "Date" data-filterable="true" data-sortable="false" width = "0%">Date</th>
                       -->
-                      <th data-filterable="false" data-sortable="true" data-direction="desc" width = "15%">Date</th>
-                      <th data-filterable="false" data-sortable="false" width = "15%">Received</th>
-                      <th data-filterable="false" data-sortable="false" width = "15%">Completed</th>
-                      <th data-filterable="false" data-sortable="false" width = "15%">In Queue</th>
-                      <th data-filterable="false" data-sortable="false"><%= bin1 %></th>
-                      <th data-filterable="false" data-sortable="false"><%= bin2 %></th>
-                      <th data-filterable="false" data-sortable="false"><%= bin3 %></th>
-                      <th data-filterable="false" data-sortable="false" width = "25%">Aging</th>
-                      <th data-filterable="false" data-sortable="false" width = "15%">Comments</th>
-                      <th data-filterable="false" data-sortable="false">Comments</th>                      
+                      <th data-filterable="false" data-sortable="true" data-direction="desc" width = "10%">Date</th>
+                      <th data-filterable="false" data-sortable="false" width = "10%" style="text-align: center">Received</th>
+                      <th data-filterable="false" data-sortable="false" width = "10%" style="text-align: center">Completed</th>
+                      <th data-filterable="false" data-sortable="false" width = "10%" style="text-align: center">In Queue</th>
+                      <th data-filterable="false" data-sortable="false" style="text-align: center"><%= bin1 %></th>
+                      <th data-filterable="false" data-sortable="false" style="text-align: center"><%= bin2 %></th>
+                      <th data-filterable="false" data-sortable="false" style="text-align: center"><%= bin3 %></th>
+                      <th data-filterable="false" data-sortable="false" width = "15%" style="text-align: center">Aging</th>
+                      <th data-filterable="false" data-sortable="false" width = "45%">Comments</th>                    
                     </tr>
                   </thead>
 
@@ -312,12 +311,12 @@ $(function() {
                   <% for(var i = 0; i < metrics.length; i++) { %>
                     <tr data-objectid="<%= metrics[i].attributes.Date %>">
                         <td> <%= metrics[i].attributes.Date %> </td>
-                        <td> <%= metrics[i].attributes.Received %> </td>
-                        <td> <%= metrics[i].attributes.Completed %> </td>
-                        <td> <%= metrics[i].attributes.InQueue %> </td>  
-                        <td> <%= metrics[i].attributes.OK %> </td> 
-                        <td> <%= metrics[i].attributes.Caution %> </td>     
-                        <td> <%= metrics[i].attributes.Danger %> </td>                         
+                        <td style="text-align: center"> <%= metrics[i].attributes.Received %> </td>
+                        <td style="text-align: center"> <%= metrics[i].attributes.Completed %> </td>
+                        <td style="text-align: center"> <%= metrics[i].attributes.InQueue %> </td>  
+                        <td style="text-align: center"> <%= metrics[i].attributes.OK %> </td> 
+                        <td style="text-align: center"> <%= metrics[i].attributes.Caution %> </td>     
+                        <td style="text-align: center"> <%= metrics[i].attributes.Danger %> </td>                         
                         <td>
                           <div class="progress">
 
@@ -335,11 +334,6 @@ $(function() {
                             </a>  
                           </div>
                         </td>
-                  <!--     <td> <%= metrics[i].attributes.InQueue %> </td> -->
-
-                        <td><a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Comments" data-content=<%= metrics[i].attributes.Comments ? metrics[i].attributes.Comments : 'None' %> >
-                          <i class="fa fa-comments-o text-xl"></i>
-                        </a></td>
                        <td> <%= metrics[i].attributes.Comments %> </td>                       
                       </tr>
                     <% } %> 

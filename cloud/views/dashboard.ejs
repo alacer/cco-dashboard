@@ -30,23 +30,22 @@
 
               <div class="table-responsive">
 
-                <table id=#metricsdt class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
+                <table id='metricsdt' class="table table-striped table-bordered table-hover table-highlight table-checkable" data-provide="datatable" data-display-rows="15" data-info="false" data-search="false" data-length-change="false" data-paginate="true">
                   <thead>
                     <tr>
                       <!--
                       <th id = "Date" data-filterable="true" data-sortable="false" width = "0%">Date</th>
                       -->
-                      <th data-filterable="true" data-sortable="true" data-direction="asc" width = "40%">Metric</th>
-                      <th data-filterable="false" data-sortable="false" width = "10%">Received</th>
+                      <th data-filterable="true" data-sortable="true" data-direction="asc" width = "25%">Metric</th>
+                      <th data-filterable="false" data-sortable="false" width = "10%" style="text-align: center">Received</th>
 <!--                       <th data-filterable="false" data-sortable="false" class="hidden-xs hidden-sm">Received Trend</th> -->
-                      <th data-filterable="false" data-sortable="false" width = "10%">Completed</th>
-                      <th data-filterable="false" data-sortable="false" width = "10%">In Queue</th> 
-                      <th data-filterable="false" data-sortable="false">OK</th>
-                      <th data-filterable="false" data-sortable="false">Caution</th>
-                      <th data-filterable="false" data-sortable="false">Warning</th>  
-                      <th data-filterable="false" data-sortable="false" width = "20%">Aging</th>
-                      <th data-filterable="false" data-sortable="false" width = "10%">Comments</th>
-                      <th data-filterable="false" data-sortable="false">Comments</th> 
+                      <th data-filterable="false" data-sortable="false" width = "10%" style="text-align: center">Completed</th>
+                      <th data-filterable="false" data-sortable="false" width = "10%" style="text-align: center">In Queue</th> 
+                      <th data-filterable="false" data-sortable="false" style="text-align: center">OK</th>
+                      <th data-filterable="false" data-sortable="false" style="text-align: center">Caution</th>
+                      <th data-filterable="false" data-sortable="false" style="text-align: center">Warning</th>  
+                      <th data-filterable="false" data-sortable="false" width = "15%" style="text-align: center">Aging</th>
+                      <th data-filterable="false" data-sortable="false" width = "30%">Comments</th>
                     </tr>
                   </thead>
 
@@ -57,17 +56,16 @@
                         <td> <%= metrics[i].attributes.Date %> </td>
                         -->
                         <td> <%= metrics[i].attributes.Metric %> </td>
-                        <td> <%= metrics[i].attributes.Received %> </td>
+                        <td style="text-align: center"> <%= metrics[i].attributes.Received %> </td>
 <!--                         <td class="hidden-xs hidden-sm">
                           <span id="Investigator1_TrendLine" class="trend-line" durationValues="48,10,26,45,30,40,25,38,43,48,20,43" dateValues="1381501200,1381509900,1381565100,1384254900,1384270200,1384938480,1385481660,1385539980,1385546520,1385558520,1385573100,1385733660" alertValues="12345,23456,34567,45678,56789,67890,78901,89012,90123,12890,23904,36757"></span>
                         </td> -->
-                        <td> <%= metrics[i].attributes.Completed %> </td>
-                        <td> <%= metrics[i].attributes.InQueue %> </td> 
-                        <td> <%= metrics[i].attributes.OK %> </td> 
-                        <td> <%= metrics[i].attributes.Caution %> </td>     
-                        <td> <%= metrics[i].attributes.Danger %> </td>                                                
+                        <td style="text-align: center">  <%= metrics[i].attributes.Completed %> </td>
+                        <td style="text-align: center"> <%= metrics[i].attributes.InQueue %> </td> 
+                        <td style="text-align: center">  <%= metrics[i].attributes.OK %> </td> 
+                        <td style="text-align: center"> <%= metrics[i].attributes.Caution %> </td>     
+                        <td style="text-align: center"> <%= metrics[i].attributes.Danger %> </td>                                                
                         <td>
-<!--                           <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b> <%= metric_bins[i].attributes.Bin1 %>: </b><%= metrics[i].attributes.OK %> <br/> <b> <%= metric_bins[i].attributes.Bin2 %>: </b> <%= metrics[i].attributes.Caution %> <br/> <b> <%= metric_bins[i].attributes.Bin3 %>: </b> <%= metrics[i].attributes.Danger %>"> -->
                           <div class="progress">
                             <a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" data-html=TRUE data-content="<b> <%= metric_bins[i].attributes.Bin1 %>: </b><%= metrics[i].attributes.OK %>">
                               <div class="progress-bar progress-bar-success" style="width: <%=percentok[i]%>%">
@@ -82,14 +80,10 @@
                               </div>
                             </a>  
                           </div>
-<!--                           </a> -->
                         </td>
-                  <!--     <td> <%= metrics[i].attributes.InQueue %> </td> -->
+                       <td> <%= metrics[i].attributes.Comments %> </td>   
 
-                        <td><a href="" class="ui-popover" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Comments" data-content=<%= metrics[i].attributes.Comments ? metrics[i].attributes.Comments : 'None' %> >
-                          <i class="fa fa-comments-o text-xl"></i>
-                        </a></td>
-                       <td> <%= metrics[i].attributes.Comments %> </td>                       
+                    
                       </tr>
                     <% } %> 
                     

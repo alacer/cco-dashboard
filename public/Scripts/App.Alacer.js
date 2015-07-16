@@ -250,7 +250,7 @@ var App = function () {
 					helperOptions = $.extend (defaultOptions, dataOptions),
 					$thisTable,
 					tableConfig = {};
-
+ 
 				tableConfig.iDisplayLength = helperOptions.displayRows;
 				tableConfig.bFilter = true;
 				tableConfig.bSort = true;
@@ -264,29 +264,29 @@ var App = function () {
             						{
             							"sExtends": "copy",
             							"sButtonText": "Copy",
-            							"mColumns": [0,1,2,3,4,5,6,9]
+            							"mColumns": [0,1,2,3,4,5,6,8]
             						},
             						{
             							"sExtends": "csv",
             							"sButtonText": "CSV",
-            							"mColumns": [0,1,2,3,4,5,6,9]
+            							"mColumns": [0,1,2,3,4,5,6,8]
             						},
             						{
             							"sExtends": "pdf",
             							"sButtonText": "PDF",
             							"sPdfOrientation": "landscape",
-            							"mColumns": [0,1,2,3,4,5,6,9]
-            						},
+            							"mColumns": [0,1,2,3,4,5,6,8]
+/*            						},
 	            					{	
 	            						"sButtonText": "Print",
 						                "sExtends":    "print_view",
-						                "target":      "#print",
+						                "target":      "#print",*/
 						            }
 					           ]
         				};
         		tableConfig.columnDefs=[
         			{
-        				"targets": [4,5,6,9],
+        				"targets": [4,5,6],
         				"visible": false
         			}
         		];	
@@ -324,8 +324,6 @@ var App = function () {
 					$row = $('<tr>', { cls: 'dataTable-filter-row' }).appendTo ($thisTable.find ('thead'));
 
 					for (var i=0; i<columns.length; i++) {
-						var test = $(columns[i].bVisible);
-						console.log(test);
 						if($(columns[i].bVisible) === true){
 							$col = $(columns[i].nTh.outerHTML);
 							showFilter = ($col.data ('filterable') === true) ? 'show' : 'hide';
