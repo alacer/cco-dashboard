@@ -63,7 +63,7 @@ app.get('/dashboard', function(req, res) {
 			 	metric_names.push(results[i].get("Metric"));
 	/*		};
 			for(j=0; j < metric_names.length; j++){ */
-	/*				var test = metricQuery.equalTo("Metric", results[i].get("Metric"));	
+	/*				var test = metricQuery.equalTo("Metric", results[j].get("Metric"));	
 					metricQuery.find().then(function(results2){
 						metric1data.push(results2[j].get("Received"));
 					console.log(metric1data);
@@ -139,8 +139,11 @@ app.get('/trends', function(req, res) {
 
 		var MetricBin = Parse.Object.extend("metric_bin");
 		var metricBinQuery = new Parse.Query(MetricBin);
+		console.log("0" + JSON.stringify(metricBinQuery));
 
-
+		var MetricBin2 = Parse.Object.extend("metric_bin");
+		var metricBinQuery2 = new Parse.Query(MetricBin2);
+		console.log("0a" + JSON.stringify(metricBinQuery2));
 		
 		var dates = [];
 		var caution = [];
@@ -156,49 +159,76 @@ app.get('/trends', function(req, res) {
 		var bin1 = [];
 		var bin2 = [];
 		var bin3 = [];
+		var metricName = [];
 
-		metricBinQuery.find().then(function(results){	
+		metricBinQuery2.find().then(function(results){	
 			 for (var i=0; i < results.length; i++) {
 			 	metric_bins.push(results[i]);
 			 }
+			 console.log("1 " + JSON.stringify(metric_bins))
 		});	
 
 		if (req.query.metric) {
-			metricQuery.equalTo("Metric", req.query.metric);
-			metricBinQuery.equalTo("Metric", req.query.metric);
-			metricBinQuery.find().then(function(results){	
-				 for (var i=0; i < results.length; i++) {
-				 	bin1.push(results[i].get('Bin1'));
-				 	bin2.push(results[i].get('Bin2'));
-				 	bin3.push(results[i].get('Bin3'));
-				 }
-			});
-		};
-
-		if(!req.query.metric){
-			metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")
-			metricBinQuery.find().then(function(results){	
+			console.log("in if loop")			
+			var metric_string 	= req.query.metric;
+			var new_metric 		= metric_string.replace("%20"," ");			
+			console.log("2" + metric_string);
+			console.log("3" + new_metric);
+			metricQuery.equalTo("Metric", new_metric);
+			metricBinQuery.equalTo("Metric", new_metric);
+			console.log("3a" + JSON.stringify(metricBinQuery));
+						metricBinQuery.find().then(function(results){	
+				console.log("in metricBinQuery function");
 				 	bin1.push(results[0].get('Bin1'));
 				 	bin2.push(results[0].get('Bin2'));
 				 	bin3.push(results[0].get('Bin3'));
-			});			
+				 	metricName.push(results[0].get("Metric")); 
+				 	console.log("4" + results[0].get("Metric"))
+			});
+
+		} else{
+			metricQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")
+			metricBinQuery.equalTo("Metric", "BAU GIFTS EDD Alerts, Cases")
+			console.log("in else loop")
+							metricBinQuery.find().then(function(results){	
+				console.log("in metricBinQuery function");
+				 	bin1.push(results[0].get('Bin1'));
+				 	bin2.push(results[0].get('Bin2'));
+				 	bin3.push(results[0].get('Bin3'));
+				 	metricName.push(results[0].get("Metric")); 
+				 	console.log("4" + results[0].get("Metric"))
+			});
+/*			metricBinQuery.find().then(function(results){	
+				 	bin1.push(results[0].get('Bin1'));
+				 	bin2.push(results[0].get('Bin2'));
+				 	bin3.push(results[0].get('Bin3'));
+				 	metricName.push(results[0].get("Metric"));				 	
+			});*/			
 		};	
 
+/*			metricBinQuery.find().then(function(results){	
+				console.log("in metricBinQuery function");
+				 	bin1.push(results[0].get('Bin1'));
+				 	bin2.push(results[0].get('Bin2'));
+				 	bin3.push(results[0].get('Bin3'));
+				 	metricName.push(results[0].get("Metric")); 
+				 	console.log("4" + results[0].get("Metric"))
+			});*/
 
 		metricQuery.ascending("Date");
 		metricQuery.find().then(function(results){
 
-			for (var i=0; i < results.length; i++) {
-				dates.push(results[i].get('Date'));
-				percentok.push(100*results[i].get('OK')/results[i].get('InQueue'));
-				percentcaution.push(100*results[i].get('Caution')/results[i].get('InQueue'));
-				percentwarning.push(100*results[i].get('Danger')/results[i].get('InQueue'));
-				ok.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('OK')+']');
-				warning.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Danger')+']');			
-				caution.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Caution')+']');
-				received.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Received')+']');
-				completed.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('Completed')+']');		
-				inqueue.push('['+Date.parse(results[i].get('Date'))+','+results[i].get('InQueue')+']');					
+			for (var k=0; k < results.length; k++) {
+				dates.push(results[k].get('Date'));
+				percentok.push(100*results[k].get('OK')/results[k].get('InQueue'));
+				percentcaution.push(100*results[k].get('Caution')/results[k].get('InQueue'));
+				percentwarning.push(100*results[k].get('Danger')/results[k].get('InQueue'));
+				ok.push('['+Date.parse(results[k].get('Date'))+','+results[k].get('OK')+']');
+				warning.push('['+Date.parse(results[k].get('Date'))+','+results[k].get('Danger')+']');			
+				caution.push('['+Date.parse(results[k].get('Date'))+','+results[k].get('Caution')+']');
+				received.push('['+Date.parse(results[k].get('Date'))+','+results[k].get('Received')+']');
+				completed.push('['+Date.parse(results[k].get('Date'))+','+results[k].get('Completed')+']');		
+				inqueue.push('['+Date.parse(results[k].get('Date'))+','+results[k].get('InQueue')+']');					
 			}
 			var unique = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 			res.render('trends.ejs', {metrics: results,
@@ -215,8 +245,10 @@ app.get('/trends', function(req, res) {
 				percentwarning:percentwarning,
 				bin3: bin3,
 				bin2: bin2,
-				bin1: bin1
+				bin1: bin1,
+				metricName: metricName
 			});
+						console.log("5" + metricName);	
 		});
 	}
 	else {
@@ -242,6 +274,7 @@ app.get('/dataentry', function(req, res) {
 		if (req.query.metric) {
 			var metric_string 	= req.query.metric;
 			var new_metric 		= metric_string.replace("%20"," ");
+			console.log(metric_string);
 			metricBinQuery2.equalTo("Metric", new_metric);
 			metricBinQuery2.find().then(function (results) {
 				metrics.bin1 = results[0].get("Bin1") || 'OK';

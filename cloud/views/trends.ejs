@@ -1,5 +1,43 @@
 <% include header.ejs %>
 
+
+
+<script>
+$(document).ready(function() {
+/*    $("#metricTrends").on("change", function () {
+        window.location.href = "/trends?metric=" +  this.value;
+    });*/
+
+    $("#metricTrends").on("change", function () {
+        window.location.href = "/trends?metric=" +  this.value;
+    }); 
+
+  var initial_metric = window.location.search;
+    if(undefined != initial_metric){
+  var set_metric   = initial_metric.replace("?metric=",'');
+    var set_metric_clean   = set_metric.replace(/%20/g,' ');
+    $("#metricTrends").val(set_metric_clean);
+    }
+
+   
+
+  $('[id*="trendTable"] table tbody tr td').on('click', function(e) {
+    var initiator = e.target;
+    var rowId = $(this).parent('tr').data('objectid');
+    if (!$(this).hasClass('non-selectable')) {
+      window.location.href = 'dashboard?date=' + rowId;
+    }
+  });
+
+    $('trendsdt').DataTable( {
+    });
+} );
+          
+
+</script> 
+
+
+
    <script> 
 $(function() {
 
@@ -14,7 +52,7 @@ $(function() {
     queueWeekSeriesCounter = 0,
     queueWeekSeriesNames = ['OK', 'Caution', 'Warning'],    
     colors = App.chartColors,
-    teamChartColors = ['#d9534f','#e69900','#9c3','#69c','#96c','#e4784e','#d96600','#3366b2'];
+    teamChartColors = ['#d9534f','#e69900','#9c3','#69c','#96c','#e4784e','#d96600','#3366b2'],
     metricName = $("#metricTrends").val();
   
 /* ---------------------------------- */
@@ -350,6 +388,8 @@ $(function() {
             <!-- /Data View: 1st Time Right Determination/Accuracy Per Week -->
           </div>
           <!-- /Performance Charts Tabs Content -->
-        </div>          
+        </div> 
+
+                
 
 <% include footer.ejs %>

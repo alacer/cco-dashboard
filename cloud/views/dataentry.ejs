@@ -1,5 +1,34 @@
 <% include header.ejs %>
 
+<script>
+$(document).ready(function() {
+    $('#dp-ex-3').datepicker ({
+        daysOfWeekDisabled: [1,2,3,4,5,6]
+    });
+
+    $("#metricSelect").on('change', function () {
+        window.location.href = "/dataentry?metric="+this.value;
+    });
+
+    if (window.location.search) {
+        var initial_metric  = window.location.search;
+        var set_metric      = initial_metric.replace("?metric=", "");
+        var final_metric    = set_metric.replace(/%20/g," ");
+        if ($('#metricSelect').val() != final_metric ) {
+            $('#metricSelect').val(final_metric);
+        };
+    };
+
+    if ($("#Bin1Label").text() == "OK") {
+        $("#okinput").hide();
+    } else if ($("#Bin2Label").text() == "Caution") {
+        $("#cautioninput").hide();
+    } else if ($("#Bin3Label").text() == "Warning") {
+        $("#warninginput").hide();
+    };
+} );
+     
+</script>
 
         <!-- Content Header -->
         <div id="content-header">
