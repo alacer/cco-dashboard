@@ -39,11 +39,16 @@ app.post('/login', function(req,res){
 
 app.get('/dashboard', function(req, res) {
 	if(Parse.User.current()){
+		var logged_user = Parse.User.current().id;
 		var Metric = Parse.Object.extend("metrics");
 		var metricQuery = new Parse.Query(Metric);
 
 		var MetricBin = Parse.Object.extend("metric_bin");
 		var metricBinQuery = new Parse.Query(MetricBin);
+
+		var user = Parse.Object.extend("User");
+		var user_query = new Parse.Query(user);
+		var username = null;
 
 		var dates = [];
 		var percentcaution = [];
@@ -56,6 +61,10 @@ app.get('/dashboard', function(req, res) {
 		metricQuery.ascending("Metric");
 		metricBinQuery.ascending("Metric");
 
+		user_query.equalTo("objectId", logged_user);
+		user_query.find().then( function (results) {
+			username = results[0].get("username");
+		});
 
 		metricBinQuery.find().then(function(results){	
 			 for (var i=0; i < results.length; i++) {
@@ -122,7 +131,8 @@ app.get('/dashboard', function(req, res) {
 				percentok:percentok, 
 				percentcaution:percentcaution,
 				percentwarning:percentwarning,
-				metric_bins: metric_bins
+				metric_bins: metric_bins,
+				user:username
 			});
 		});
 	}
