@@ -32,54 +32,54 @@
 				  	<div class="panel-group accordion" id="accordion">
 
 						<div class="panel panel-default">
-							<div class="panel-heading" ng-click="">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseOne">
+							<div class="panel-heading" >
+								<h4 class="panel-title" ng-click="select_panel1()"  id="panel1">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseOne" id="panelAnchor1">
 									Add Users
 									</a>
 								</h4>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse collapseOne" style="height: 0px;">
 								<div class="panel-body">
-						          	<form action="./page-settings.html" class="form-horizontal">
+						          	<form ng-submit="add_new_user(new_user)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Username</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="user-name" class="form-control">
+							          			<input type="text" name="user-name" class="form-control" ng-model="new_user.username">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">First Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="first-name" class="form-control">
+							          			<input type="text" name="first-name" class="form-control" ng-model="new_user.firstName">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Last Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="last-name" class="form-control">
+							          			<input type="text" name="last-name" class="form-control" ng-model="new_user.lastName">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Email Address</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="email-address" class="form-control">
+							          			<input type="email" name="email-address" class="form-control" ng-model="new_user.emailAddress">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Role</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> Analyst </option>
-							                        <option> Manager </option>
-							                        <option> Admin </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="new_user.role">
+							                        <option value="" disabled> (Please Select One) </option>
+							                        <option value="Analyst"> Analyst </option>
+							                        <option value="Manager"> Manager </option>
+							                        <option value="Admin"> Admin </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<div class="col-md-7 col-md-push-3">
-							          			<button type="submit" class="btn btn-primary">Save Changes</button>
+							          			<button type="submit" class="btn btn-primary">Add User</button>
 							          			&nbsp;
 							          			<button type="reset" class="btn btn-default">Cancel</button>
 							          		</div> <!-- /.col -->
@@ -91,52 +91,46 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseTwo">
+								<h4 class="panel-title" ng-click="select_panel2()" id="panel2">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseTwo" id="panelAnchor2">
 									Update User Access
 									</a>
 								</h4>
 							</div>
 							<div id="collapseTwo" class="panel-collapse collapse collapseTwo" style="height: 0px;">
 								<div class="panel-body">
-						          	<form action="" class="form-horizontal">
+						          	<form ng-submit="update_user(user_details)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Select User</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> user1 </option>
-							                        <option> user2 </option>
-							                        <option> user3 </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="username" ng-change="get_user(username)">
+							                        <option ng-repeat="user in users" value="{{user.username}}"> {{user.firstName}} {{user.lastName}} </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">First Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="first-name" class="form-control">
+							          			<input type="text" name="first-name" class="form-control" ng-model="user_details.firstName">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Last Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="last-name" class="form-control">
+							          			<input type="text" name="last-name" class="form-control" ng-model="user_details.lastName">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Email Address</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="email-address" class="form-control">
+							          			<input type="text" name="email-address" class="form-control" ng-model="user_details.emailAddress">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Role</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> Analyst </option>
-							                        <option> Manager </option>
-							                        <option> Admin </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="user_details.role">
+							                        <option ng-repeat="role in roles" ng-selected="role == user_details.role" value="{{role}}" > {{ role }} </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
@@ -154,54 +148,46 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseThree">
+								<h4 class="panel-title" ng-click="select_panel3()" id="panel3">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseThree" id="panelAnchor3">
 									Delete Users
 									</a>
 								</h4>
 							</div>
 							<div id="collapseThree" class="panel-collapse collapse collapseThree" style="height: 0px;">
 								<div class="panel-body">
-						          	<form action="./page-settings.html" class="form-horizontal">
+						          	<form ng-submit="delete_user(user_details._id)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Select User</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> user1 </option>
-							                        <option> user2 </option>
-							                        <option> user3 </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="username" ng-change="get_user(username)">
+							                        <option ng-repeat="user in users" value="{{user.username}}"> {{user.firstName}} {{user.lastName}} </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">First Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="first-name" class="form-control">
+							          			<input type="text" name="first-name" class="form-control" ng-model="user_details.firstName" disabled>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Last Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="last-name" class="form-control">
+							          			<input type="text" name="last-name" class="form-control" ng-model="user_details.lastName" disabled>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Email Address</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="email-address" class="form-control">
+							          			<input type="text" name="email-address" class="form-control" ng-model="user_details.emailAddress" disabled>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Role</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-
-							                        <option> (Please Select One) </option>
-							                        <option> Analyst </option>
-							                        <option> Manager </option>
-							                        <option> Admin </option>
-							          
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="user_details.role" disabled>
+							                        <option ng-repeat="role in roles" ng-selected="role == user_details.role" value="{{role}}" > {{ role }} </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
@@ -224,29 +210,29 @@
 				  	<div class="panel-group accordion" id="accordion">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseFour">
+								<h4 class="panel-title" ng-click="metric_panel1()" id="metricPanel1">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseFour" id="metricPanelAnchor1">
 									Add Metrics
 									</a>
 								</h4>
 							</div>
 							<div id="collapseFour" class="panel-collapse collapse collapseFour" style="height: 0px;">
 								<div class="panel-body">
-						          	<form action="./page-settings.html" class="form-horizontal">
+						          	<form ng-submit="add_metric_bin(new_metric)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Metric Name</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="metric-name" class="form-control">
+							          			<input type="text" name="metric-name" class="form-control" ng-model="new_metric.metric">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Role Responsible</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> Analyst </option>
-							                        <option> Manager </option>
-							                        <option> Admin </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="new_metric.role">
+							                        <option value="" disabled> (Please Select One) </option>
+							                        <option value="Analyst" > Analyst </option>
+							                        <option value="Manager" > Manager </option>
+							                        <option value="Admin" > Admin </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
@@ -254,19 +240,19 @@
 							          	<div class="form-group">
 							          		<label class="col-md-3">OK Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="ok-name" class="form-control">
+							          			<input type="text" name="ok-name" class="form-control" ng-model="new_metric.bin1">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Caution Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="caution-name" class="form-control">
+							          			<input type="text" name="caution-name" class="form-control" ng-model="new_metric.bin2">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Warning Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="warning-name" class="form-control">
+							          			<input type="text" name="warning-name" class="form-control" ng-model="new_metric.bin3">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
@@ -283,42 +269,33 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseFive">
+								<h4 class="panel-title" ng-click="metric_panel2()" id="metricPanel2">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseFive" id="metricPanelAnchor2">
 									Update Metrics
 									</a>
 								</h4>
 							</div>
 							<div id="collapseFive" class="panel-collapse collapse collapseFive" style="height: 0px;">
 								<div class="panel-body">
-						          	<form action="./page-settings.html" class="form-horizontal">
+						          	<form ng-submit="update_metric_bin(metric_bin)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Metric Name</label>
 							          		<div class="col-md-7">
-									            <select id="metricSettings" name="metricSettings" class="form-control parsley-validated" data-required="true">
-							                        <option> BAU GIFTS EDD Alerts, Cases </option>
-							                        <option> eGIFTS OFAC Referrals </option>
-							                        <option> FinCEN, 314(a) List Screening </option>
-							                        <option> Head Office Internal WatchList Updates </option>
-							                        <option> HR Data Reconciliations </option>
-							                        <option> KYC New Customer Onboarding QA Review </option>
-							                        <option> KYC Periodic Reviews </option>
-							                        <option> List Screening (Vendors, Employees, Related Parties) </option>
-							                        <option> Midas Data Reconciliations </option>
-							                        <option> OFAC List Screening (Customers and Other Parties) </option>
-							                        <option> PAC Certification Updates </option>
-							                        <option> SAR Filings </option>
-									            </select>
+									            <select id="metricTrends" 
+									        			name="metricTrends" 
+									        			class="form-control" 
+									        			ng-model="metric_id"
+									        			ng-change="get_metric_bin(metric_id)" >
+									            	<option ng-repeat="metric_bin in metric_bins" 
+									            			value="{{metric_bin._id}}" >{{ metric_bin.metric }}</option>
+									        	</select>
 									        </div>
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Role Responsible</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> Analyst </option>
-							                        <option> Manager </option>
-							                        <option> Admin </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="metric_bin.role">
+							                        <option ng-repeat="role in roles" ng-selected="metric_bin.role == role" value="{{role}} " > {{role}} </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
@@ -326,19 +303,19 @@
 							          	<div class="form-group">
 							          		<label class="col-md-3">OK Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="ok-name" class="form-control">
+							          			<input type="text" name="ok-name" class="form-control" ng-model="metric_bin.bin1">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Caution Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="caution-name" class="form-control">
+							          			<input type="text" name="caution-name" class="form-control" ng-model="metric_bin.bin2">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Warning Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="warning-name" class="form-control">
+							          			<input type="text" name="warning-name" class="form-control" ng-model="metric_bin.bin3">
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
@@ -354,42 +331,33 @@
 						</div> <!-- /.panel-default -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseSix">
+								<h4 class="panel-title" ng-click="metric_panel3()" id="metricPanel3">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseSix" id="metricPanelAnchor3">
 									Delete Metrics
 									</a>
 								</h4>
 							</div>
 							<div id="collapseSix" class="panel-collapse collapse collapseSix" style="height: 0px;">
 								<div class="panel-body">
-						          	<form class="form-horizontal">
+						          	<form class="form-horizontal" ng-submit="delete_metric_bin(metric_id)">
 								         <div class="form-group">
 							          		<label class="col-md-3">Metric Name</label>
 							          		<div class="col-md-7">
-									            <select id="metricSettings" name="metricSettings" class="form-control parsley-validated" data-required="true">
-								                    <option> BAU GIFTS EDD Alerts, Cases </option>
-							                        <option> eGIFTS OFAC Referrals </option>
-							                        <option> FinCEN, 314(a) List Screening </option>
-							                        <option> Head Office Internal WatchList Updates </option>
-							                        <option> HR Data Reconciliations </option>
-							                        <option> KYC New Customer Onboarding QA Review </option>
-							                        <option> KYC Periodic Reviews </option>
-							                        <option> List Screening (Vendors, Employees, Related Parties) </option>
-							                        <option> Midas Data Reconciliations </option>
-							                        <option> OFAC List Screening (Customers and Other Parties) </option>
-							                        <option> PAC Certification Updates </option>
-							                        <option> SAR Filings </option>
-									            </select>
+									            <select id="metricTrends" 
+									        			name="metricTrends" 
+									        			class="form-control" 
+									        			ng-model="metric_bin._id"
+									        			ng-change="get_metric_bin(metric_bin._id)" >
+									            	<option ng-repeat="metric_bin in metric_bins" 
+									            			value="{{metric_bin._id}}" >{{ metric_bin.metric }}</option>
+									        	</select>
 									        </div>
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Role Responsible</label>
 							          		<div class="col-md-7">
-    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" data="">
-							                        <option> (Please Select One) </option>
-							                        <option> Analyst </option>
-							                        <option> Manager </option>
-							                        <option> Admin </option>
+    											<select id="Role" name="Role" class="form-control parsley-validated" data-required="true" ng-model="metric_bin.role" disabled>
+							                        <option ng-repeat="role in roles" ng-selected="metric_bin.role == role" value="{{role}} " > {{role}} </option>
 							            		</select>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
@@ -397,24 +365,24 @@
 							          	<div class="form-group">
 							          		<label class="col-md-3">OK Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="ok-name" class="form-control">
+							          			<input type="text" name="ok-name" class="form-control" ng-model="metric_bin.bin1" disabled>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Caution Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="caution-name" class="form-control">
+							          			<input type="text" name="caution-name" class="form-control" ng-model="metric_bin.bin2" disabled>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<label class="col-md-3">Warning Status Label</label>
 							          		<div class="col-md-7">
-							          			<input type="text" name="warning-name" class="form-control">
+							          			<input type="text" name="warning-name" class="form-control" ng-model="metric_bin.bin3" disabled>
 							          		</div> <!-- /.col -->
 							          	</div> <!-- /.form-group -->
 							          	<div class="form-group">
 							          		<div class="col-md-7 col-md-push-3">
-							          			<button type="submit" class="btn btn-primary">Save Changes</button>
+							          			<button type="submit" class="btn btn-primary">Delete</button>
 							          			&nbsp;
 							          			<button type="reset" class="btn btn-default">Cancel</button>
 							          		</div> <!-- /.col -->

@@ -51,9 +51,9 @@ angular.module('dataentry-module',[])
 		data.name = $scope.default_metric.metric;
 		data.date 	= date_filter(data.date);
 		DataEntryService.add_metric(data).then( function (response) {
-			console.log(response);
+			alert('Metric successfully added.');
 		}, function (error) {
-			console.log(error);
+			alert('Something went wrong, unable to add new metric.');
 		});
 	};
 

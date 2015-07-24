@@ -3,10 +3,11 @@ angular.module('trends-module',[])
 .service ('TrendsService', function ($q, $http) {
 	var parent 	= this;
 
-	this.get_metric_bins = function() {
+	this.get_metric_bins = function(metric_id) {
 		var deferred = $q.defer();
+        if (metric_id) { metric_id = '/' + metric_id; } else { metric_id = ''; };
 
-		$http({method:'GET', url:config.metric_bins}).then( function (response) {
+		$http({method:'GET', url:config.metric_bins + metric_id }).then( function (response) {
 			deferred.resolve(response);
 		}, function (error) {
 			deferred.reject(error);

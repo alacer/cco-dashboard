@@ -64,7 +64,7 @@ angular.module('app',dependencies)
 		})
 
 		.state('user.settings', {
-			url 			: '/settings',
+			url 			: '/settings?metric',
 			templateUrl 	: 'views/settings.html',
 			controller 		: 'SettingsController',
 			controllerAs	: 'settingsCtrl'
