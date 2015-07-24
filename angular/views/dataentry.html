@@ -1,0 +1,364 @@
+<!-- <div class="" ng-include="'views/navbar.html'"></div>
+<div id="wrapper">	
+	<div id="content-header">
+	    <div class="row">
+	      <div class="col-sm-6">
+	        <h1>Enter Data</h1>
+	      </div>
+	      <div class="col-sm-5" style="margin-top: 15px;">
+	           	<label for="metricTrends">Metric</label>
+	            <select id="metricTrends" 
+	            		name="metricTrends" 
+	            		class="form-control" 
+	            		ng-model="metric_bin"
+	            		ng-change="selected_bin(metric_bin)" >
+	                <option ng-repeat="metric_bin in metric_bins" 
+	                    	ng-selected="default_metric.metric == metric_bin.metric"
+	                    	value="{{metric_bin}}" >{{ metric_bin.metric }}</option>
+	            </select>
+	        </select>
+	      </div>
+	    </div>
+	</div>
+	<div class="content-container clearfix">
+		<div class="panel-container">
+			<div class="panel panel-default">
+				<div class="panel-heading data-entry-panel">
+					<b>Instructions</b>
+				</div>
+					<div class="panel-body">
+						<p>
+							Select a metric above. Enter data for the most recent week, or upload a .csv file in the approved format. To correct historical data or enter data from previous weeks, contact the administrator for assistance
+						</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-5">				
+				<div class="panel-container">
+					<div class="panel panel-default">
+						<div class="panel-heading data-entry-panel">
+							<b>Enter Data</b>
+						</div>
+						<div class="panel-body">
+							<form 	id="metricForm" 
+									class="form-horizontal" 
+									ng-submit="add_metric(metric)">
+
+					            <h4>Overall</h4>
+					            <div class="form-group">
+					                <label class="col-md-4">Date</label>
+					                <div class="col-md-8">
+							            <div 	id="date"
+						                		class="input-append input-group date" 
+						                		datetimez 
+						                		ng-model="metric.date" >
+						                  	<input 	data-format="yyyy-MM-dd" 
+						                  			class="form-control" 
+						                  			type="text" 
+						                  			id="input1" 
+						                  			name="input1">
+						                  	<span 	class="add-on input-group-addon ">
+						                    	<i 	class="fa fa-calendar"></i>
+						                  	</span>
+						                </div>
+					                </div>
+					            </div>
+
+					            <div class="form-group">
+					                <label class="col-md-4">Received</label>
+					                <div class="col-md-8">
+					                  	<input 	id="Received" 
+					                  			type="text" 
+					                  			name="received" 
+					                  			class="form-control" 
+					                  			placeholder="(Number)"
+					                  			ng-model="metric.received" >
+					                </div>
+					            </div>
+
+					            <div class="form-group"> 
+					                <label class="col-md-4">Completed</label>
+					                <div class="col-md-8">
+					                  	<input 	type="text" 
+					                  			class="form-control" 
+					                  			name="completed" 
+					                  			placeholder="(Number)" 
+					                  			ng-model="metric.completed" >
+					                </div>
+					            </div>
+
+					            <h4>In Queue</h4>
+
+					            <div class="form-group" ng-if="show_bin1">              
+					                <label class="col-md-4" id="Bin1Label">{{ bin1 }}</label>
+					                <div class="col-md-8">
+					                  	<input 	type="text" 
+					                  			class="form-control" 
+					                  			name="ok" 
+					                  			placeholder="(Number)" 
+					                  			ng-model="metric.ok" >
+					                </div>
+					            </div>
+					            <div class="form-group" ng-if="show_bin2"> 
+					                <label class="col-md-4" id="Bin2Label">{{ bin2 }}</label>  
+					                <div class="col-md-8">
+					                  	<input 	type="text" 
+					                  			class="form-control" 
+					                  			name="caution" 
+					                  			placeholder="(Number)" 
+					                  			ng-model="metric.caution" >
+					                </div>
+					            </div>
+					            <div class="form-group" ng-if="show_bin3">   
+					                <label class="col-md-4" id="Bin3Label">{{ bin3 }}</label> 
+					                <div class="col-md-8">
+					                  	<input 	type="text" 
+					                  			class="form-control" 
+					                  			name="danger" 
+					                  			placeholder="(Number)" 
+					                  			ng-model="metric.danger" >
+					                </div>
+					            </div>  
+
+					            <div class="form-group">   
+					                <label class="col-md-4" id="Comments">Comments</label> 
+					                <div class="col-md-8">
+					                  	<input 	type="text" 
+					                  			class="form-control" 
+					                  			name="comments" 
+					                  			placeholder="Comments"
+					                  			ng-model="metric.comments" >
+					                </div>
+					            </div>
+					          	<div style="text-align: center">
+					              	<button type="submit" 
+					              			id="submitData" 
+					              			class="btn btn-primary">Submit</button>
+					          	</div>
+					            <br>
+					        </form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-2">
+				<h4 style="text-align: center"> - OR  - </h4>
+			</div>
+
+			<div class="col-sm-5">
+				<div class="panel-container">
+					<div class="panel panel-default">
+						<div class="panel-heading data-entry-panel">
+							<b>Upload File</b>
+						</div>
+						<div class="panel-body">
+						    <div class="input-group">
+					      		<input 	type="text" 
+					      				class="form-control" 
+					      				aria-label="...">
+					      		<div class="input-group-btn">
+					        		<button type="button" class="btn btn-primary" >Select file</button>
+					        	</div>
+					    	</div>
+					        <div class="submitBtn" style="text-align: center;" >
+				              	<button type="submit" class="btn btn-primary ">Submit</button>
+				          	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<div id="content-header">
+    <div class="row">
+      	<div class="col-sm-6">
+        	<h1>Enter Data</h1>
+      	</div>
+      	<div class="col-sm-5" style="margin-top: 15px;">
+        	<label for="validateSelect">Metric</label>
+        	<select id="metricTrends" 
+            		name="metricTrends" 
+            		class="form-control" 
+            		ng-model="metric_bin"
+            		ng-change="selected_bin(metric_bin)" >
+                <option ng-repeat="metric_bin in metric_bins" 
+                    	ng-selected="default_metric.metric == metric_bin.metric"
+                    	value="{{metric_bin}}" >{{ metric_bin.metric }}</option>
+            </select>
+      	</div>
+    </div>
+</div>
+
+<div id="content-container">
+    <div class="row">
+      	<div class="col-sm-12">
+          	<!-- <div id="datauploadalert" class="alert alert-success alert-dismissable collapse" role="alert">
+            	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              		<span aria-hidden="true">×</span>
+            	</button>
+            Data Entered And Submitted!
+          	</div>
+          	<div id="datafilealert" class="alert alert-success alert-dismissable collapse" role="alert">
+            	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              		<span aria-hidden="true">×</span>
+            	</button>
+            Data Uploaded Successfully!
+         	</div> -->
+
+	      	<div class="portlet">
+				<div class="portlet-header">
+	          		<h3>Instructions</h3>
+	        	</div>
+	        	<div class="portlet-content">
+	              	<p>Select a metric above.  Enter data for the most recent week, or upload a .csv file in the approved format.  To correct historical data or enter data from previous weeks, contact the administrator for assistance.</p>
+		        </div>
+	      	</div>
+      	</div>
+    </div>
+
+    <div class="row">
+      	<div class="col-sm-5">
+      		<div class="portlet">
+        		<div class="portlet-header">
+              		<h3>Enter Data</h3>
+        		</div>
+        		<div class="portlet-content">
+        			<form 	id="metricForm" 
+							class="form-horizontal" 
+							ng-submit="add_metric(metric)">
+
+			            <h4>Overall</h4>
+			            <div class="form-group">
+			                <label class="col-md-4">Date</label>
+			                <div class="col-md-8">
+					            <div 	id="date"
+				                		class="input-append input-group date" 
+				                		datetimez 
+				                		ng-model="metric.date" >
+				                  	<input 	data-format="yyyy-MM-dd" 
+				                  			class="form-control" 
+				                  			type="text" 
+				                  			id="input1" 
+				                  			name="input1">
+				                  	<span 	class="add-on input-group-addon ">
+				                    	<i 	class="fa fa-calendar"></i>
+				                  	</span>
+				                </div>
+			                </div>
+			            </div>
+
+			            <div class="form-group">
+			                <label class="col-md-4">Received</label>
+			                <div class="col-md-8">
+			                  	<input 	id="Received" 
+			                  			type="text" 
+			                  			name="received" 
+			                  			class="form-control" 
+			                  			placeholder="(Number)"
+			                  			ng-model="metric.received" >
+			                </div>
+			            </div>
+
+			            <div class="form-group"> 
+			                <label class="col-md-4">Completed</label>
+			                <div class="col-md-8">
+			                  	<input 	type="text" 
+			                  			class="form-control" 
+			                  			name="completed" 
+			                  			placeholder="(Number)" 
+			                  			ng-model="metric.completed" >
+			                </div>
+			            </div>
+
+			            <h4>In Queue</h4>
+
+			            <div class="form-group" ng-if="show_bin1">              
+			                <label class="col-md-4" id="Bin1Label">{{ bin1 }}</label>
+			                <div class="col-md-8">
+			                  	<input 	type="text" 
+			                  			class="form-control" 
+			                  			name="ok" 
+			                  			placeholder="(Number)" 
+			                  			ng-model="metric.ok" >
+			                </div>
+			            </div>
+			            <div class="form-group" ng-if="show_bin2"> 
+			                <label class="col-md-4" id="Bin2Label">{{ bin2 }}</label>  
+			                <div class="col-md-8">
+			                  	<input 	type="text" 
+			                  			class="form-control" 
+			                  			name="caution" 
+			                  			placeholder="(Number)" 
+			                  			ng-model="metric.caution" >
+			                </div>
+			            </div>
+			            <div class="form-group" ng-if="show_bin3">   
+			                <label class="col-md-4" id="Bin3Label">{{ bin3 }}</label> 
+			                <div class="col-md-8">
+			                  	<input 	type="text" 
+			                  			class="form-control" 
+			                  			name="danger" 
+			                  			placeholder="(Number)" 
+			                  			ng-model="metric.danger" >
+			                </div>
+			            </div>  
+
+			            <div class="form-group">   
+			                <label class="col-md-4" id="Comments">Comments</label> 
+			                <div class="col-md-8">
+			                  	<input 	type="text" 
+			                  			class="form-control" 
+			                  			name="comments" 
+			                  			placeholder="Comments"
+			                  			ng-model="metric.comments" >
+			                </div>
+			            </div>
+			          	<div style="text-align: center">
+			              	<button type="submit" 
+			              			id="submitData" 
+			              			class="btn btn-primary">Submit</button>
+			          	</div>
+			            <br>
+			        </form>
+		        </div>
+      		</div>
+      	</div>
+
+      	<div class="col-sm-2">
+        	<h4 style="text-align: center"> - OR  - </h4>
+      	</div>
+
+      	<div class="col-sm-5">
+      		<div class="portlet">
+        		<div class="portlet-header">
+              		<h3>Upload File</h3>
+		        </div>
+        		<div class="portlet-content">
+	          		<div class="fileupload fileupload-new" data-provides="fileupload">
+			            <div class="input-group">
+			              	<div class="form-control">
+			                	<i class="fa fa-file fileupload-exists"></i>
+			                	<span class="fileupload-preview"></span>
+			              	</div>
+			              	<div class="input-group-btn">
+			                	<a href="#" class="btn btn-default fileupload-exists btn btn-danger" data-dismiss="fileupload" style="border-color: #004a89">Remove</a>
+			                	<span class="btn btn-default btn-file btn btn-primary">
+			                		<span class="fileupload-new">Select file</span>
+			                		<span class="fileupload-exists">Change</span>
+			                  		<input type="file">
+			                	</span>
+			              	</div>
+			            </div>
+			        </div>
+          			<div style="text-align: center">
+              			<button type="submit" id="submitDataUpload" class="btn btn-primary">Submit</button>
+          			</div>
+        		</div>
+      		</div>
+      	</div>
+    </div>
+</div>

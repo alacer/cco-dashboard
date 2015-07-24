@@ -1,0 +1,99 @@
+<div id="wrapper" ng-controller="NavController">
+	<header id="header">
+        <!-- Alacer Logo -->
+        <h1 id="site-logo">
+            <a href="/">
+                <img src="img/logo.png" alt="Alacer" />
+            </a>
+        </h1>
+        <!-- Navbar Toggle - Disabled -->
+        <a  href="javascript:;" 
+            data-toggle="collapse" 
+            data-target=".top-bar-collapse" 
+            id="top-bar-toggle" 
+            class="navbar-toggle collapsed">
+            <i class="fa fa-cog"></i>
+        </a>
+        <!-- Sidebar Toggle - Disabled -->
+        <a  href="javascript:;" 
+            data-toggle="collapse" 
+            data-target=".sidebar-collapse" 
+            id="sidebar-toggle" 
+            class="navbar-toggle collapsed">
+            <i class="fa fa-reorder"></i>
+        </a>
+    </header>
+	<!-- /header -->
+  	<!-- Top/Navigation Bar -->
+    <nav id="top-bar" class="collapse top-bar-collapse">
+    	<!-- Current User Display/Links -->
+      	<ul class="nav navbar-nav pull-right">
+          	<!-- Inbox Preview -->
+          	<!-- Authenticated User and User-Specific Links -->
+          	<li class="dropdown">
+            	<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+              		<i class="fa fa-user"></i>
+              		{{ user.firstName }} {{ user.lastName }}
+              		<span class="caret"></span>
+            	</a>
+            	<ul class="dropdown-menu" role="menu">
+                	<!-- Profile Link -->
+              		<li ng-click="view_settings()">
+                  		<a>
+                  			<i class="fa fa-gears"></i>
+                  			&nbsp;&nbsp;Settings
+                  		</a>
+                	</li>
+              		<!-- Logout -->
+                	<li ng-click="logout_user()">
+                  		<a>
+                    		<i class="fa fa-sign-out"></i>
+                    		&nbsp;&nbsp;Logout
+                  		</a>
+                	</li>
+            	</ul>
+          	</li>
+      	</ul>
+    </nav>
+    <!-- /#top-bar -->
+    <!-- Contextual Navigation and Sidebar Breadcrumb -->
+    <div id="sidebar-wrapper" class="collapse sidebar-collapse">
+      	<!-- Sidebar Breadcrumb -->
+      	<div id="SidebarBreadcrumb" style="width: 100%">
+          	<h4 style="left: 38px; position: absolute">AML Dashboard</h4>
+      	</div>
+      	<!-- Contextual Navigation -->
+      	<nav id="sidebar">
+          	<ul id="main-nav" class="open-active">
+            	<li ng-class="{'active': active == 1}" ng-click="selected_view(1, 'user.dashboard')">
+                	<a>
+                  		<i class="fa fa-exclamation-circle"></i>
+                  		Dashboard Overview
+                	</a>
+            	</li>
+            	<li ng-class="{'active': active == 2}" ng-click="selected_view(2, 'user.trends')">
+                	<a>
+                  	<i class="fa fa-bar-chart-o"></i>
+                  	Trends
+                	</a>
+            	</li>
+            	<li ng-class="{'active': active == 3}" ng-click="selected_view(3, 'user.dataentry')">
+                	<a>
+                  		<i class="fa fa-pencil-square-o"></i>
+                 	 	Enter Data
+                	</a>
+            	</li>
+          	</ul>
+      	</nav>
+      	<!-- #sidebar -->
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <div id="content">
+        <div ui-view></div>
+    </div>
+    <footer id="footer">
+    	<ul class="nav pull-right">
+          	<li>Copyright © 2015, Alacer Group.</li>
+        </ul>
+    </footer>
+</div>
