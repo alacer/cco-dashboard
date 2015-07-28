@@ -14,7 +14,19 @@ angular.module('dataentry-module',[])
 		return deferred.promise;
 	};
 
-})
+	this.upload_file = function (file) {
+		var deferred = $q.defer();
+
+		$http({ method:'POST', url:config.upload_file, file:file, headers: { 'Content-Type':'multipart/form-data' }, 
+			transformRequest:angular.identity }).then( function (response) {
+			deferred.resolve(response);
+		}, function (error) {
+			deferred.reject(error);
+		});
+		return deferred.promise;
+	};
+
+ })
 
 .controller ('DataEntryController', function ($scope, $state, $filter, TrendsService, DataEntryService, LoginService) {
 
@@ -83,6 +95,22 @@ angular.module('dataentry-module',[])
 			$scope.show_bin2 = true;
 			$scope.show_bin3 = true;
 		}
+	};
+
+	$scope.upload_file = function () {
+		var file = $('#file');
+		if (file) {
+			console.log(file);
+			// var formData = new FormData();
+			// 	formData.append('file', file[0].files[0]);
+			// DataEntryService.upload_file(formData).then( function (response) {
+			// 	console.log(response);
+			// }, function (error) {
+			// 	console.log(error);
+			// });
+		} else {
+			return;
+		};
 	};
 
 	function date_filter (date) {

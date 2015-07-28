@@ -85,14 +85,16 @@ angular.module('settings-module', [])
 
 .controller('SettingsController', function ($scope, $state, $stateParams, LoginService, TrendsService, SettingsService) {
 	
-	$scope.view_tab 	= "Users";
-	$scope.metric_bin 	= null;
-	$scope.metric_bins 	= null;
-	$scope.users 		= null;
-	$scope.user_details = null;
-	$scope.new_user 	= {};
-	$scope.new_metric 	= {};
-	$scope.roles 		= ['Admin','Analyst','Manager'];
+	$scope.view_tab 		= "Users";
+	$scope.metric_bin 		= null;
+	$scope.metric_bins 		= null;
+	$scope.users 			= null;
+	$scope.user_details 	= null;
+	$scope.new_user 		= {};
+	$scope.new_metric 		= {};
+	$scope.roles 			= ['Admin','Analyst','Manager'];
+	$scope.user_panel_ids 	= ['panel1', 'panelAnchor1', 'panel2', 'panelAnchor2', 'panel3', 'panelAnchor3'];
+	$scope.metric_panel_ids = ['metricPanel1', 'metricPanelAnchor1', 'metricPanel2', 'metricPanelAnchor2', 'metricPanel3', 'metricPanelAnchor3'];
 
 	function init () {
 		var login_state = LoginService.isLoggedIn();
@@ -201,76 +203,35 @@ angular.module('settings-module', [])
 		});
 	};
 
-	$scope.select_panel1 = function () {
-		document.getElementById('panel1').style.borderRadius = '3px';
-		document.getElementById('panel1').style.background = '#0069a6';
-		document.getElementById('panelAnchor1').style.color = '#fff';
-
-		document.getElementById('panel2').style.background = '';
-		document.getElementById('panelAnchor2').style.color = '';
-
-		document.getElementById('panel3').style.background = '';
-		document.getElementById('panelAnchor3').style.color = '';
+	$scope.select_panel = function (events, settings, panel_ids) {
+		var ids = [];
+		if (settings == 'metric') {
+			ids = panel_ids;
+		} else if (settings == 'user') {
+			ids = panel_ids;
+		};
+		
+		if (ids) {
+			if (events == 'first') {
+				set_style(ids[0], ids[1], ids[2], ids[3], ids[4], ids[5]);
+			} else if (events == 'second') {
+				set_style(ids[2], ids[3], ids[0], ids[1], ids[4], ids[5]);
+			} else if (events == 'third') {
+				set_style(ids[4], ids[5], ids[2], ids[3], ids[0], ids[1]);
+			};
+		};
 	};
 
-	$scope.select_panel2 = function () {
-		document.getElementById('panel1').style.background = '';
-		document.getElementById('panelAnchor1').style.color = '';
+	function set_style (value1, value2, value3, value4, value5, value6) {
+		document.getElementById(value1).style.borderRadius = '3px';
+		document.getElementById(value1).style.background = '#0069a6';
+		document.getElementById(value2).style.color = '#fff';
 
-		document.getElementById('panel2').style.borderRadius = '3px';
-		document.getElementById('panel2').style.background = '#0069a6';
-		document.getElementById('panelAnchor2').style.color = '#fff';
+		document.getElementById(value3).style.background = '';
+		document.getElementById(value4).style.color = '';
 
-		document.getElementById('panel3').style.background = '';
-		document.getElementById('panelAnchor3').style.color = '';
-	};
-
-	$scope.select_panel3 = function () {
-		document.getElementById('panel1').style.background = '';
-		document.getElementById('panelAnchor1').style.color = '';
-
-		document.getElementById('panel2').style.background = '';
-		document.getElementById('panelAnchor2').style.color = '';
-
-		document.getElementById('panel3').style.borderRadius = '3px';
-		document.getElementById('panel3').style.background = '#0069a6';
-		document.getElementById('panelAnchor3').style.color = '#fff';
-	};
-
-	$scope.metric_panel1 = function () {
-		document.getElementById('metricPanel1').style.borderRadius = '3px';
-		document.getElementById('metricPanel1').style.background = '#0069a6';
-		document.getElementById('metricPanelAnchor1').style.color = '#fff';
-
-		document.getElementById('metricPanel2').style.background = '';
-		document.getElementById('metricPanelAnchor2').style.color = '';
-
-		document.getElementById('metricPanel3').style.background = '';
-		document.getElementById('metricPanelAnchor3').style.color = '';
-	};
-
-	$scope.metric_panel2 = function () {
-		document.getElementById('metricPanel1').style.background = '';
-		document.getElementById('metricPanelAnchor1').style.color = '';
-
-		document.getElementById('metricPanel2').style.borderRadius = '3px';
-		document.getElementById('metricPanel2').style.background = '#0069a6';
-		document.getElementById('metricPanelAnchor2').style.color = '#fff';
-
-		document.getElementById('metricPanel3').style.background = '';
-		document.getElementById('metricPanelAnchor3').style.color = '';
-	};
-
-	$scope.metric_panel3 = function () {
-		document.getElementById('metricPanel1').style.background = '';
-		document.getElementById('metricPanelAnchor1').style.color = '';
-
-		document.getElementById('metricPanel2').style.background = '';
-		document.getElementById('metricPanelAnchor2').style.color = '';
-
-		document.getElementById('metricPanel3').style.borderRadius = '3px';
-		document.getElementById('metricPanel3').style.background = '#0069a6';
-		document.getElementById('metricPanelAnchor3').style.color = '#fff';
+		document.getElementById(value5).style.background = '';
+		document.getElementById(value6).style.color = '';
 	};
 
 	init();

@@ -335,29 +335,36 @@
       	<div class="col-sm-5">
       		<div class="portlet">
         		<div class="portlet-header">
-              		<h3>Upload File</h3>
-		        </div>
+              		<h3>
+                		Upload File
+              		</h3>
+              	</div>
+
         		<div class="portlet-content">
-	          		<div class="fileupload fileupload-new" data-provides="fileupload">
-			            <div class="input-group">
-			              	<div class="form-control">
-			                	<i class="fa fa-file fileupload-exists"></i>
-			                	<span class="fileupload-preview"></span>
-			              	</div>
-			              	<div class="input-group-btn">
-			                	<a href="#" class="btn btn-default fileupload-exists btn btn-danger" data-dismiss="fileupload" style="border-color: #004a89">Remove</a>
-			                	<span class="btn btn-default btn-file btn btn-primary">
-			                		<span class="fileupload-new">Select file</span>
-			                		<span class="fileupload-exists">Change</span>
-			                  		<input type="file">
-			                	</span>
-			              	</div>
-			            </div>
-			        </div>
-          			<div style="text-align: center">
-              			<button type="submit" id="submitDataUpload" class="btn btn-primary">Submit</button>
-          			</div>
+        			<form ng-submit="upload_file(new_file)">
+	          			<div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden" value="" name="">
+	            			<div class="input-group">
+	              				<div class="form-control">
+	                				<i class="fa fa-file fileupload-exists"></i> 
+	                				<span class="fileupload-preview"></span>
+	              				</div>
+	              				<div class="input-group-btn">
+	                				<a href="#" class="btn btn-default fileupload-exists btn btn-danger" data-dismiss="fileupload" style="border-color: #004a89">Remove</a>
+	                				<span class="btn btn-default btn-file btn btn-primary">
+	                					<span class="fileupload-new">Select file</span>
+	                					<span class="fileupload-exists">Change</span>
+	                  					<input type="file" id="file">
+	                				</span>
+	              				</div>
+	            			</div>
+	          			</div>
+	          			<div style="text-align: center">
+	              			<button type="submit" id="submitDataUpload" class="btn btn-primary">Submit</button>
+	          			</div>
+        			</form>
+          			<!--Closes Portlet Content -->
         		</div>
+        		<!-- closes portlet -->
       		</div>
       	</div>
     </div>

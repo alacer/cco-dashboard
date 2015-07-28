@@ -33,7 +33,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading" >
-								<h4 class="panel-title" ng-click="select_panel1()"  id="panel1">
+								<h4 class="panel-title" ng-click="select_panel('first', 'user', user_panel_ids)"  id="panel1">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseOne" id="panelAnchor1">
 									Add Users
 									</a>
@@ -91,7 +91,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" ng-click="select_panel2()" id="panel2">
+								<h4 class="panel-title" ng-click="select_panel('second', 'user', user_panel_ids)" id="panel2">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseTwo" id="panelAnchor2">
 									Update User Access
 									</a>
@@ -148,7 +148,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" ng-click="select_panel3()" id="panel3">
+								<h4 class="panel-title" ng-click="select_panel('third', 'user', user_panel_ids)" id="panel3">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseThree" id="panelAnchor3">
 									Delete Users
 									</a>
@@ -202,15 +202,17 @@
 								</div>
 							</div>
 						</div> <!-- /.panel-default -->	
+
 		        	</div> 
 		        </div>
 
 		        <div class="tab-pane fade reports" id="reports">
 		        	<h3>Configure Metrics</h3>
 				  	<div class="panel-group accordion" id="accordion">
+
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" ng-click="metric_panel1()" id="metricPanel1">
+								<h4 class="panel-title" ng-click="select_panel('first', 'metric', metric_panel_ids)" id="metricPanel1">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseFour" id="metricPanelAnchor1">
 									Add Metrics
 									</a>
@@ -269,7 +271,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" ng-click="metric_panel2()" id="metricPanel2">
+								<h4 class="panel-title" ng-click="select_panel('second', 'metric', metric_panel_ids)" id="metricPanel2">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseFive" id="metricPanelAnchor2">
 									Update Metrics
 									</a>
@@ -329,9 +331,10 @@
 								</div>
 							</div>
 						</div> <!-- /.panel-default -->
+
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" ng-click="metric_panel3()" id="metricPanel3">
+								<h4 class="panel-title" ng-click="select_panel('third', 'metric', metric_panel_ids)" id="metricPanel3">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".accordion" href=".collapseSix" id="metricPanelAnchor3">
 									Delete Metrics
 									</a>
@@ -391,12 +394,33 @@
 								</div>
 							</div>
 						</div> <!-- /.panel-default -->	
-		        	</div> 
+		        	
+		        	</div>
 		    	</div>
 		        <div class="tab-pane fade actionlog" id="actionlog">
 		        	<h3>View Log</h3>
 	               	<div class="table-responsive">
-	
+						<table 	id="dashboard"
+								class="table table-striped table-bordered table-hover table-highlight table-checkable dataTable-helper dataTable no-footer datatable-columnfilter">
+							<thead>
+						      	<tr cls="dataTable-filter-row">
+						      		<th>DATE</th>
+							        <th>USER</th>
+							        <th>ACTION</th>
+							        <th>RESULT</th>
+							        <th>DETAILS</th>
+				                </tr>
+			    			</thead>
+			    			<tbody style="cursor:pointer;">
+							    <tr>
+							    	<td></td>
+							    	<td></td>
+							    	<td></td>
+							    	<td></td>
+							    	<td></td>
+							    </tr>
+			    			</tbody>
+						</table>
 	              	</div>
 		     	</div>
 			</div> <!-- /.col -->				

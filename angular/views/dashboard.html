@@ -55,7 +55,7 @@
 					        <th class="sorting_disabled">Comments</th>
 				      	</tr>
 	    			</thead>
-	    			<tbody>
+	    			<tbody style="cursor:pointer;">
 					    <tr ng-repeat ="metric in metrics" >
 					        <td ng-click="view_trends(metric.name)"><span>{{ metric.name }}</span></td>
 					        <td ng-click="view_trends(metric.name)"><span>{{ metric.received }}</span></td>
