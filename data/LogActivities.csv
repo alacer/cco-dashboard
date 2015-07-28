@@ -1,0 +1,9 @@
+Action,What Triggers this?,What details should be included?
+Add User,"Selecting ""Save Changes"" on manage users--add users page under settings.",Include new user ID and all details on page
+Delete User,"Selecting ""Save Changes"" on manage users--update users page under settings.",Include user ID
+Modify User,"Selecting ""Save Changes"" on manage users--delete users page under settings.","Include any modifications made (i.e., updated name, updated access role to…)."
+Add Metrics,"Selecting ""Save Changes"" on Configure Metrics--add metrics page under settings",Include new metric name and all details on page
+Update Metrics,"Selecting ""Save Changes"" on Configure Metrics--update metrics page under settings","Include any modifications made (i.e., updated metric name, updated Label…)."
+Delete Metrics,"Selecting ""Save Changes"" on Configure Metrics--delete metrics page under settings",Include metric name
+Submit Manual Data,"Selecting ""Submit"" under Enter Data on Enter Data page",Include name of metric and date recorded
+Submit CSV File,"Selecting ""Submit"" under Upload File on Enter Data page","Include name of file (and, if possible, metric submitted and date recorded)"
