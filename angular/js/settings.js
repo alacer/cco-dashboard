@@ -144,14 +144,14 @@ angular.module('settings-module', [])
 	$scope.get_metric_bins = function () {
 		TrendsService.get_metric_bins().then(function (response) {
 			$scope.metric_bins = response.data;
-			console.log($scope.metric_bins);
 		}, function (error) {
 			console.log(error);
 		});
 	};
 
-	$scope.get_metric_bin = function (metric_id) {
-		TrendsService.get_metric_bins(metric_id).then( function (response) {
+	$scope.get_metric_bin = function (metric) {
+		var metric = JSON.parse(metric);
+		TrendsService.get_metric_bins(metric._id).then( function (response) {
 			$scope.metric_bin = response.data;
 		}, function (error) {
 			console.log(error);
@@ -179,18 +179,17 @@ angular.module('settings-module', [])
 	};
 
 	$scope.update_user = function (user) {
+		actions = 'Update User';
 		SettingsService.update_user(user, user._id).then( function (response) {
 			alert('User successfully updated.');
 			$scope.get_users();
-			actions = 'Update User';
 			details = 'Updated User: ' + user.firstName + ' ' + user.lastName;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);
 		}, function (error) {
 			alert('Something went wrong, unable to update user.');
-			actions = 'Update User';
-			details = 'Update User: ' + user.firstName + ' ' + user.lastName;
+			details = actions + ': ' + user.firstName + ' ' + user.lastName;
 			log = set_log($scope.user, details, actions, 'Failure');
 
 			$scope.log_activity(log);
@@ -198,10 +197,10 @@ angular.module('settings-module', [])
 	};
 
 	$scope.delete_user = function (user) {
+		actions = 'Delete User';
 		SettingsService.delete_user(user._id).then( function (response) {
 			alert('User successfully removed.');
 			$scope.user_details = {};
-			actions = 'Delete User';
 			details = 'Deleted User: ' + user.firstName + ' ' + user.lastName;
 			log = set_log($scope.user, details, actions, 'Success');
 
@@ -209,8 +208,7 @@ angular.module('settings-module', [])
 			$scope.splice_data(user, 'user');
 		}, function (error) {
 			alert('Something went wrong, unable to remove user.');
-			actions = 'Delete User';
-			details = 'Delete User: ' + user.firstName + ' ' + user.lastName;
+			details = actions + ': ' + user.firstName + ' ' + user.lastName;
 			log = set_log($scope.user, details, actions, 'Failure');
 
 			$scope.log_activity(log);
@@ -218,32 +216,60 @@ angular.module('settings-module', [])
 	};
 
 	$scope.add_metric_bin = function (bin_data) {
+		actions = 'Add Metric Bin';
 		SettingsService.add_metric_bin(bin_data).then( function (response) {
 			alert('Metric bin successfully added.');
+			$scope.metric_bins.push(response.data.data);
 			$scope.new_metric = {};
-			$scope.get_metric_bins();
+			details = 'New Metric Bin Added: ' + bin_data.metric;
+			log = set_log($scope.user, details, actions, 'Success');
+
+			$scope.log_activity(log);
 		}, function (error) {
 			alert('Something went wrong, unable to add new metric bin.');
+			details = actions + ': ' + bin_data.metric;
+			log = set_log($scope.user, details, actions, 'Failure');
+
+			$scope.log_activity(log);
 		});
 	};
 
 	$scope.update_metric_bin = function (metric_bin) {
-		delete metric_bin.createdAt;
-		delete metric_bin.updatedAt;
-		
+		var metric_bin = JSON.parse(metric_bin);
+		actions = 'Update Metric Bin';
 		SettingsService.update_metric_bin(metric_bin, metric_bin._id).then( function (response) {
 			alert('Metric bin successfully updated.');
+			$scope.get_metric_bins();
+			details = 'Metric Bin Updated: ' + metric_bin.metric;
+			log = set_log($scope.user, details, actions, 'Success');
+
+			$scope.log_activity(log);
 		}, function (error) {
 			alert('Something went wrong, unable to update metric bin.');
+			details = actions + ': ' + metric_bin.metric;
+			log = set_log($scope.user, details, actions, 'Failure');
+
+			$scope.log_activity(log);
 		});
 	};
 
-	$scope.delete_metric_bin = function (metric_id) {
-		SettingsService.delete_metric_bin(metric_id).then( function (response) {
+	$scope.delete_metric_bin = function (metric) {
+		var metric = JSON.parse(metric);
+		actions = 'Delete Metric Bin';
+		SettingsService.delete_metric_bin(metric._id).then( function (response) {
 			alert('Metric bin successfully removed.');
-			$scope.get_metric_bins();
+			$scope.metric_bin = {};
+			details = 'Deleted Metric Bin: ' + metric.metric;
+			log = set_log($scope.user, details, actions, 'Success');
+
+			$scope.log_activity(log);
+			$scope.splice_data(metric, 'metric');
 		}, function (error) {
 			alert('Something went wrong, unable to remove metric bin.');
+			details = actions + ': ' + metric.metric;
+			log = set_log($scope.user, details, actions, 'Failure');
+
+			$scope.log_activity(log);
 		});
 	};
 
@@ -269,7 +295,7 @@ angular.module('settings-module', [])
 				};
 			};
 		} else if (type == 'metric') {
-			for (var i = 0; i < $scope.users.length; i++) {
+			for (var i = 0; i < $scope.metric_bins.length; i++) {
 				if ($scope.metric_bins[i].metric == data.metric) {
 					$scope.metric_bins.splice(i, 1);
 				};

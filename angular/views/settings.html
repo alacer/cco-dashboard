@@ -279,17 +279,17 @@
 							</div>
 							<div id="collapseFive" class="panel-collapse collapse collapseFive" style="height: 0px;">
 								<div class="panel-body">
-						          	<form ng-submit="update_metric_bin(metric_bin)" class="form-horizontal">
+						          	<form ng-submit="update_metric_bin(metric)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Metric Name</label>
 							          		<div class="col-md-7">
 									            <select id="metricTrends" 
 									        			name="metricTrends" 
 									        			class="form-control" 
-									        			ng-model="metric_id"
-									        			ng-change="get_metric_bin(metric_id)" >
+									        			ng-model="metric"
+									        			ng-change="get_metric_bin(metric)" >
 									            	<option ng-repeat="metric_bin in metric_bins" 
-									            			value="{{metric_bin._id}}" >{{ metric_bin.metric }}</option>
+									            			value="{{metric_bin}}" >{{ metric_bin.metric }}</option>
 									        	</select>
 									        </div>
 							          	</div> <!-- /.form-group -->
@@ -342,17 +342,17 @@
 							</div>
 							<div id="collapseSix" class="panel-collapse collapse collapseSix" style="height: 0px;">
 								<div class="panel-body">
-						          	<form class="form-horizontal" ng-submit="delete_metric_bin(metric_id)">
+						          	<form class="form-horizontal" ng-submit="delete_metric_bin(metric)">
 								         <div class="form-group">
 							          		<label class="col-md-3">Metric Name</label>
 							          		<div class="col-md-7">
 									            <select id="metricTrends" 
 									        			name="metricTrends" 
 									        			class="form-control" 
-									        			ng-model="metric_bin._id"
-									        			ng-change="get_metric_bin(metric_bin._id)" >
+									        			ng-model="metric"
+									        			ng-change="get_metric_bin(metric)" >
 									            	<option ng-repeat="metric_bin in metric_bins" 
-									            			value="{{metric_bin._id}}" >{{ metric_bin.metric }}</option>
+									            			value="{{metric_bin}}" >{{ metric_bin.metric }}</option>
 									        	</select>
 									        </div>
 							          	</div> <!-- /.form-group -->
