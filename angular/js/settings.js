@@ -81,23 +81,41 @@ angular.module('settings-module', [])
 		return deferred.promise;
 	};
 
+	this.activities = function () {
+		var deferred = $q.defer();
+
+		$http({ method:'GET', url:config.logs }).then( function (response) {
+			deferred.resolve(response);
+		}, function (error) {
+			deferred.reject(error);
+		});
+		return deferred.promise;
+	};
+
 })
 
-.controller('SettingsController', function ($scope, $state, $stateParams, LoginService, TrendsService, SettingsService) {
+.controller('SettingsController', function ($scope, $state, $stateParams, SessionService, TrendsService, SettingsService) {
 	
 	$scope.view_tab 		= "Users";
+	$scope.date 			= new Date();
+
+	$scope.user 			= null;
 	$scope.metric_bin 		= null;
 	$scope.metric_bins 		= null;
 	$scope.users 			= null;
 	$scope.user_details 	= null;
+	$scope.logs 			= null;
+
 	$scope.new_user 		= {};
 	$scope.new_metric 		= {};
+	
 	$scope.roles 			= ['Admin','Analyst','Manager'];
 	$scope.user_panel_ids 	= ['panel1', 'panelAnchor1', 'panel2', 'panelAnchor2', 'panel3', 'panelAnchor3'];
 	$scope.metric_panel_ids = ['metricPanel1', 'metricPanelAnchor1', 'metricPanel2', 'metricPanelAnchor2', 'metricPanel3', 'metricPanelAnchor3'];
 
 	function init () {
-		var login_state = LoginService.isLoggedIn();
+		$scope.user = SessionService.get_user_data();
+		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {
 			$state.go('login');
 		};
@@ -126,6 +144,7 @@ angular.module('settings-module', [])
 	$scope.get_metric_bins = function () {
 		TrendsService.get_metric_bins().then(function (response) {
 			$scope.metric_bins = response.data;
+			console.log($scope.metric_bins);
 		}, function (error) {
 			console.log(error);
 		});
@@ -142,34 +161,59 @@ angular.module('settings-module', [])
 	$scope.add_new_user = function (user) {
 		SettingsService.add_new_user(user).then( function (response) {
 			alert("User successfully added.");
-			$scope.get_users();
+			$scope.users.push(user);
 			$scope.new_user = {};
+			actions = 'Add User';
+			details = 'New User Added: ' + user.firstName + ' ' + user.lastName;
+			log = set_log($scope.user, details, actions, 'Success');
+
+			$scope.log_activity(log);
 		}, function (error) {
 			alert("Something went wrong, unable to add new user.");
+			actions = 'Add User';
+			details = 'Add New User: ' + user.firstName + ' ' + user.lastName;
+			log 	= set_log($scope.user, details, actions, 'Failure');
+
+			$scope.log_activity(log);
 		});
 	};
 
 	$scope.update_user = function (user) {
-		var user_id = user._id;
-		delete user.createdAt;
-		delete user.updatedAt;
-		delete user._id;
-
-		SettingsService.update_user(user, user_id).then( function (response) {
+		SettingsService.update_user(user, user._id).then( function (response) {
 			alert('User successfully updated.');
 			$scope.get_users();
+			actions = 'Update User';
+			details = 'Updated User: ' + user.firstName + ' ' + user.lastName;
+			log = set_log($scope.user, details, actions, 'Success');
+
+			$scope.log_activity(log);
 		}, function (error) {
 			alert('Something went wrong, unable to update user.');
+			actions = 'Update User';
+			details = 'Update User: ' + user.firstName + ' ' + user.lastName;
+			log = set_log($scope.user, details, actions, 'Failure');
+
+			$scope.log_activity(log);
 		});
 	};
 
-	$scope.delete_user = function (user_id) {
-		SettingsService.delete_user(user_id).then( function (response) {
+	$scope.delete_user = function (user) {
+		SettingsService.delete_user(user._id).then( function (response) {
 			alert('User successfully removed.');
-			$scope.get_users();
 			$scope.user_details = {};
+			actions = 'Delete User';
+			details = 'Deleted User: ' + user.firstName + ' ' + user.lastName;
+			log = set_log($scope.user, details, actions, 'Success');
+
+			$scope.log_activity(log);
+			$scope.splice_data(user, 'user');
 		}, function (error) {
 			alert('Something went wrong, unable to remove user.');
+			actions = 'Delete User';
+			details = 'Delete User: ' + user.firstName + ' ' + user.lastName;
+			log = set_log($scope.user, details, actions, 'Failure');
+
+			$scope.log_activity(log);
 		});
 	};
 
@@ -203,6 +247,36 @@ angular.module('settings-module', [])
 		});
 	};
 
+	$scope.activities = function () {
+		SettingsService.activities().then( function (response) {
+			$scope.logs = response.data;
+		}, function (error) {
+			console.log(error);
+		});
+	};
+
+	$scope.log_activity = function (log) {
+		SessionService.logs(log);
+		log.createdAt = $scope.date;
+		$scope.logs.push(log);
+	};
+
+	$scope.splice_data = function (data, type) {
+		if (type == 'user') {
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.users[i].emailAddress == data.emailAddress) {
+					$scope.users.splice(i, 1);
+				};
+			};
+		} else if (type == 'metric') {
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.metric_bins[i].metric == data.metric) {
+					$scope.metric_bins.splice(i, 1);
+				};
+			};
+		};
+	};
+
 	$scope.select_panel = function (events, settings, panel_ids) {
 		var ids = [];
 		if (settings == 'metric') {
@@ -210,7 +284,7 @@ angular.module('settings-module', [])
 		} else if (settings == 'user') {
 			ids = panel_ids;
 		};
-		
+
 		if (ids) {
 			if (events == 'first') {
 				set_style(ids[0], ids[1], ids[2], ids[3], ids[4], ids[5]);
@@ -237,5 +311,6 @@ angular.module('settings-module', [])
 	init();
 	$scope.get_metric_bins();
 	$scope.get_users();
+	$scope.activities();
 
 })

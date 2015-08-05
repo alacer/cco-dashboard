@@ -17,7 +17,7 @@ angular.module('dashboard-module',[])
 	
 })
 
-.controller ('DashboardController', function ($scope, $state, DashboardService, $stateParams, TrendsService, LoginService, $filter, DTColumnDefBuilder, DTOptionsBuilder) {
+.controller ('DashboardController', function ($scope, $state, DashboardService, $stateParams, TrendsService, SessionService, $filter, DTColumnDefBuilder, DTOptionsBuilder) {
 
 	$scope.metric_bins 		= null;
 	$scope.total_items  	= null; 
@@ -79,7 +79,7 @@ angular.module('dashboard-module',[])
     };
 
 	function init () {
-		var login_state = LoginService.isLoggedIn();
+		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {
 			$state.go('login');
 		};

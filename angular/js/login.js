@@ -1,6 +1,6 @@
 angular.module('login-module', [])
 
-.service('LoginService', function ($q, $http, $state, $cookieStore) {
+.service('SessionService', function ($q, $http, $state, $cookieStore) {
 	var parent = this;
 
 	function login_private (username) {
@@ -29,6 +29,17 @@ angular.module('login-module', [])
 		});
 	};
 
+	this.logs = function (logs) {
+		var deferred = $q.defer();
+
+		$http({ method:'POST', url:config.logs, data:logs }).then( function (response) {
+			deferred.resolve(response);
+		}, function (error) {
+			deferred.reject(error);
+		});
+		return deferred.promise;
+	};
+
 	this.save_user_data = function (data) {
 		$cookieStore.put ('user', data);
 	};
@@ -48,10 +59,10 @@ angular.module('login-module', [])
 
 })
 
-.controller('LoginController', function ($scope, $state, LoginService) {
+.controller('LoginController', function ($scope, $state, SessionService) {
 	
 	$scope.login = function (user) {
-		LoginService.login(user);
+		SessionService.login(user);
 	};
 
 })

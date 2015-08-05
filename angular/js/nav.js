@@ -1,6 +1,6 @@
 angular.module('nav-module', [])
 
-.controller('NavController', function ($scope, $state, $cookieStore, LoginService) {
+.controller('NavController', function ($scope, $state, $cookieStore, SessionService) {
 
 	$scope.user = 'User';
 
@@ -24,8 +24,8 @@ angular.module('nav-module', [])
 			$scope.selected_view($scope.active, newValue);
    	 	};
 
-   	 	if (LoginService.isLoggedIn()) {
-   	 		$scope.user = LoginService.get_user_data()
+   	 	if (SessionService.isLoggedIn()) {
+   	 		$scope.user = SessionService.get_user_data()
    	 	};
 	};
 

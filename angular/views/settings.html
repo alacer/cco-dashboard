@@ -156,7 +156,7 @@
 							</div>
 							<div id="collapseThree" class="panel-collapse collapse collapseThree" style="height: 0px;">
 								<div class="panel-body">
-						          	<form ng-submit="delete_user(user_details._id)" class="form-horizontal">
+						          	<form ng-submit="delete_user(user_details)" class="form-horizontal">
 							          	<div class="form-group">
 							          		<label class="col-md-3">Select User</label>
 							          		<div class="col-md-7">
@@ -401,6 +401,7 @@
 		        	<h3>View Log</h3>
 	               	<div class="table-responsive">
 						<table 	id="dashboard"
+								datatable="ng"
 								class="table table-striped table-bordered table-hover table-highlight table-checkable dataTable-helper dataTable no-footer datatable-columnfilter">
 							<thead>
 						      	<tr cls="dataTable-filter-row">
@@ -412,12 +413,12 @@
 				                </tr>
 			    			</thead>
 			    			<tbody style="cursor:pointer;">
-							    <tr>
-							    	<td></td>
-							    	<td></td>
-							    	<td></td>
-							    	<td></td>
-							    	<td></td>
+							    <tr ng-repeat ="log in logs">
+							    	<td>{{ log.createdAt | date:'MMMM dd, yyyy' }}</td>
+							    	<td>{{ log.actor }}</td>
+							    	<td>{{ log.activity }}</td>
+							    	<td>{{ log.result }}</td>
+							    	<td>{{ log.details }}</td>
 							    </tr>
 			    			</tbody>
 						</table>

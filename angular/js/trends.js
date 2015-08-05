@@ -30,7 +30,7 @@ angular.module('trends-module',[])
 	
 })
 
-.controller ('TrendsController', function ($scope, $state, $stateParams, TrendsService, LoginService, DashboardService, DTOptionsBuilder, DTColumnDefBuilder) {
+.controller ('TrendsController', function ($scope, $state, $stateParams, TrendsService, SessionService, DashboardService, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.metrics      = null;
     $scope.charts       = null;
     $scope.metric_bins  = null; 
@@ -50,7 +50,7 @@ angular.module('trends-module',[])
     $scope.selected_bin = $stateParams.metric || 'BAU GIFTS EDD Alerts, Cases';
 
     function init () {
-        var login_state = LoginService.isLoggedIn();
+        var login_state = SessionService.isLoggedIn();
         if (login_state == false) {
             $state.go('login');
         };

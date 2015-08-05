@@ -1,3 +1,6 @@
+var details = null;
+var log     = null;
+var actions = null;
 
 var get_bins = function (metric, metric_bins) {
 	for (var i = 0; i < metric_bins.length; i++) {
@@ -25,4 +28,16 @@ var sort_dates = function (date, date_array) {
             }
         };
     }
+};
+
+var set_log = function (user, details, action, status) {
+    var full_name = user.firstName + ' ' + user.lastName;
+
+    this.activity_log  = {
+        actor       : full_name,
+        activity    : action,
+        result      : status,
+        details     : details
+    };
+    return this.activity_log;
 };

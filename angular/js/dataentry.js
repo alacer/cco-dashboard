@@ -28,8 +28,9 @@ angular.module('dataentry-module',[])
 
  })
 
-.controller ('DataEntryController', function ($scope, $state, $filter, TrendsService, DataEntryService, LoginService) {
+.controller ('DataEntryController', function ($scope, $state, $filter, TrendsService, DataEntryService, SessionService, SettingsService) {
 
+	$scope.user 			= null;
 	$scope.default_metric 	= null;
 	$scope.bin1 			= null;
 	$scope.bin2				= null;
@@ -41,7 +42,8 @@ angular.module('dataentry-module',[])
 	$scope.show_bin3		= true;
 
 	function init () {
-		var login_state = LoginService.isLoggedIn();
+		$scope.user = SessionService.get_user_data();
+		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {
 			$state.go('login');
 		};
@@ -63,9 +65,17 @@ angular.module('dataentry-module',[])
 		data.name = $scope.default_metric.metric;
 		data.date 	= date_filter(data.date);
 		DataEntryService.add_metric(data).then( function (response) {
-			alert('Metric successfully added.');
+			alert('Metric successfully added.');	
+			actions = 'Add Metric';
+			details = 'New Metric Added: ' + data.name;
+			log = set_log($scope.user, details, actions, 'Success');
+			SessionService.logs(log);
 		}, function (error) {
 			alert('Something went wrong, unable to add new metric.');
+			actions = 'Add Metric';
+			details = 'Add New Metric: ' + data.name;
+			log = set_log($scope.user, details, actions, 'Failure');
+			SessionService.logs(log);
 		});
 	};
 
@@ -95,6 +105,14 @@ angular.module('dataentry-module',[])
 			$scope.show_bin2 = true;
 			$scope.show_bin3 = true;
 		}
+	};
+
+	$scope.log_activity = function (data) {
+		SessionService.logs(data).then( function (response) {
+			
+		}, function (error) {
+			console.log(error);
+		});
 	};
 
 	$scope.upload_file = function () {
