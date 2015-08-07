@@ -22,10 +22,13 @@ angular.module('login-module', [])
 				$state.go('user.dashboard');
 			} else {
 				alert('Failed to log in');
-				$state.go('login');
+				document.getElementById('login-username').value = '';
+				document.getElementById('login-password').value = '';
 			}
 		}, function (error) {
-			console.log(error);
+			alert('Invalid username or password.');
+			document.getElementById('login-username').value = '';
+			document.getElementById('login-password').value = '';
 		});
 	};
 
@@ -60,6 +63,7 @@ angular.module('login-module', [])
 })
 
 .controller('LoginController', function ($scope, $state, SessionService) {
+	$scope.user = {};
 	
 	$scope.login = function (user) {
 		SessionService.login(user);

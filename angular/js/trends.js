@@ -102,9 +102,9 @@ angular.module('trends-module',[])
                 $scope.metrics[i].bin2 = new_bin.bin2;
                 $scope.metrics[i].bin3 = new_bin.bin3;
 
-                var ok_progress = get_average($scope.metrics[i].inqueue, $scope.metrics[i].ok);
-                var c_progress  = get_average($scope.metrics[i].inqueue, $scope.metrics[i].caution);
-                var d_progress  = get_average($scope.metrics[i].inqueue, $scope.metrics[i].danger);
+                var ok_progress = get_average($scope.metrics[i].inqueue, $scope.metrics[i].ok ? $scope.metrics[i].ok : 0);
+                var c_progress  = get_average($scope.metrics[i].inqueue, $scope.metrics[i].caution ? $scope.metrics[i].caution : 0);
+                var d_progress  = get_average($scope.metrics[i].inqueue, $scope.metrics[i].danger ? $scope.metrics[i].danger : 0);
 
                 $scope.metrics[i].ok_progress   = ok_progress;
                 $scope.metrics[i].c_progress    = c_progress;
