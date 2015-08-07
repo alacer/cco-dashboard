@@ -13,6 +13,7 @@ var dependencies = [
 'highcharts-ng',
 'angular-loading-bar',
 'ngCookies',
+'pascalprecht.translate',
 
 'datatables',
 'datatables.bootstrap',
@@ -24,6 +25,11 @@ angular.module('app',dependencies)
 
 .filter('decodeURIComponent', function() {
 	return window.decodeURIComponent;
+})
+
+.config( function ($translateProvider) {
+	$translateProvider.translations('ja', translations('ja'))
+	$translateProvider.translations('en', translations('en'))
 })
 
 //defines the routes on our website

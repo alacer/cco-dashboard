@@ -68,19 +68,19 @@
             	<li ng-class="{'active': active == 1}" ng-click="selected_view(1, 'user.dashboard')">
                 	<a>
                   		<i class="fa fa-exclamation-circle"></i>
-                  		Dashboard Overview
+                  		{{ 'DASHBOARD_OVERVIEW' | translate }}
                 	</a>
             	</li>
             	<li ng-class="{'active': active == 2}" ng-click="selected_view(2, 'user.trends')">
                 	<a>
                   	<i class="fa fa-bar-chart-o"></i>
-                  	Trends
+                  	{{ 'TRENDS' | translate }}
                 	</a>
             	</li>
             	<li ng-class="{'active': active == 3}" ng-click="selected_view(3, 'user.dataentry')">
                 	<a>
                   		<i class="fa fa-pencil-square-o"></i>
-                 	 	Enter Data
+                 	 	{{ 'ENTER_DATA' | translate }}
                 	</a>
             	</li>
           	</ul>

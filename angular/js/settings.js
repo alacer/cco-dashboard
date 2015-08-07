@@ -160,11 +160,13 @@ angular.module('settings-module', [])
 
 	$scope.add_new_user = function (user) {
 		SettingsService.add_new_user(user).then( function (response) {
+			var n_user = response.data.data;
 			alert("User successfully added.");
-			$scope.users.push(user);
+			$scope.users.push(n_user);
 			$scope.new_user = {};
 			actions = 'Add User';
-			details = 'New User Added: ' + user.firstName + ' ' + user.lastName;
+			details = 'New User Added - ' + 'Full Name: ' + n_user.firstName + ' ' + n_user.lastName + ', User ID:' + n_user._id 
+					+ ', Username: ' + n_user.username + ', Email Address: ' + n_user.emailAddress + ', Role: ' + n_user.role;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);
@@ -179,11 +181,14 @@ angular.module('settings-module', [])
 	};
 
 	$scope.update_user = function (user) {
-		actions = 'Update User';
+		actions = 'Modify User';
 		SettingsService.update_user(user, user._id).then( function (response) {
+			console.log(response);
+			var n_user = response.data.data;
 			alert('User successfully updated.');
 			$scope.get_users();
-			details = 'Updated User: ' + user.firstName + ' ' + user.lastName;
+			details = 'Modified User - ' + 'Full Name: ' + n_user.firstName + ' ' + n_user.lastName + ', User ID:' + n_user._id 
+					+ ', Username: ' + n_user.username + ', Email Address: ' + n_user.emailAddress + ', Role: ' + n_user.role;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);
@@ -201,7 +206,7 @@ angular.module('settings-module', [])
 		SettingsService.delete_user(user._id).then( function (response) {
 			alert('User successfully removed.');
 			$scope.user_details = {};
-			details = 'Deleted User: ' + user.firstName + ' ' + user.lastName;
+			details = 'Deleted User - ' + 'Full Name: ' + user.firstName + ' ' + user.lastName + ', User ID: ' + user._id;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);
@@ -216,12 +221,14 @@ angular.module('settings-module', [])
 	};
 
 	$scope.add_metric_bin = function (bin_data) {
-		actions = 'Add Metric Bin';
+		actions = 'Add Metrics';
 		SettingsService.add_metric_bin(bin_data).then( function (response) {
+			var n_metric = response.data.data;
 			alert('Metric bin successfully added.');
-			$scope.metric_bins.push(response.data.data);
+			$scope.metric_bins.push(n_metric);
 			$scope.new_metric = {};
-			details = 'New Metric Bin Added: ' + bin_data.metric;
+			details = 'New Metric Added - ' + n_metric.metric + ', OK: ' + n_metric.bin1 + ', CAUTION: ' 
+					+ n_metric.bin2 + ', DANGER: ' + n_metric.bin3 + ', Role Responsible: ' + n_metric.role;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);
@@ -238,9 +245,11 @@ angular.module('settings-module', [])
 		var metric_bin = JSON.parse(metric_bin);
 		actions = 'Update Metric Bin';
 		SettingsService.update_metric_bin(metric_bin, metric_bin._id).then( function (response) {
+			var n_metric = response.data.data;
 			alert('Metric bin successfully updated.');
 			$scope.get_metric_bins();
-			details = 'Metric Bin Updated: ' + metric_bin.metric;
+			details = 'Metric Bin Updated: ' + n_metric.metric + ', OK: ' + n_metric.bin1 + ', CAUTION: ' 
+					+ n_metric.bin2 + ', DANGER: ' + n_metric.bin3 + ', Role Responsible: ' + n_metric.role;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);
@@ -259,7 +268,7 @@ angular.module('settings-module', [])
 		SettingsService.delete_metric_bin(metric._id).then( function (response) {
 			alert('Metric bin successfully removed.');
 			$scope.metric_bin = {};
-			details = 'Deleted Metric Bin: ' + metric.metric;
+			details = 'Deleted Metric Bin - ' + metric.metric + ', User ID: ' + metric._id;
 			log = set_log($scope.user, details, actions, 'Success');
 
 			$scope.log_activity(log);

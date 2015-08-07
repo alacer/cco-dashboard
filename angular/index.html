@@ -68,6 +68,10 @@
     <script src="js/host.js"></script>
     <script src="js/utils.js"></script>
 
+    <!-- i18n Js -->
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="custom/translation.js"></script>
+
     <!-- Controllers -->
     <script src="js/login.js"></script>
     <script src="js/nav.js"></script>
@@ -77,13 +81,15 @@
     <script src="js/settings.js"></script>
     <script src="js/app.js"></script>
     <script type='text/javascript'>
-	    (function (d, t) {
-	      	var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
-	      	bh.type = 'text/javascript';
-	      	bh.src = '//www.bugherd.com/sidebarv2.js?apikey=yp82spoxomxx2lnnuplaxg';
-	      	s.parentNode.insertBefore(bh, s);
-	    })(document, 'script');
+        (function (d, t) {
+            var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            bh.type = 'text/javascript';
+            bh.src = '//www.bugherd.com/sidebarv2.js?apikey=yp82spoxomxx2lnnuplaxg';
+            s.parentNode.insertBefore(bh, s);
+        })(document, 'script');
     </script>
+
+
 </head>
 <body>
 	<div ui-view></div>

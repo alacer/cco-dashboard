@@ -1,7 +1,7 @@
 angular.module('nav-module', [])
 
-.controller('NavController', function ($scope, $state, $cookieStore, SessionService) {
-
+.controller('NavController', function ($scope, $state, $cookieStore, $translate, SessionService) {
+	$translate.use('en');
 	$scope.user = 'User';
 
 	function init () {

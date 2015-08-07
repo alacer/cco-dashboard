@@ -62,18 +62,18 @@ angular.module('dataentry-module',[])
 	};
 
 	$scope.add_metric = function (data) {
-		data.name = $scope.default_metric.metric;
+		data.name 	= $scope.default_metric.metric;
 		data.date 	= date_filter(data.date);
+		actions 	= 'Submit Manual Data';
 		DataEntryService.add_metric(data).then( function (response) {
+			console.log(response);
 			alert('Metric successfully added.');	
-			actions = 'Add Metric';
-			details = 'New Metric Added: ' + data.name;
+			details = actions + ': ' + data.name + ', Date: ' + data.date;
 			log = set_log($scope.user, details, actions, 'Success');
 			SessionService.logs(log);
 		}, function (error) {
 			alert('Something went wrong, unable to add new metric.');
-			actions = 'Add Metric';
-			details = 'Add New Metric: ' + data.name;
+			details = actions + ': ' + data.name;
 			log = set_log($scope.user, details, actions, 'Failure');
 			SessionService.logs(log);
 		});
