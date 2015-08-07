@@ -7,7 +7,7 @@ angular.module('dashboard-module',[])
 		var deferred = $q.defer();
 		var page     = page ||'0';
 
-		$http({method:'GET', url:config.metrics + '?date=' + date + '&page=' + page }).then( function (response) {
+		$http({method:'GET', url:config.metrics + '?date=' + date + '&page=' + page + '&size=' + data_size }).then( function (response) {
 			deferred.resolve(response);
 		}, function (error) {
 			deferred.reject(error);

@@ -6,34 +6,33 @@
       	<div class="col-sm-3" style="margin-top: 15px;">
           	<h4>Date</h4>
           	<div id="dp-ex-3" class="input-group date" data-auto-close="true" data-date-format="yyyy-mm-dd" data-date-autoclose="true" placeholder="Date">
-          		
+	            <form 	class="form-horizontal" 
+	            		novalidate 
+	            		name="form" 
+	            		ng-submit="submit()">
+	                <div 	id="date"
+	                		class="input-append input-group date" 
+	                		datetimez 
+	                		ng-model="default_date" 
+	                		ng-change="date_filter(default_date)">
+	                  	<input 	data-format="yyyy-MM-dd" 
+	                  			placeholder="{{default_date}}"  
+	                  			class="form-control" 
+	                  			type="text" 
+	                  			id="input1" 
+	                  			name="input1">
+	                  	<span 	class="add-on input-group-addon ">
+	                    	<i 	class="fa fa-calendar"></i>
+	                  	</span>
+	                </div>
+	            </form>
           	</div>
-            <form 	class="form-horizontal" 
-            		novalidate 
-            		name="form" 
-            		ng-submit="submit()">
-                <div 	id="date"
-                		class="input-append input-group date" 
-                		datetimez 
-                		ng-model="default_date" 
-                		ng-change="date_filter(default_date)">
-                  	<input 	data-format="yyyy-MM-dd" 
-                  			placeholder="{{default_date}}"  
-                  			class="form-control" 
-                  			type="text" 
-                  			id="input1" 
-                  			name="input1">
-                  	<span 	class="add-on input-group-addon ">
-                    	<i 	class="fa fa-calendar"></i>
-                  	</span>
-                </div>
-            </form>
 	    </div>
     </div>
 </div>
 
 <div id="content-container">
-    <!-- <div class="clear"></div> -->
+    <div class="clear"></div>
     <div id="DashboardTabsContent" class="tab-content">
         <div class="col-md-12" id="Overview">
           	<div class="table-responsive">    
@@ -87,12 +86,12 @@
 					    </tr>
 	    			</tbody>
 				</table> 
-				<pagination class="pull-right" 
+				<!-- <pagination class="pull-right" 
 							total-items="total_items" 
 							ng-model="current_page" 
 							num-pages="num_pages" 
 							items-per-page="limit" 
-							ng-change="page_changed(current_page)"></pagination>
+							ng-change="page_changed(current_page)"></pagination> -->
           	</div>
     	</div>
   	</div>

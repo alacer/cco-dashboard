@@ -66,7 +66,7 @@ angular.module('trends-module',[])
     };
 
     $scope.metric_charts = function () {
-        TrendsService.bin_metrics($scope.selected_bin, null, 9999999).then( function (response) {
+        TrendsService.bin_metrics($scope.selected_bin, null, data_size).then( function (response) {
             $scope.charts = response.data.metrics;
             for (var i = 0; i < $scope.charts.length; i++) {
                 var r_trend  = $scope.trend_ric($scope.charts[i], 'Received');

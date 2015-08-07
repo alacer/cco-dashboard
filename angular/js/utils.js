@@ -1,6 +1,8 @@
-var details = null;
-var log     = null;
-var actions = null;
+var details     = null;
+var log         = null;
+var actions     = null;
+
+var data_size   = 9999999;
 
 var default_date = function () {
 
