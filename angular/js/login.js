@@ -21,14 +21,10 @@ angular.module('login-module', [])
 				parent.save_user_data(log_user);
 				$state.go('user.dashboard');
 			} else {
-				alert('Failed to log in');
-				document.getElementById('login-username').value = '';
-				document.getElementById('login-password').value = '';
+				error_response(user.username);
 			}
 		}, function (error) {
-			alert('Invalid username or password.');
-			document.getElementById('login-username').value = '';
-			document.getElementById('login-password').value = '';
+			error_response(user.username);
 		});
 	};
 
@@ -60,13 +56,23 @@ angular.module('login-module', [])
         }
 	};
 
+	function error_response (user) {
+		document.getElementById('message').innerHTML 	= 'Login failed for user ' + '"' + user + '"';
+		document.getElementById('login-username').value = '';
+		document.getElementById('login-password').value = '';
+	};
+
 })
 
 .controller('LoginController', function ($scope, $state, SessionService) {
-	$scope.user = {};
+	$scope.user 			= {};
 	
 	$scope.login = function (user) {
 		SessionService.login(user);
+	};
+
+	$scope.reset_message = function () {
+		document.getElementById('message').innerHTML = 'Please sign in to get access.';
 	};
 
 })
