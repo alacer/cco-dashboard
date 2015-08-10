@@ -5,9 +5,13 @@ angular.module('dashboard-module',[])
 
 	this.get_metrics = function(date, page) {
 		var deferred = $q.defer();
-		var page     = page ||'0';
+		if (date == undefined) { var date = ''; } else { var date = '&date=' + date; };
+		if (page == undefined) { var page = ''; } else { var page = '&page=' + page; };
+		var size 	= '&size=' + data_size;
+		var query 	= date + page + size;
+		var final_query = query.replace('&','?');
 
-		$http({method:'GET', url:config.metrics + '?date=' + date + '&page=' + page + '&size=' + data_size }).then( function (response) {
+		$http({ method:'GET', url:config.metrics + final_query }).then( function (response) {
 			deferred.resolve(response);
 		}, function (error) {
 			deferred.reject(error);
@@ -19,14 +23,13 @@ angular.module('dashboard-module',[])
 
 .controller ('DashboardController', function ($scope, $state, DashboardService, $stateParams, TrendsService, SessionService, $filter, DTColumnDefBuilder, DTOptionsBuilder) {
 
-	$scope.amount 			= 50000;
 	$scope.metric_bins 		= null;
 	$scope.total_items  	= null; 
     $scope.num_pages    	= null;
     $scope.limit        	= null;
     $scope.current_page 	= null;
     $scope.init_page    	= $stateParams.page || 1;
-	$scope.default_date 	= $stateParams.date || default_date();
+	// $scope.default_date 	= $stateParams.date;
 
 	$scope.get_metrics = function(date, page) {
 		var new_page = page - 1;
@@ -67,7 +70,21 @@ angular.module('dashboard-module',[])
 	$scope.get_metric_bins = function () {
 		TrendsService.get_metric_bins().then(function (response) {
 			$scope.metric_bins = response.data;
+		});
+	};
+
+	$scope.recent_date = function () {
+		DashboardService.get_metrics().then( function (response) {
+			var array 	= response.data.metrics;
+			var recent 	= array[array.length - 1];
+			if ($stateParams.date) {
+				$scope.default_date = $stateParams.date;
+			} else {
+				$scope.default_date = recent.date;
+			};
 			$scope.get_metrics($scope.default_date, $scope.init_page);
+		}, function (error) {
+			console.log(error);
 		});
 	};
 
@@ -80,6 +97,7 @@ angular.module('dashboard-module',[])
     };
 
 	function init () {
+		$scope.recent_date();
 		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {
 			$state.go('login');
