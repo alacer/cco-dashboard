@@ -29,7 +29,6 @@ angular.module('dashboard-module',[])
     $scope.limit        	= null;
     $scope.current_page 	= null;
     $scope.init_page    	= $stateParams.page || 1;
-	// $scope.default_date 	= $stateParams.date;
 
 	$scope.get_metrics = function(date, page) {
 		var new_page = page - 1;

@@ -62,9 +62,13 @@ angular.module('dataentry-module',[])
 	};
 
 	$scope.add_metric = function (data) {
-		data.name 	= $scope.default_metric.metric;
-		data.date 	= date_filter(data.date);
-		actions 	= 'Submit Manual Data';
+		data.name 	 = $scope.default_metric.metric;
+		data.date 	 = date_filter(data.date);
+		data.ok 	 = data.ok 		|| 0;
+		data.caution = data.caution || 0;
+		data.danger  = data.danger 	|| 0;
+		actions 	 = 'Submit Manual Data';
+
 		DataEntryService.add_metric(data).then( function (response) {
 			console.log(response);
 			alert('Metric successfully added.');	

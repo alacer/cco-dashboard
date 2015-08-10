@@ -243,7 +243,8 @@
 				                  			class="form-control" 
 				                  			type="text" 
 				                  			id="input1" 
-				                  			name="input1">
+				                  			name="input1" 
+				                  			required>
 				                  	<span 	class="add-on input-group-addon ">
 				                    	<i 	class="fa fa-calendar"></i>
 				                  	</span>
@@ -259,7 +260,9 @@
 			                  			name="received" 
 			                  			class="form-control" 
 			                  			placeholder="(Number)"
-			                  			ng-model="metric.received" >
+			                  			ng-model="metric.received" 
+			                  			numbers-only="numbers-only"
+			                  			required>
 			                </div>
 			            </div>
 
@@ -270,7 +273,9 @@
 			                  			class="form-control" 
 			                  			name="completed" 
 			                  			placeholder="(Number)" 
-			                  			ng-model="metric.completed" >
+			                  			ng-model="metric.completed" 
+			                  			numbers-only="numbers-only"
+			                  			required>
 			                </div>
 			            </div>
 
@@ -283,7 +288,9 @@
 			                  			class="form-control" 
 			                  			name="ok" 
 			                  			placeholder="(Number)" 
-			                  			ng-model="metric.ok" >
+			                  			ng-model="metric.ok" 
+			                  			numbers-only="numbers-only"
+			                  			required>
 			                </div>
 			            </div>
 			            <div class="form-group" ng-if="show_bin2"> 
@@ -293,7 +300,9 @@
 			                  			class="form-control" 
 			                  			name="caution" 
 			                  			placeholder="(Number)" 
-			                  			ng-model="metric.caution" >
+			                  			ng-model="metric.caution" 
+			                  			numbers-only="numbers-only"
+			                  			required>
 			                </div>
 			            </div>
 			            <div class="form-group" ng-if="show_bin3">   
@@ -303,7 +312,9 @@
 			                  			class="form-control" 
 			                  			name="danger" 
 			                  			placeholder="(Number)" 
-			                  			ng-model="metric.danger" >
+			                  			ng-model="metric.danger" 
+			                  			numbers-only="numbers-only"
+			                  			required>
 			                </div>
 			            </div>  
 
