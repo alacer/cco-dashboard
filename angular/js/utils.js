@@ -4,9 +4,9 @@ var actions     = null;
 
 var data_size   = 9999999;
 
-var default_date = function () {
+var previous_date = function (date) {
 
-    var current_day = new Date(); 
+    var current_day = new Date(date); 
     var day         = current_day.getDate() - current_day.getDay(); 
     var sunday      = new Date(current_day.setDate(day)).toUTCString(); 
 
@@ -57,4 +57,18 @@ var set_log = function (user, details, action, status) {
         details     : details
     };
     return this.activity_log;
+};
+
+var get_absolute = function (value) {
+    var data = {};
+
+    data.result = Math.abs(value);
+
+    if (value < 0) {
+        data.state = false;
+    } else {
+        data.state = true;
+    };
+
+    return data;
 };

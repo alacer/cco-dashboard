@@ -30,6 +30,11 @@ angular.module('dashboard-module',[])
     $scope.current_page 	= null;
     $scope.init_page    	= $stateParams.page || 1;
 
+    $scope.metrics 			= {};
+    $scope.past_metrics 	= {};
+
+    $scope.pos_change 		= false;
+
 	$scope.get_metrics = function(date, page) {
 		var new_page = page - 1;
 		DashboardService.get_metrics(date, new_page).then(function (response) {
@@ -39,11 +44,15 @@ angular.module('dashboard-module',[])
             $scope.limit        = response.data.size;
             $scope.total_items  = $scope.num_pages * $scope.limit;
 			for (var i = 0; i < $scope.metrics.length; i++) {
-				var new_bin = get_bins($scope.metrics[i].name, $scope.metric_bins);
-
-				$scope.metrics[i].bin1 	= new_bin.bin1 || 0;
-				$scope.metrics[i].bin2 	= new_bin.bin2 || 0;
-				$scope.metrics[i].bin3 	= new_bin.bin3 || 0;
+				var new_bin 		 = get_bins($scope.metrics[i].name, $scope.metric_bins);
+				var received_changes = $scope.metrics[i].received - $scope.past_metrics[i].received;
+				var complete_changes = $scope.metrics[i].completed - $scope.past_metrics[i].completed;
+				
+				$scope.metrics[i].received 	= get_absolute(received_changes);
+				$scope.metrics[i].completed = get_absolute(complete_changes);
+				$scope.metrics[i].bin1 		= new_bin.bin1 || 0;
+				$scope.metrics[i].bin2 		= new_bin.bin2 || 0;
+				$scope.metrics[i].bin3 		= new_bin.bin3 || 0;
 
 				var ok_progress = get_average($scope.metrics[i].inqueue, $scope.metrics[i].ok ? $scope.metrics[i].ok : 0);
 				var c_progress	= get_average($scope.metrics[i].inqueue, $scope.metrics[i].caution ? $scope.metrics[i].caution : 0);
@@ -53,6 +62,8 @@ angular.module('dashboard-module',[])
 				$scope.metrics[i].c_progress 	= c_progress;
 				$scope.metrics[i].d_progress 	= d_progress;
 			};
+
+			console.log($scope.metrics);
 		}, function (error) {
 			console.log(error);
 		});
@@ -72,16 +83,32 @@ angular.module('dashboard-module',[])
 		});
 	};
 
+	$scope.get_previous_week = function (date, page) {
+		var new_page = page - 1;
+		DashboardService.get_metrics(date, new_page).then( function (response) {
+			$scope.past_metrics = response.data.metrics;
+			console.log($scope.past_metrics);
+			$scope.get_metrics($scope.default_date, $scope.init_page);
+		}, function (error) {
+			console.log(error);
+		});
+	};
+
 	$scope.recent_date = function () {
 		DashboardService.get_metrics().then( function (response) {
 			var array 	= response.data.metrics;
 			var recent 	= array[array.length - 1];
+
 			if ($stateParams.date) {
 				$scope.default_date = $stateParams.date;
 			} else {
 				$scope.default_date = recent.date;
 			};
-			$scope.get_metrics($scope.default_date, $scope.init_page);
+			var p_date = new Date($scope.default_date);
+			p_date.setDate(p_date.getDate()-7);
+			var prev_week = previous_date(p_date);
+
+			$scope.get_previous_week(prev_week, $scope.init_page);
 		}, function (error) {
 			console.log(error);
 		});
@@ -126,7 +153,14 @@ angular.module('dashboard-module',[])
 				"sPdfOrientation": "landscape",
 				"sButtonText": "PDF",
 				"mColumns": [ 0, 1, 2, 3, 4, 5, 6, 8]
-			}
+			},
+			// {
+			// 	"sExtends": "print",
+			// 	"sButtonText": "Print",
+			// 	"fnClick": function( button, conf ) {
+			// 		window.print();
+			// 	}
+			// }
         
         ]);
 
