@@ -62,8 +62,6 @@ angular.module('dashboard-module',[])
 				$scope.metrics[i].c_progress 	= c_progress;
 				$scope.metrics[i].d_progress 	= d_progress;
 			};
-
-			console.log($scope.metrics);
 		}, function (error) {
 			console.log(error);
 		});
@@ -72,7 +70,7 @@ angular.module('dashboard-module',[])
 	$scope.date_filter = function (date) {
 		// var new_date = new Date(date);
 		// 	new_date.setDate(new_date.getDate()-1);
-
+		console.log(date);
 		var set_date = $filter('date')(date, 'yyyy-MM-dd');
 		$state.go('user.dashboard', { date:set_date, page:1 });
 	};	
@@ -87,7 +85,6 @@ angular.module('dashboard-module',[])
 		var new_page = page - 1;
 		DashboardService.get_metrics(date, new_page).then( function (response) {
 			$scope.past_metrics = response.data.metrics;
-			console.log($scope.past_metrics);
 			$scope.get_metrics($scope.default_date, $scope.init_page);
 		}, function (error) {
 			console.log(error);
@@ -104,6 +101,7 @@ angular.module('dashboard-module',[])
 			} else {
 				$scope.default_date = recent.date;
 			};
+
 			var p_date = new Date($scope.default_date);
 			p_date.setDate(p_date.getDate()-7);
 			var prev_week = previous_date(p_date);
@@ -130,6 +128,15 @@ angular.module('dashboard-module',[])
 		};
 	};
 
+	function print_table () {
+		var divToPrint = document.getElementById("dashboard");
+
+		new_window = window.open("");
+		new_window.document.write(divToPrint.outerHTML);
+		new_window.print();
+		new_window.close();
+	};
+
 	$scope.dtOptions = DTOptionsBuilder
 		.newOptions()
 		.withDOM('Tft<"top"l>rt<"bottom"ip><"clear">')
@@ -154,13 +161,13 @@ angular.module('dashboard-module',[])
 				"sButtonText": "PDF",
 				"mColumns": [ 0, 1, 2, 3, 4, 5, 6, 8]
 			},
-			// {
-			// 	"sExtends": "print",
-			// 	"sButtonText": "Print",
-			// 	"fnClick": function( button, conf ) {
-			// 		window.print();
-			// 	}
-			// }
+			{
+				"sExtends": "print",
+				"sButtonText": "Print",
+				"fnClick": function( button, conf ) {
+					print_table();
+				}
+			}
         
         ]);
 
