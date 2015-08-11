@@ -196,18 +196,45 @@
 <div id="content-container">
     <div class="row">
       	<div class="col-sm-12">
-          	<!-- <div id="datauploadalert" class="alert alert-success alert-dismissable collapse" role="alert">
-            	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              		<span aria-hidden="true">×</span>
+          	<div 	id="datauploadalert" 
+          			class="alert alert-success alert-dismissable" 
+          			role="alert"
+          			ng-if="success_alert">
+            	<button type="button" 
+            			class="close" 
+            			data-dismiss="alert" 
+            			aria-label="Close"
+            			ng-click="clear_fields()">
+              		<span>×</span>
             	</button>
-            Data Entered And Submitted!
+            	Data Entered And Submitted!
           	</div>
-          	<div id="datafilealert" class="alert alert-success alert-dismissable collapse" role="alert">
-            	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              		<span aria-hidden="true">×</span>
+          	<div 	id="datafilealert" 
+          			class="alert alert-success alert-dismissable" 
+          			role="alert"
+          			ng-if="success_upload">
+            	<button type="button" 
+            			class="close" 
+            			data-dismiss="alert" 
+            			aria-label="Close" 
+            			ng-click="clear_fields()" >
+              		<span>×</span>
             	</button>
-            Data Uploaded Successfully!
-         	</div> -->
+           	 	Data Uploaded Successfully!
+         	</div>
+         	<div 	id="datauploadalert" 
+          			class="alert alert-danger alert-dismissable" 
+          			role="alert" 
+          			ng-if="failed_alert" >
+            	<button type="button" 
+            			class="close" 
+            			data-dismiss="alert" 
+            			aria-label="Close" 
+            			ng-click="clear_fields()" >
+              		<span>×</span>
+            	</button>
+            	<strong>Error!</strong> A problem occurred while submitting the data.
+          	</div>
 
 	      	<div class="portlet">
 				<div class="portlet-header">
