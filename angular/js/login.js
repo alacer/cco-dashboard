@@ -62,10 +62,15 @@ angular.module('login-module', [])
 		document.getElementById('login-password').value = '';
 	};
 
+	this.alert_messages = function () {
+		$("#success-alert").hide();
+	};
+
 })
 
 .controller('LoginController', function ($scope, $state, SessionService) {
 	$scope.user 			= {};
+	SessionService.alert_messages();
 	
 	$scope.login = function (user) {
 		SessionService.login(user);

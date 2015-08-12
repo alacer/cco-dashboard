@@ -114,6 +114,8 @@ angular.module('settings-module', [])
 	$scope.metric_panel_ids = ['metricPanel1', 'metricPanelAnchor1', 'metricPanel2', 'metricPanelAnchor2', 'metricPanel3', 'metricPanelAnchor3'];
 
 	function init () {
+		SessionService.alert_messages();
+		
 		$scope.user = SessionService.get_user_data();
 		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {

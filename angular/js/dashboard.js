@@ -121,7 +121,9 @@ angular.module('dashboard-module',[])
     };
 
 	function init () {
+		SessionService.alert_messages();
 		$scope.recent_date();
+
 		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {
 			$state.go('login');

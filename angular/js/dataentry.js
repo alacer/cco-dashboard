@@ -48,7 +48,7 @@ angular.module('dataentry-module',[])
 	$scope.metric 			= {};
 
 	function init () {
-		$("#success-alert").hide();
+		SessionService.alert_messages();
 
 		$scope.user = SessionService.get_user_data();
 		var login_state = SessionService.isLoggedIn();
@@ -154,7 +154,7 @@ angular.module('dataentry-module',[])
 	$scope.show_popup = function () {
         $("#success-alert").alert();
         $("#success-alert").fadeTo(3000, 500).slideUp(500, function(){
-       		$("#success-alert").alert('close');
+       		$("#success-alert").hide();
         }); 
 	};
 

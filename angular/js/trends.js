@@ -50,6 +50,8 @@ angular.module('trends-module',[])
     $scope.selected_bin = $stateParams.metric || 'BAU GIFTS EDD Alerts, Cases';
 
     function init () {
+        SessionService.alert_messages();
+        
         var login_state = SessionService.isLoggedIn();
         if (login_state == false) {
             $state.go('login');
