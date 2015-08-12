@@ -45,8 +45,13 @@ angular.module('dashboard-module',[])
             $scope.total_items  = $scope.num_pages * $scope.limit;
 			for (var i = 0; i < $scope.metrics.length; i++) {
 				var new_bin 		 = get_bins($scope.metrics[i].name, $scope.metric_bins);
-				var received_changes = $scope.metrics[i].received - $scope.past_metrics[i].received;
-				var complete_changes = $scope.metrics[i].completed - $scope.past_metrics[i].completed;
+				if ($scope.past_metrics.length == 0) {
+					var received_changes = $scope.metrics[i].received - 0;
+					var complete_changes = $scope.metrics[i].completed - 0;	
+				} else {
+					var received_changes = $scope.metrics[i].received - $scope.past_metrics[i].received;
+					var complete_changes = $scope.metrics[i].completed - $scope.past_metrics[i].completed;
+				};
 				
 				$scope.metrics[i].received 	= get_absolute(received_changes);
 				$scope.metrics[i].completed = get_absolute(complete_changes);
