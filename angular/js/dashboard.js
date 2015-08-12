@@ -70,7 +70,6 @@ angular.module('dashboard-module',[])
 	$scope.date_filter = function (date) {
 		// var new_date = new Date(date);
 		// 	new_date.setDate(new_date.getDate()-1);
-		console.log(date);
 		var set_date = $filter('date')(date, 'yyyy-MM-dd');
 		$state.go('user.dashboard', { date:set_date, page:1 });
 	};	
@@ -94,7 +93,7 @@ angular.module('dashboard-module',[])
 	$scope.recent_date = function () {
 		DashboardService.get_metrics().then( function (response) {
 			var array 	= response.data.metrics;
-			var recent 	= array[array.length - 1];
+			var recent 	= array[0];
 
 			if ($stateParams.date) {
 				$scope.default_date = $stateParams.date;

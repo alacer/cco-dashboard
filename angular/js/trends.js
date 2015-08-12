@@ -156,6 +156,15 @@ angular.module('trends-module',[])
         $state.go('user.dashboard', { date:dates, page:1 });
     };
 
+    function print_table () {
+        var divToPrint = document.getElementById("dashboard");
+
+        new_window = window.open("");
+        new_window.document.write(divToPrint.outerHTML);
+        new_window.print();
+        new_window.close();
+    };
+
 	$scope.chartConfig = {
         options: {
             chart: {
@@ -254,6 +263,13 @@ angular.module('trends-module',[])
                 "sPdfOrientation": "landscape",
                 "sButtonText": "PDF",
                 "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 8]
+            },
+            {
+                "sExtends": "print",
+                "sButtonText": "Print",
+                "fnClick": function( button, conf ) {
+                    print_table();
+                }
             }
         
         ]);
