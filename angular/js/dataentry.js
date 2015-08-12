@@ -48,6 +48,8 @@ angular.module('dataentry-module',[])
 	$scope.metric 			= {};
 
 	function init () {
+		$("#success-alert").hide();
+
 		$scope.user = SessionService.get_user_data();
 		var login_state = SessionService.isLoggedIn();
 		if (login_state == false) {
@@ -76,9 +78,7 @@ angular.module('dataentry-module',[])
 		actions 	 = 'Submit Manual Data';
 
 		DataEntryService.add_metric(data).then( function (response) {
-			$scope.success_alert 	= true;
-			$scope.failed_alert 	= false;
-			$scope.success_upload 	= false;
+			$scope.show_popup();
 
 			details = actions + ': ' + data.name + ', Date: ' + data.date;
 			log = set_log($scope.user, details, actions, 'Success');
@@ -149,6 +149,13 @@ angular.module('dataentry-module',[])
 	$scope.clear_fields = function () {
 		$scope.metric = {};
 		document.getElementById('input1').value = '';
+	};
+
+	$scope.show_popup = function () {
+        $("#success-alert").alert();
+        $("#success-alert").fadeTo(3000, 500).slideUp(500, function(){
+       		$("#success-alert").alert('close');
+        }); 
 	};
 
 	function date_filter (date) {

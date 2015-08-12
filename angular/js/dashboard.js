@@ -94,6 +94,7 @@ angular.module('dashboard-module',[])
 		DashboardService.get_metrics().then( function (response) {
 			var array 	= response.data.metrics;
 			var recent 	= array[0];
+			console.log(recent);
 
 			if ($stateParams.date) {
 				$scope.default_date = $stateParams.date;
