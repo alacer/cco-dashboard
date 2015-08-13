@@ -78,7 +78,11 @@
 					        	<i class="fa fa-arrow-down" ng-if="metric.completed.state == false"></i >
 					        	<span>{{ metric.completed.result }}</span>
 					        </td> 
-					        <td ng-click="view_trends(metric.name)"><span>{{ metric.inqueue }}</span></td>
+					        <td ng-click="view_trends(metric.name)">
+					        	<i class="fa fa-arrow-up" ng-if="metric.inqueue.state == true"></i >
+					        	<i class="fa fa-arrow-down" ng-if="metric.inqueue.state == false"></i >
+					        	<span>{{ metric.inqueue.result }}</span>
+					        </td>
 			                <td><span>{{ metric.ok }}</span></td>
 			                <td><span>{{ metric.caution }}</span></td>
 			                <td><span>{{ metric.danger }}</span></td>

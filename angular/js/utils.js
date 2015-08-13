@@ -64,7 +64,9 @@ var get_absolute = function (value) {
 
     data.result = Math.abs(value);
 
-    if (value < 0) {
+    if (value == 0) {
+        data.state = null;
+    } else if (value < 0) {
         data.state = false;
     } else {
         data.state = true;

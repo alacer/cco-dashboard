@@ -48,14 +48,17 @@ angular.module('dashboard-module',[])
 				var new_bin 		 = get_bins($scope.metrics[i].name, $scope.metric_bins);
 				if ($scope.past_metrics.length == 0) {
 					var received_changes = $scope.metrics[i].received - 0;
-					var complete_changes = $scope.metrics[i].completed - 0;	
+					var complete_changes = $scope.metrics[i].completed - 0;
+					var complete_changes = $scope.metrics[i].inqueue - 0;
 				} else {
 					var received_changes = $scope.metrics[i].received - $scope.past_metrics[i].received;
 					var complete_changes = $scope.metrics[i].completed - $scope.past_metrics[i].completed;
+					var inqueue_changes  = $scope.metrics[i].inqueue - $scope.past_metrics[i].inqueue;
 				};
 				
 				$scope.metrics[i].received 	= get_absolute(received_changes);
 				$scope.metrics[i].completed = get_absolute(complete_changes);
+				$scope.metrics[i].inqueue 	= get_absolute(inqueue_changes);
 				$scope.metrics[i].bin1 		= new_bin.bin1 || 0;
 				$scope.metrics[i].bin2 		= new_bin.bin2 || 0;
 				$scope.metrics[i].bin3 		= new_bin.bin3 || 0;
