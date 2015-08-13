@@ -71,7 +71,6 @@ angular.module('dataentry-module',[])
 
 	$scope.add_metric = function (data) {
 		data.name 	 = $scope.default_metric.metric;
-		data.date 	 = date_filter(data.date);
 		data.ok 	 = data.ok 		|| 0;
 		data.caution = data.caution || 0;
 		data.danger  = data.danger 	|| 0;
@@ -79,7 +78,6 @@ angular.module('dataentry-module',[])
 
 		DataEntryService.add_metric(data).then( function (response) {
 			$scope.metric = {};
-			document.getElementById('input1').value = '';
 			$scope.show_popup();
 
 			details = actions + ': ' + data.name + ', Date: ' + data.date;
@@ -152,12 +150,13 @@ angular.module('dataentry-module',[])
         }); 
 	};
 
-	function date_filter (date) {
-		// var new_date = new Date(date);
-		// 	new_date.setDate(new_date.getDate()-1);
-		var set_date = $filter('date')(date, 'yyyy-MM-dd');
-		return set_date;
-	};
+	$('.input-group.date').datepicker({
+	    format: "yyyy-mm-dd",
+	    keyboardNavigation: false,
+	    forceParse: false,
+	    daysOfWeekDisabled: "1,2,3,4,5,6",
+	    autoclose: true
+	});
 
 	init();
 	$scope.get_metric_bins();

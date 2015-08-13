@@ -10,7 +10,17 @@
 	            		novalidate 
 	            		name="form" 
 	            		ng-submit="submit()">
-	                <div 	id="date"
+	            		<div class="input-group date" >
+						  	<input 	type="text" 
+						  			class="form-control" 
+						  			ng-model="default_date" 
+	                				ng-change="date_filter(default_date)"
+						  			placeholder="{{default_date}}" >
+						  	<span class="input-group-addon">
+						  		<i class="fa fa-calendar"></i>
+						  	</span>
+						</div>
+	                <!-- <div 	id="date"
 	                		class="input-append input-group date" 
 	                		datetimez 
 	                		ng-model="default_date" 
@@ -24,7 +34,7 @@
 	                  	<span 	class="add-on input-group-addon ">
 	                    	<i 	class="fa fa-calendar"></i>
 	                  	</span>
-	                </div>
+	                </div> -->
 	            </form>
           	</div>
 	    </div>

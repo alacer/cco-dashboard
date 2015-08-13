@@ -28,12 +28,13 @@ angular.module('dashboard-module',[])
     $scope.num_pages    	= null;
     $scope.limit        	= null;
     $scope.current_page 	= null;
-    $scope.init_page    	= $stateParams.page || 1;
 
     $scope.metrics 			= {};
     $scope.past_metrics 	= {};
 
     $scope.pos_change 		= false;
+    
+    $scope.init_page    	= $stateParams.page || 1;
 
 	$scope.get_metrics = function(date, page) {
 		var new_page = page - 1;
@@ -73,10 +74,8 @@ angular.module('dashboard-module',[])
 	};
 
 	$scope.date_filter = function (date) {
-		// var new_date = new Date(date);
-		// 	new_date.setDate(new_date.getDate()-1);
-		var set_date = $filter('date')(date, 'yyyy-MM-dd');
-		$state.go('user.dashboard', { date:set_date, page:1 });
+		// var set_date = $filter('date')(date, 'yyyy-MM-dd');
+		$state.go('user.dashboard', { date:date, page:1 });
 	};	
 
 	$scope.get_metric_bins = function () {
@@ -183,30 +182,36 @@ angular.module('dashboard-module',[])
         DTColumnDefBuilder.newColumnDef([4, 5, -3]).notVisible()
     ];
 
+	$('.input-group.date').datepicker({
+	    format: "yyyy-mm-dd",
+	    keyboardNavigation: false,
+	    forceParse: false,
+	    daysOfWeekDisabled: "1,2,3,4,5,6",
+	    autoclose: true
+	});
+
 	init();
 	$scope.get_metric_bins();
 })
 
-.directive('datetimez', function() {
+// .directive('datetimez', function() {
 
-    return {
-        restrict: 'A',
-        require : 'ngModel',
-        link: function(scope, element, attrs, ngModelCtrl) {
-          element.datetimepicker({
-            dateFormat:'dd-mm-yyyy',
-           language: 'en',
-           pickTime: false,
-           startDate: '01-11-2013',      // set a minimum date
-           endDate: '01-11-2030'          // set a maximum date
-          }).on('changeDate', function(e) {
-            ngModelCtrl.$setViewValue(e.date);
-            scope.$apply();
-            $(".bootstrap-datetimepicker-widget").hide();
-          });
-        }
-    };
+//     return {
+//         restrict: 'A',
+//         require : 'ngModel',
+//         link: function(scope, element, attrs, ngModelCtrl) {
+//           element.datetimepicker({
+//             dateFormat:'dd-mm-yyyy',
+//            language: 'en',
+//            pickTime: false,
+//            startDate: '01-11-2013',      // set a minimum date
+//            endDate: '01-11-2030'          // set a maximum date
+//           }).on('changeDate', function(e) {
+//             ngModelCtrl.$setViewValue(e.date);
+//             scope.$apply();
+//             $(".bootstrap-datetimepicker-widget").hide();
+//           });
+//         }
+//     };
 
-})
-
-
+// })
