@@ -46,26 +46,27 @@ angular.module('dashboard-module',[])
             $scope.total_items  = $scope.num_pages * $scope.limit;
 			for (var i = 0; i < $scope.metrics.length; i++) {
 				var new_bin 		 = get_bins($scope.metrics[i].name, $scope.metric_bins);
+				var new_inqueue 	 = $scope.metrics[i].inqueue;
 				if ($scope.past_metrics.length == 0) {
 					var received_changes = $scope.metrics[i].received - 0;
 					var complete_changes = $scope.metrics[i].completed - 0;
-					// var complete_changes = $scope.metrics[i].inqueue - 0;
+					var inqueue_changes  = $scope.metrics[i].inqueue - 0;
 				} else {
 					var received_changes = $scope.metrics[i].received - $scope.past_metrics[i].received;
 					var complete_changes = $scope.metrics[i].completed - $scope.past_metrics[i].completed;
-					// var inqueue_changes  = $scope.metrics[i].inqueue - $scope.past_metrics[i].inqueue;
+					var inqueue_changes  = $scope.metrics[i].inqueue - $scope.past_metrics[i].inqueue;
 				};
 				
 				$scope.metrics[i].received 	= get_absolute(received_changes);
 				$scope.metrics[i].completed = get_absolute(complete_changes);
-				// $scope.metrics[i].inqueue 	= get_absolute(inqueue_changes);
+				$scope.metrics[i].inqueue 	= get_absolute(inqueue_changes);
 				$scope.metrics[i].bin1 		= new_bin.bin1 || 0;
 				$scope.metrics[i].bin2 		= new_bin.bin2 || 0;
 				$scope.metrics[i].bin3 		= new_bin.bin3 || 0;
 
-				var ok_progress = get_average($scope.metrics[i].inqueue, $scope.metrics[i].ok ? $scope.metrics[i].ok : 0);
-				var c_progress	= get_average($scope.metrics[i].inqueue, $scope.metrics[i].caution ? $scope.metrics[i].caution : 0);
-				var d_progress 	= get_average($scope.metrics[i].inqueue, $scope.metrics[i].danger ? $scope.metrics[i].danger : 0);
+				var ok_progress = get_average(new_inqueue, $scope.metrics[i].ok ? $scope.metrics[i].ok : 0);
+				var c_progress	= get_average(new_inqueue, $scope.metrics[i].caution ? $scope.metrics[i].caution : 0);
+				var d_progress 	= get_average(new_inqueue, $scope.metrics[i].danger ? $scope.metrics[i].danger : 0);
 
 				$scope.metrics[i].ok_progress 	= ok_progress;
 				$scope.metrics[i].c_progress 	= c_progress;
