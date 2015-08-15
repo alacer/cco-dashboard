@@ -159,12 +159,7 @@ angular.module('trends-module',[])
     };
 
     function print_table () {
-        var divToPrint = document.getElementById("dashboard");
-
-        new_window = window.open("");
-        new_window.document.write(divToPrint.outerHTML);
-        new_window.print();
-        new_window.close();
+        window.print();
     };
 
 	$scope.chartConfig = {

@@ -43,3 +43,15 @@
 #login h5 {
 	color: #990000;
 }
+
+/* print css */
+
+@media print {
+	.bar1 { background-color: #5cb85c !important; -webkit-print-color-adjust: exact; }
+}
+@media print {
+	.bar2 { background-color: #f0ad4e !important; -webkit-print-color-adjust: exact; }
+}
+@media print {
+	.bar3 { background-color: #d9534f !important; -webkit-print-color-adjust: exact; }	
+}
