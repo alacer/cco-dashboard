@@ -64,6 +64,12 @@ var get_absolute = function (value) {
 
     data.result = Math.abs(value);
 
+    /////////////// static
+    data.temp_dur   = [48,10,26,45,30,40,25,38,43,48,20,43];
+    data.temp_date  = [1381501200,1381509900,1381565100,1384254900,1384270200,1384938480,1385481660,1385539980,1385546520,1385558520,1385573100,1385733660];
+    data.temp_alert = [12345,23456,34567,45678,56789,67890,78901,89012,90123,12890,23904,36757];
+    /////////////// static
+
     if (value == 0) {
         data.state = null;
     } else if (value < 0) {
@@ -73,4 +79,88 @@ var get_absolute = function (value) {
     };
 
     return data;
+};
+
+var sparklines = function (dataDur, dataDate, dataAlert) {
+
+    $('.trend-line').sparkline(dataAlert, {
+        disableHiddenCheck: true,
+        height: '25px',
+        width: '100px',
+        chartRangeMin: 0,
+        chartRangeMax: 50,
+        defaultPixelsPerValue: 25,
+        numberDigitGroupSep: null,
+        tooltipFormat: '<div style="text-align: center; padding-bottom: 3px; border-bottom: 1px solid #ccc; margin-bottom: 3px;"><strong>Alert {{y}}</div>',
+        lineColor: 'transparent',
+        fillColor: false,
+        spotColor: false,
+        minSpotColor: false,
+        maxSpotColor: false,
+        highlightSpotColor: false,
+        highlightLineColor: false,
+        tooltipOffsetX: -50,
+        tooltipOffsetY: 25
+    });
+
+    $('.trend-line').sparkline(dataDate, {
+        composite: true,
+        disableHiddenCheck: true,
+        height: '25px',
+        width: '100px',
+        chartRangeMin: 0,
+        chartRangeMax: 50,
+        defaultPixelsPerValue: 25,
+        tooltipFormatter: function (sparkline, options, fields) {
+            var date = new Date(0);
+            date.setUTCSeconds(fields.y);
+            var month = (date.getMonth() + 1),
+            day = date.getDate(),
+            year = date.getFullYear(),
+            hours = date.getHours(),
+            minutes = date.getMinutes();
+            var formattedDate = month + '/' + day + '/' + year;
+            var formattedTime = function() {
+                var formattedHours = function() {
+                    if (hours == 0) hours = '12';
+                    else if (hours > 12) hours = (hours - 12);
+                    return hours;
+                }
+                var formattedMinutes = function() {
+                    if (minutes < 10) minutes = '0' + minutes;
+                    return minutes;
+                }
+                var time = formattedHours() + ':' + formattedMinutes() + ' ' + ((date.getHours() < 12)? 'AM' : 'PM');
+                return time;
+            }
+            return '<div style="text-align: center; padding-bottom: 3px; border-bottom: 1px solid #ccc; margin-bottom: 3px;">' + formattedDate + '<br/>Start time: ' + formattedTime() + '</div>';
+        },
+        lineColor: 'transparent',
+        fillColor: false,
+        spotColor: false,
+        minSpotColor: false,
+        maxSpotColor: false,
+        highlightSpotColor: false,
+        highlightLineColor: false
+    });
+
+    $('.trend-line').sparkline(dataDur, {
+        type: 'line',
+        composite: true,
+        disableHiddenCheck: true,
+        height: '25px',
+        width: '100px',
+        chartRangeMin: 0,
+        chartRangeMax: 50,
+        defaultPixelsPerValue: 25,
+        tooltipFormat: '{{y}} min. triage time',
+        lineColor: '#444444',
+        fillColor: 'transparent',
+        spotColor: '#e5412d',
+        minSpotColor: '#e5412d',
+        maxSpotColor: '#e5412d',
+        highlightSpotColor: '#ff5b3f',
+        highlightLineColor: '#ff5b3f'
+    });
+
 };

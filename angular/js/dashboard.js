@@ -128,6 +128,10 @@ angular.module('dashboard-module',[])
         $state.go('user.dashboard', { date:$scope.default_date, page:pages });
     };
 
+    $scope.gen_sparklines = function (dataDur, dataDate, dataAlert) {
+    	sparklines(dataDur, dataDate, dataAlert);
+    };
+
 	function init () {
 		SessionService.alert_messages();
 		$scope.recent_date();
