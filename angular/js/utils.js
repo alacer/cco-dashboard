@@ -59,6 +59,10 @@ var set_log = function (user, details, action, status) {
     return this.activity_log;
 };
 
+var print_table = function () {
+    window.print();
+};
+
 var get_absolute = function (value) {
     var data = {};
 

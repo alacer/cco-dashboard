@@ -158,10 +158,6 @@ angular.module('trends-module',[])
         $state.go('user.dashboard', { date:dates, page:1 });
     };
 
-    function print_table () {
-        window.print();
-    };
-
 	$scope.chartConfig = {
         options: {
             chart: {
@@ -265,6 +261,7 @@ angular.module('trends-module',[])
                 "sExtends": "print",
                 "sButtonText": "Print",
                 "fnClick": function( button, conf ) {
+                    this._fnPrintStart(conf);
                     print_table();
                 }
             }

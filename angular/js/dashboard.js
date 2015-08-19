@@ -142,10 +142,6 @@ angular.module('dashboard-module',[])
 		};
 	};
 
-	function print_table () {
-		window.print();
-	};
-
 	$scope.dtOptions = DTOptionsBuilder
 		.newOptions()
 		.withDOM('Tft<"top"l>rt<"bottom"ip><"clear">')
@@ -174,6 +170,7 @@ angular.module('dashboard-module',[])
 				"sExtends": "print",
 				"sButtonText": "Print",
 				"fnClick": function( button, conf ) {
+					this._fnPrintStart(conf);
 					print_table();
 				}
 			}
