@@ -236,6 +236,7 @@ angular.module('trends-module',[])
     $scope.trendsDT = DTOptionsBuilder
         .newOptions()
         .withDOM('Tft<"top"l>rt<"bottom"ip><"clear">')
+        .withOption('order', [0,'desc'])
         .withOption('paging', false)
         .withOption('filter', false)
         .withOption('info', false)
