@@ -72,7 +72,7 @@ var print_table = function (browser_type) {
         win.document.write('<link href="../css/App.Overrides.css" rel="stylesheet">');
         win.document.write('<link rel="stylesheet" href="../css/custom.css">');
         win.document.write('<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></head><body>');
-        win.document.write($("#div_table").html());
+        win.document.write($("#Overview").html());
         win.document.write('</body></html>');
         javascript:win.print();
         win.close();
