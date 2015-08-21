@@ -59,9 +59,47 @@ var set_log = function (user, details, action, status) {
     return this.activity_log;
 };
 
-var print_table = function () {
-    window.print();
+var print_table = function (browser_type) {
+    if (browser_type == 'Firefox' || browser_type == 'Safari') {
+        var win = window.open('');
+        javascript:win.document.write('<html><head><title>Print</title>');
+        win.document.write('<link href="../bower_components/bootstrap/bootstrap.min.css" rel="stylesheet">');
+        win.document.write('<link rel="stylesheet" href="../custom/datepicker/bootstrap-datepicker.css">');
+        win.document.write('<link rel="stylesheet" href="../bower_components/datatables/media/css/dataTables.tableTools.css">' );
+        win.document.write('<link rel="stylesheet" type="text/css" href="../bower_components/angular-loading-bar/build/loading-bar.css">');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../custom/fileupload/bootstrap-fileupload.css">');
+        win.document.write('<link href="../css/App.css" rel="stylesheet">');
+        win.document.write('<link href="../css/App.Overrides.css" rel="stylesheet">');
+        win.document.write('<link rel="stylesheet" href="../css/custom.css">');
+        win.document.write('<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></head><body>');
+        win.document.write($("#div_table").html());
+        win.document.write('</body></html>');
+        javascript:win.print();
+        win.close();
+    } else if (browser_type == 'Chrome' || browser_type == 'Opera') {
+        window.print(); 
+    } else {
+        window.print();
+    }
 };
+
+var identify_browser = function () {
+    var browser_type = null;
+
+    var isOpera      = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    var isFirefox    = typeof InstallTrigger !== 'undefined';
+    var isSafari     = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    var isChrome     = !!window.chrome && !isOpera;
+    var isIE         = false || !!document.documentMode; 
+
+    if (isOpera)    { browser_type = 'Opera' };
+    if (isFirefox)  { browser_type = 'Firefox' };
+    if (isSafari)   { browser_type = 'Safari' };
+    if (isChrome)   { browser_type = 'Chrome' };
+    if (isIE)       { browser_type = 'Explorer' };
+
+    return browser_type;
+}
 
 var get_absolute = function (value) {
     var data = {};
