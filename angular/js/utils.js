@@ -83,7 +83,7 @@ var print_table = function (browser_type) {
         win.document.close();
         win.focus();
         javascript:win.print();
-        // win.close();
+        win.close();
 
         return true;
     } else if (browser_type == 'Chrome' || browser_type == 'Opera') {
