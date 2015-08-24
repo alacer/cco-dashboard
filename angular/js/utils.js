@@ -62,20 +62,30 @@ var set_log = function (user, details, action, status) {
 var print_table = function (browser_type) {
     if (browser_type == 'Firefox' || browser_type == 'Safari') {
         var win = window.open('');
-        javascript:win.document.write('<html><head><title>Print</title>');
-        win.document.write('<link href="../bower_components/bootstrap/bootstrap.min.css" rel="stylesheet">');
-        win.document.write('<link rel="stylesheet" href="../custom/datepicker/bootstrap-datepicker.css">');
-        win.document.write('<link rel="stylesheet" href="../bower_components/datatables/media/css/dataTables.tableTools.css">' );
-        win.document.write('<link rel="stylesheet" type="text/css" href="../bower_components/angular-loading-bar/build/loading-bar.css">');
-        win.document.write('<link rel="stylesheet" type="text/css" href="../custom/fileupload/bootstrap-fileupload.css">');
-        win.document.write('<link href="../css/App.css" rel="stylesheet">');
-        win.document.write('<link href="../css/App.Overrides.css" rel="stylesheet">');
-        win.document.write('<link rel="stylesheet" href="../css/custom.css">');
-        win.document.write('<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></head><body>');
-        win.document.write($("#Overview").html());
+        win.document.write('<html><head><title>Print</title>');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/bootstrap.min.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../custom/datepicker/bootstrap-datepicker.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../bower_components/datatables/media/css/dataTables.tableTools.css" >' );
+        win.document.write('<link rel="stylesheet" type="text/css" href="../bower_components/angular-loading-bar/build/loading-bar.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../custom/fileupload/bootstrap-fileupload.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../css/App.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../css/App.Overrides.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../css/custom.css" >');
+        win.document.write('<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css" >');
+        win.document.write('<script src="../bower_components/bootstrap/jquery.js"></script>');
+        win.document.write('<script src="../bower_components/angular/angular.js">');
+        win.document.write('<script src="../custom/sparkline/jquery.sparkline.min.js"></script>');
+        win.document.write('<script src="../js/utils.js"></script>');
+        win.document.write('<script src="../js/dashboard.js"></script>');
+        win.document.write('<script src="../js/app.js"></script></head><body>');
+        win.document.write($("#div_table").html());
         win.document.write('</body></html>');
+        win.document.close();
+        win.focus();
         javascript:win.print();
-        win.close();
+        // win.close();
+
+        return true;
     } else if (browser_type == 'Chrome' || browser_type == 'Opera') {
         window.print(); 
     } else {
