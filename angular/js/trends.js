@@ -262,8 +262,14 @@ angular.module('trends-module',[])
                 "sExtends": "print",
                 "sButtonText": "Print",
                 "fnClick": function( button, conf ) {
-                    this._fnPrintStart(conf);
-                    print_table();
+                    var browser = identify_browser();
+                    if (browser == 'Chrome' || browser == 'Opera') {
+                        this._fnPrintStart(conf);
+                        print_table(browser);
+                        this._fnPrintEnd(conf);
+                    } else if (browser == 'Safari' || browser == 'Firefox') {
+                        print_table(browser);
+                    };
                 }
             }
         

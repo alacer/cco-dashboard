@@ -47,6 +47,10 @@
 /* print css */
 
 @media print {
+	canvas { -webkit-print-color-adjust: exact; }
+}
+
+@media print {
 	.bar1 { background-color: #5cb85c !important; -webkit-print-color-adjust: exact; }
 }
 @media print {

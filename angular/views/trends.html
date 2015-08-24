@@ -31,7 +31,7 @@
       	<div class="row">
         	<h3 style="text-align: center; margin-top: 20px">Historical Data</h3>
         	<div class="col-md-12" id="trendTable">
-       			<div class="table-responsive">
+       			<div class="table-responsive" id="div_table" >
         			<table 	id="dashboard" 
         					style="text-align: center;" 
 							datatable="ng"
@@ -84,13 +84,13 @@
 						    </tr>
 		    			</tbody>
 					</table>
-					<pagination class="pull-right" 
-								total-items="total_items" 
-								ng-model="current_page" 
-								num-pages="num_pages" 
-								items-per-page="limit" 
-								ng-change="page_changed(current_page)"></pagination>
       			</div>
+				<pagination class="pull-right" 
+							total-items="total_items" 
+							ng-model="current_page" 
+							num-pages="num_pages" 
+							items-per-page="limit" 
+							ng-change="page_changed(current_page)"></pagination>
       		</div>
       	</div>
   	</div>
