@@ -46,7 +46,7 @@
 
 /* print css */
 
-@media print {
+@media screen {
 	canvas { -webkit-print-color-adjust: exact; }
 }
 
