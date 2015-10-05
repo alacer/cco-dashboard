@@ -1,5 +1,7 @@
 # cco-dashboard
 
+##Features
+
 ###Background:
 Chief Compliance Officers are responsible for managing multiple teams and ensuring regulatory standards are implemented and met.  Each team has different responsibilities and increasingly different standards for success.  Comparing compliance data across the organization presents a unique challenge in normalizing data and presenting it in a meaningful way.
 
@@ -14,3 +16,10 @@ Moreover, CCOs are time-constrained individuals, and yet need to be able to asse
 The Alacer AML Dashboard is a unique tool that allows managers to review team status at-a-glance.  Alacer has designed a management-level dashboard with fully-integrated multi-user data entry.  The dashboard bridges the divide between team-specific data and standardized metrics.  Data normalization makes it easy to assess organizational status at a glance.  The dashboard allows for viewing overall trends as well, assisting the organization with forecasting case volume demands.
 
 Data quality remains a priority.  Alacer consultants discuss data governance and quality with the organization and customizes the AML dashboard to meet the organization’s needs.  All organization SLAs and regulatory standards are taken into consideration when designing team metrics.  The result is data unique and relevant to each team, and yet standardized across teams.
+
+##Maintenance
+Requires an admin role to update and maintain list of users, list of locations, etc.  Some features still in development (see limitations).
+
+##Limitations
+1. Sparklines still in development--not implemented yet.
+2. Back-end currently dependent on SQL (although could be migrated to other systems).
